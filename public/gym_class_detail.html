@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/gym_class_detail.css">
+    <title>Gym Class Detail</title>
+</head>
+<body>
+    <main>
+        <section class="gym-class-detail-container">
+            <div class="image-section">
+                <img src="img/gym_class.jpg" alt="HIIT Bootcamp Class" />
+            </div>
+
+            <div class="content-section">
+                <h1>HIIT Bootcamp</h1>
+                
+                <div class="meta-info">
+                    <p class="author-name">with {Author Name}</p>
+                    <div class="rating">
+                        ⭐ 4.8 (127 Reviews)
+                    </div>
+                </div>
+
+                <p class="description">
+                    High-intensity interval training designed to maximize calorie burn and build endurance. Perfect for those who want to push their limits.
+                </p>
+
+                <div class="gym-class-attributes-container">
+                    <div class="attribute-box">
+                        <span class="attribute-label">🕒 Duration</span>
+                        <span class="attribute-value">45min</span>
+                    </div>
+                    <div class="attribute-box">
+                        <span class="attribute-label">📅 Sessions</span>
+                        <span class="attribute-value">3/week</span>
+                    </div>
+                    <div class="attribute-box">
+                        <span class="attribute-label">👤 Capacity</span>
+                        <span class="attribute-value">20</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="gym-class-reviews-container">
+            <h1>Reviews</h1>
+            
+            <form class="review-form">
+                <div class="current-user-badge">
+                    <span class="user-label">Posting as:</span>
+                    <span class="author-name">{Current user}</span>
+                </div>
+                <div class="rating-selector">
+                    <label for="rating">Score:</label>
+                    <select name="rating" id="rating">
+                        <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
+                        <option value="4">⭐⭐⭐⭐ (Good)</option>
+                        <option value="3">⭐⭐⭐ (Average)</option>
+                        <option value="2">⭐⭐ (Poor)</option>
+                        <option value="1">⭐ (Terrible)</option>
+                    </select>
+                </div>
+                <div class="review-form-input-container">
+                    <input type="text" id="comment" name="comment" placeholder="Let others know what you think..." required />
+                    <button type="submit">Post</button>
+                </div>
+            </form>
+
+            <div class="reviews-list">
+                <article class="review-card">
+                    <div class="review-card-header">
+                        <span class="review-card-author-name">John Doe</span>
+                        <span>⭐⭐⭐⭐</span>
+                    </div>
+                    <time>19/2/2026</time>
+                    <p>This class is absolutely brutal but incredibly effective. The energy is amazing!</p>
+                </article>
+                <article class="review-card">
+                    <div class="review-card-header">
+                        <span>Anna Smith</span>
+                        <span>⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <time>12/7/2026</time>
+                    <p>I loved the energy of the class! The trainer, Tabea, is extremly friendly.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
