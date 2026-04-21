@@ -55,6 +55,17 @@ a {
 }
 p, ul { color: var(--font-color); }
 
+#menu a {
+  font-size: var(--h2-size);
+  font-weight: bold;
+  font-family: Poppins, sans-serif;
+  text-shadow: 0.1em 0.1em 0.1em var(--shadow-color);
+}
+
+#menu ul {
+    padding-inline-start: 0;
+}
+
 #hamburger {
     display: none;
 }
@@ -93,6 +104,9 @@ footer{
 
 
 header > div > h1 > a:hover{
+    text-shadow: 0.2em 0.2em 0.2em black;
+}
+#menu a:hover {
     text-shadow: 0.2em 0.2em 0.2em black;
 }
 h2:hover {
