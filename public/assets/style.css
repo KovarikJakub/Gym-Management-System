@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Lora:400,700|Poppins:400,700');
+
+:root {
+    --bg-color: #232018;
+    --boxes-color: #35322b;
+    --font-color: #e0c989;
+    --title-color: #ceaa51;
+    --shadow-color: #85431E;
+
+    --title-size: 230%;
+    --h2-size: 140%;
+    --sub-size: 115%;
+    --p-size: 85%;
+}
+
+body {
+    font-family: Lora, serif;
+    background-color: var(--bg-color);
+}
+
+/* Header & Footer stay solid */
+header, footer {
+    background-color: var(--bg-color);
+}
+
+/* Image is ONLY in the main area */
+main {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                      url('../assets/\ -9.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* This makes it static while you scroll */
+    background-repeat: no-repeat;
+
+}
+
+h1, h2 {
+    color: var(--title-color);
+    font-family: Poppins, sans-serif;
+}
+
+h1 { 
+    font-size: var(--title-size);
+    text-shadow: 0.1em 0.1em 0.1em var(--shadow-color);
+}
+h2 { 
+    font-size: var(--h2-size);
+    text-shadow: 0.1em 0.1em 0.1em var(--shadow-color);
+}
+
+h3 { color: var(--title-color); }
+a { 
+    color: var(--title-color);
+    text-decoration: none;
+}
+p, ul { color: var(--font-color); }
+
+#hamburger {
+    display: none;
+}
+
+.overlay, #shortcuts {
+    background: rgba(0, 0, 0, 0.7); /* Extra tint for the welcome text area */
+}
+
+.boxes {
+    background-color: var(--boxes-color);
+    border-radius: 1em;
+    box-shadow: 0.5em 0.5em 0.3em var(--bg-color);
+}
+
+.btn {
+    padding: 1em;
+    background-color: var(--font-color);
+    color: var(--boxes-color);
+    border-radius: 1em;
+    text-align: center;
+    box-shadow: 0.4em 0.4em 0.2em var(--bg-color);
+}
+
+footer{
+    text-align: center;
+    padding: 0;
+}
+
+
+header > div > h1 > a:hover{
+    text-shadow: 0.2em 0.2em 0.2em black;
+}
+h2:hover {
+    text-shadow: 0.2em 0.2em 0.1em black;
+}
+.btn:hover {
+    background-color: var(--title-color);
+}

@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3em;
+    padding-left: 2em;
+    padding-right: 2em;;
+}
+
+header ul {
+    display: flex;
+    gap: 2em;
+    list-style: none;
+    margin: 0;
+}
+
+#signup {
+    display: flex;
+    gap: 1.5em;
+}
+
+/* Main logic */
+main {
+    width: 100%;
+    min-height: 100vh; /* Ensures main is tall enough to show the image */
+}
+
+#presentation {
+    min-height: 85vh;
+    display: flex;
+}
+
+.overlay {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+    text-align: center;
+}
+
+#shortcuts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem; /* The 1em/2em padding you wanted around the boxes */
+}
+
+.boxes {
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-bottom: 1.5em;
+    display: flex;
+    flex-direction: column;
+}
