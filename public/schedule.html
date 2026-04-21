@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule – Fit-Pro</title>
+    <link href="assets/style.css" rel="stylesheet">
+    <link href="assets/layout.css" rel="stylesheet">
+    <link href="assets/responsive.css" rel="stylesheet">
+    <link href="assets/schedule.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div>
+            <h1><a href="index.html">Fit-Pro</a></h1>
+        </div>
+
+        <nav id="menu">
+            <input type="checkbox" id="hamburger">
+            <label class="hamburger" for="hamburger"></label>
+            <ul>
+                <li><a href="gym_class_detail.html"><h2>Classes</h2></a></li>
+                <li><a href="equipment.html"><h2>Equipment</h2></a></li>
+                <li><a href="trainers.html"><h2>Trainers</h2></a></li>
+                <li><a href="schedule.html"><h2>Schedule</h2></a></li>
+            </ul>
+        </nav>
+
+        <div id="signup">
+            <a href="login.html"><h2>Login</h2></a>
+            <a href="register.html"><h2>Register</h2></a>
+        </div>
+    </header>
+
+    <main id="schedule-main">
+
+        <section class="schedule-hero">
+            <h1 class="schedule-title">Schedule</h1>
+            <p class="schedule-subtitle">Pick a day and find your class</p>
+            <a href="#" class="btn schedule-ticket-btn">Get Membership</a>
+        </section>
+
+        <!-- Filter by room -->
+        <section class="filter-bar">
+            <span class="filter-label">Filter by room:</span>
+            <nav class="filter-pills">
+                <a href="#" class="pill active">All Rooms</a>
+                <a href="#" class="pill">Main Stage</a>
+                <a href="#" class="pill">Cardio Zone</a>
+                <a href="#" class="pill">Yoga Room</a>
+                <a href="#" class="pill">Strength Hall</a>
+            </nav>
+        </section>
+
+        <!-- Date tabs -->
+        <section class="date-tabs-section">
+            <nav class="date-tabs" aria-label="Schedule days">
+                <a href="#" class="date-tab active">
+                    <span class="tab-weekday">Mon</span>
+                    <time class="tab-date" datetime="2026-05-05">May 05</time>
+                </a>
+                <a href="#" class="date-tab">
+                    <span class="tab-weekday">Tue</span>
+                    <time class="tab-date" datetime="2026-05-06">May 06</time>
+                </a>
+                <a href="#" class="date-tab">
+                    <span class="tab-weekday">Wed</span>
+                    <time class="tab-date" datetime="2026-05-07">May 07</time>
+                </a>
+                <a href="#" class="date-tab">
+                    <span class="tab-weekday">Thu</span>
+                    <time class="tab-date" datetime="2026-05-08">May 08</time>
+                </a>
+                <a href="#" class="date-tab">
+                    <span class="tab-weekday">Fri</span>
+                    <time class="tab-date" datetime="2026-05-09">May 09</time>
+                </a>
+                <a href="#" class="date-tab">
+                    <span class="tab-weekday">Sat</span>
+                    <time class="tab-date" datetime="2026-05-10">May 10</time>
+                </a>
+                <a href="#" class="date-tab">
+                    <span class="tab-weekday">Sun</span>
+                    <time class="tab-date" datetime="2026-05-11">May 11</time>
+                </a>
+            </nav>
+        </section>
+
+        <!-- Schedule list -->
+        <section class="schedule-list-section">
+            <h2 class="day-heading">Monday, May 05</h2>
+
+            <article class="class-row">
+                <time class="class-time" datetime="06:00">06:00 – 07:00</time>
+                <section class="class-info">
+                    <h3 class="class-name">Morning Yoga</h3>
+                    <p class="class-meta">
+                        <span class="class-room">&#9675; Yoga Room</span>
+                        <span class="class-trainer">&#9632; Anna K.</span>
+                    </p>
+                    <div class="spots-bar-wrap">
+                        <div class="spots-bar"><div class="spots-fill" style="width:33%"></div></div>
+                        <span class="spots-label">4 spots left</span>
+                    </div>
+                </section>
+                <span class="class-level level-beginner">Beginner</span>
+                <aside class="class-action">
+                    <a href="#" class="btn book-btn">Book</a>
+                </aside>
+            </article>
+
+            <article class="class-row">
+                <time class="class-time" datetime="07:30">07:30 – 08:30</time>
+                <section class="class-info">
+                    <h3 class="class-name">HIIT Blast</h3>
+                    <p class="class-meta">
+                        <span class="class-room">&#9675; Main Stage</span>
+                        <span class="class-trainer">&#9632; Marek W.</span>
+                    </p>
+                    <div class="spots-bar-wrap">
+                        <div class="spots-bar"><div class="spots-fill" style="width:85%"></div></div>
+                        <span class="spots-label">3 spots left</span>
+                    </div>
+                </section>
+                <span class="class-level level-advanced">Advanced</span>
+                <aside class="class-action">
+                    <a href="#" class="btn book-btn">Book</a>
+                </aside>
+            </article>
+
+            <article class="class-row">
+                <time class="class-time" datetime="09:00">09:00 – 10:00</time>
+                <section class="class-info">
+                    <h3 class="class-name">Pilates Flow</h3>
+                    <p class="class-meta">
+                        <span class="class-room">&#9675; Yoga Room</span>
+                        <span class="class-trainer">&#9632; Sofia L.</span>
+                    </p>
+                    <div class="spots-bar-wrap">
+                        <div class="spots-bar"><div class="spots-fill" style="width:67%"></div></div>
+                        <span class="spots-label">10 spots left</span>
+                    </div>
+                </section>
+                <span class="class-level level-intermediate">Intermediate</span>
+                <aside class="class-action">
+                    <a href="#" class="btn book-btn">Book</a>
+                </aside>
+            </article>
+
+            <article class="class-row">
+                <time class="class-time" datetime="12:00">12:00 – 13:00</time>
+                <section class="class-info">
+                    <h3 class="class-name">Core Crusher</h3>
+                    <p class="class-meta">
+                        <span class="class-room">&#9675; Cardio Zone</span>
+                        <span class="class-trainer">&#9632; Janek B.</span>
+                    </p>
+                    <div class="spots-bar-wrap">
+                        <div class="spots-bar"><div class="spots-fill spots-fill--full" style="width:100%"></div></div>
+                        <span class="spots-label full">FULL</span>
+                    </div>
+                </section>
+                <span class="class-level level-intermediate">Intermediate</span>
+                <aside class="class-action">
+                    <a href="#" class="btn book-btn book-btn--disabled">Waitlist</a>
+                </aside>
+            </article>
+
+            <article class="class-row">
+                <time class="class-time" datetime="17:00">17:00 – 18:00</time>
+                <section class="class-info">
+                    <h3 class="class-name">Strength &amp; Power</h3>
+                    <p class="class-meta">
+                        <span class="class-room">&#9675; Strength Hall</span>
+                        <span class="class-trainer">&#9632; Piotr M.</span>
+                    </p>
+                    <div class="spots-bar-wrap">
+                        <div class="spots-bar"><div class="spots-fill" style="width:50%"></div></div>
+                        <span class="spots-label">5 spots left</span>
+                    </div>
+                </section>
+                <span class="class-level level-advanced">Advanced</span>
+                <aside class="class-action">
+                    <a href="#" class="btn book-btn">Book</a>
+                </aside>
+            </article>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 GymFit Studio. All rights reserved.</p>
+        <nav class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </nav>
+    </footer>
+</body>
+</html>
