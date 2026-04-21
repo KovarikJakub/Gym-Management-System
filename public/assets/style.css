@@ -80,7 +80,15 @@ p, ul { color: var(--font-color); }
 
 footer{
     text-align: center;
-    padding: 0;
+    padding: 2rem;
+}
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links a {
+    margin: 0 10px;
+    text-decoration: none;
 }
 
 
