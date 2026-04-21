@@ -7,24 +7,6 @@
     }
 }
 
-@media (max-width: 60em) {
-  body{ 
-    width: 100%;
-  }
-
-  #news article {
-    margin: 0 0 1em;
-  }
-
-  #related {
-    display: none;  
-  }
-
-  body > footer {
-    margin: 0;  
-  }
-}
-
 @media (max-width: 30em) {
   body > header {
     display: block;
