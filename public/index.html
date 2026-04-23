@@ -4,35 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gym managment</title>
-    <link href="style.css" rel="stylesheet">
-    <link href="layout.css" rel="stylesheet">
-    <link href="responsive.css" rel="stylesheet">
+    <link href="assets/style.css" rel="stylesheet">
+    <link href="assets/layout.css" rel="stylesheet">
+    <link href="assets/responsive.css" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1><a href="index.html">gym name</a></h1>
-    </header>
-    <nav id="menu">
-        <!-- just for the hamburguer menu in responsive layout -->
-      <input type="checkbox" id="hamburger"> 
-      <label class="hamburger" for="hamburger"></label>
+        <div>
+            <h1><a href="index.html">Fit-Pro</a></h1>
+        </div>
 
-      <ul>
-        <li><a href="classes.html">Classes</a></li>
-        <li><a href="equipment.html">Equipment</a></li>
-        <li><a href="trainers.html">Trainers</a></li>
-      </ul>
-    </nav>
-    <div id="signup">
-        <!-- 'buttons', add padding ... -->
-        <a href="login.html">Login</a>
-        <a href="register.html">Register</a>
-    </div>
+        <nav id="menu">
+            <!-- just for the hamburguer menu in responsive layout -->
+            <input type="checkbox" id="hamburger"> 
+            <label class="hamburger" for="hamburger"></label>
+            <ul>
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="equipment.html">Equipment</a></li>
+                <li><a href="trainers.html">Trainers</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+            </ul>
+        </nav>
+
+        <div id="signup">
+            <!-- 'buttons', add padding ... -->
+            <a href="login.html"><h2>Login</h2></a>
+            <a href="register.html"><h2>Register</h2></a>
+        </div>
+    </header>
+
     <main>
         <!-- gym presentation(photos, ...), classes available, equipment availability, ... -->
-        <section id="presentation"></section>
-        <section id="shortcuts"></section>
+        <section id="presentation">
+            <div class="overlay">
+                <h1>Welcome to * gym</h1>
+                <p>bla bla bla</p>
+            </div>
+        </section>
+
+        <section id="shortcuts">
+
+            <article class="boxes">
+                <h3>Classes</h3>
+                <ul>
+                    <li>Yoga - schedule</li>
+                    <li>HIIT -schedule</li>
+                </ul>
+                <br>
+                <a href="classes.html" class="btn">View Classes</a>
+            </article>
+
+            <article class="boxes">
+                <h3>Equipment</h3>
+                <ul>
+                    <li>Treadmills - 3/5</li>
+                    <li>Legpress - 2/4</li>
+                </ul>
+                <br>
+                <a href="equipment.html" class="btn">Check Equipment</a>
+            </article>
+
+            <article class="boxes">
+                <h3>Trainers</h3>
+                <ul>
+                    <li>Photo - Name</li>
+                    <li>Photo - Name</li>
+                </ul>
+                <br>
+                <a href="trainers.html" class="btn">Book Trainers</a>
+            </article>
+            <br>
+        </section>
     </main>
-    <footer></footer>
+    <footer>
+        <p>&copy; 2026 GymFit Studio. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </div>
+    </footer>
 </body>
 </html>
