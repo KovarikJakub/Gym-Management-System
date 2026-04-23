@@ -1,6 +1,6 @@
 @media (max-width: 60em) {
-    #shortcuts { 
-        grid-template-columns: 1fr; 
+    #shortcuts, #info { 
+        grid-template-columns: 1fr;
         flex-wrap: wrap;
     }
     header { 

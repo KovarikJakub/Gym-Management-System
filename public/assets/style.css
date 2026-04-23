@@ -31,7 +31,6 @@ main {
     background-position: center;
     background-attachment: fixed; /* This makes it static while you scroll */
     background-repeat: no-repeat;
-
 }
 
 h1, h2 {
@@ -55,8 +54,12 @@ a {
 }
 p, ul { color: var(--font-color); }
 
-#menu a {
-  font-size: var(--h2-size);
+header div h1{
+    font-size: var(--h2-size);
+}
+
+#menu a, #signup a h2{
+  font-size: var(--sub-size);
   font-weight: bold;
   font-family: Poppins, sans-serif;
   text-shadow: 0.1em 0.1em 0.1em var(--shadow-color);
@@ -65,13 +68,20 @@ p, ul { color: var(--font-color); }
 #menu ul {
     padding-inline-start: 0;
 }
+#menu ul li{
+    list-style-type: none;
+}
 
 #hamburger {
     display: none;
 }
 
-.overlay, #shortcuts {
+.overlay, #shortcuts, #info {
     background: rgba(0, 0, 0, 0.7); /* Extra tint for the welcome text area */
+}
+
+li {
+    list-style-type:circle;
 }
 
 .boxes {
@@ -109,7 +119,7 @@ header > div > h1 > a:hover{
 #menu a:hover {
     text-shadow: 0.2em 0.2em 0.2em black;
 }
-h2:hover {
+header h2:hover {
     text-shadow: 0.2em 0.2em 0.1em black;
 }
 .btn:hover {
