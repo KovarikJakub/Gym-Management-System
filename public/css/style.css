@@ -26,7 +26,7 @@ header, footer {
 /* Image is ONLY in the main area */
 main {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                      url('../assets/\ -9.jpg');
+                      url('../assets/img/gym_background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* This makes it static while you scroll */

@@ -176,7 +176,6 @@ time {
     color: var(--font-color);
 }
 
-/* Footer Overrides - leveraging global footer */
 .site-footer {
     border-top: 1px solid rgba(255,255,255,0.1);
 }
