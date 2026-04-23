@@ -3,19 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/style.css" rel="stylesheet">
+    <link href="assets/layout.css" rel="stylesheet">
+    <link href="assets/responsive.css" rel="stylesheet">
     <link rel="stylesheet" href="css/gym_class_detail.css">
     <title>Gym Class Detail</title>
 </head>
 <body>
-    <header class="main-header">
-        <nav class="nav-container">
-            <div class="logo">FIT-PRO</div>
-            <ul class="nav-links">
-                <li><a href="#">Classes</a></li>
-                <li><a href="#">Trainers</a></li>
-                <li><a href="#">Membership</a></li>
+    <header>
+        <div>
+            <h1><a href="index.html">Fit-Pro</a></h1>
+        </div>
+
+        <nav id="menu">
+            <!-- just for the hamburguer menu in responsive layout -->
+            <input type="checkbox" id="hamburger"> 
+            <label class="hamburger" for="hamburger"></label>
+            <ul>
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="equipment.html">Equipment</a></li>
+                <li><a href="trainers.html">Trainers</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
             </ul>
         </nav>
+
+        <div id="signup">
+            <!-- 'buttons', add padding ... -->
+            <a href="login.html"><h2>Login</h2></a>
+            <a href="register.html"><h2>Register</h2></a>
+        </div>
     </header>
     <main>
         <section class="back-button-section">
@@ -41,22 +57,22 @@
                 </p>
 
                 <div class="gym-class-attributes-container">
-                    <div class="attribute-box">
+                    <div class="attribute-box boxes">
                         <span class="attribute-label">🕒 Duration</span>
                         <span class="attribute-value">45min</span>
                     </div>
-                    <div class="attribute-box">
+                    <div class="attribute-box boxes">
                         <span class="attribute-label">📅 Sessions</span>
                         <span class="attribute-value">3/week</span>
                     </div>
-                    <div class="attribute-box">
+                    <div class="attribute-box boxes">
                         <span class="attribute-label">👤 Capacity</span>
                         <span class="attribute-value">20</span>
                     </div>
                 </div>
                 
                 <div class="book-button-container">
-                    <button class="book-button">
+                    <button class="book-button btn">
                         Enroll Now
                     </button>
                 </div>
@@ -65,7 +81,7 @@
         <section class="gym-class-reviews-container">
             <h1>Reviews</h1>
             
-            <form class="review-form">
+            <form class="review-form boxes">
                 <div class="current-user-badge">
                     <span class="user-label">Posting as:</span>
                     <span class="author-name">{Current user}</span>
@@ -82,12 +98,12 @@
                 </div>
                 <div class="review-form-input-container">
                     <input type="text" id="comment" name="comment" placeholder="Let others know what you think..." required />
-                    <button type="submit">Post</button>
+                    <button type="submit" class="btn">Post</button>
                 </div>
             </form>
 
             <div class="reviews-list">
-                <article class="review-card">
+                <article class="review-card boxes">
                     <div class="review-card-header">
                         <span class="review-card-author-name">John Doe</span>
                         <span>⭐⭐⭐⭐</span>
@@ -95,7 +111,7 @@
                     <time>19/2/2026</time>
                     <p>This class is absolutely brutal but incredibly effective. The energy is amazing!</p>
                 </article>
-                <article class="review-card">
+                <article class="review-card boxes">
                     <div class="review-card-header">
                         <span>Anna Smith</span>
                         <span>⭐⭐⭐⭐⭐</span>
