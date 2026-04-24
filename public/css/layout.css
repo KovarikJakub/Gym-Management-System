@@ -24,10 +24,9 @@ header ul {
     gap: 1.5em;
 }
 
-/* Main logic */
 main {
     width: 100%;
-    min-height: 100vh; /* Ensures main is tall enough to show the image */
+    min-height: 100vh;
 }
 
 #presentation {
@@ -49,7 +48,7 @@ main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    padding: 2rem; /* The 1em/2em padding you wanted around the boxes */
+    padding: 2rem;
 }
 
 #info {
