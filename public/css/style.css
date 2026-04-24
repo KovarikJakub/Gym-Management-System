@@ -29,7 +29,7 @@ main {
                       url('../assets/img/gym_background.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* This makes it static while you scroll */
+    background-attachment: fixed;
     background-repeat: no-repeat;
 }
 
@@ -77,7 +77,7 @@ header div h1{
 }
 
 .overlay, #shortcuts, #info {
-    background: rgba(0, 0, 0, 0.7); /* Extra tint for the welcome text area */
+    background: rgba(0, 0, 0, 0.7);
 }
 
 li {

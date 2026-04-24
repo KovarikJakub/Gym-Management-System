@@ -10,7 +10,9 @@
 
 @media (max-width: 30em) {
   body > header {
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items:normal;
   }
 
   body > header h2 {
@@ -18,12 +20,21 @@
     text-size-adjust: var(--sub-size);
   }
 
+  header ul {
+    gap: 0.5em;
+  }
+
+  header #signup {
+    margin-left: auto;
+  }
+
   #menu .hamburger {
-    display:flex-box;
+    display:contents;
     background-color: var(--boxes-color);
     border-radius: 0.3em;
     color: var(--font-color);
     padding: 0.5em;
+    font-size: var(--h2-size);
   }
 
   #menu .hamburger:before {
