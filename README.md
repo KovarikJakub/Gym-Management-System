@@ -5,9 +5,11 @@
 ```
 └── 📁 public
     ├── 📁 assets                # images & icons
+    ├── 📁 css                   # stylesheets
     ├── index.html               # home page
     ├── schedule.html            # page to show & pick schedules
     └── gym_class_detail.html    # single class detail page
+└── README.md
 ```
 
 ## How to see the files
