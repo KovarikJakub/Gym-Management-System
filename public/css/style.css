@@ -58,7 +58,7 @@ header div h1{
     font-size: var(--h2-size);
 }
 
-#menu a, #signup a h2{
+#menu a, #signup a{
   font-size: var(--sub-size);
   font-weight: bold;
   font-family: Poppins, sans-serif;

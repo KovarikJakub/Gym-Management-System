@@ -24,10 +24,6 @@
     gap: 0.5em;
   }
 
-  header #signup {
-    margin-left: auto;
-  }
-
   #menu .hamburger {
     display:contents;
     background-color: var(--boxes-color);
@@ -65,6 +61,11 @@
     opacity: 0;
     transition: all .3s ease-in-out;
     border-radius: 0.3em;
+    font-size: var(--p-size);
+  }
+
+  #signup {
+    margin-left: auto;
     font-size: var(--p-size);
   }
 }
