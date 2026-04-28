@@ -90,9 +90,21 @@ function getFilteredSessions($date, $filters = [])
     return $sessions;
 }
 
-
-function enrollUserToClass($user_id, $session_id)
+function enrollUserToSession($user_id, $session_id)
 {
-    # create m:n relation between a user and chosen session
+    # create m:n relationship between a user and chosen session
+    $db = getDbConnection();
+
+    $sql = "INSERT INTO enrollments (member_id, session_id, enrolled_at) 
+            VALUES (:member_id, :session_id, :enrolled_at)";
+
+    $params = [
+        ':member_id' => $user_id,
+        ':session_id' => $session_id,
+        ':enrolled_at' => date('Y-m-d H:i:s')
+    ];
     
+    $stmt = $db->prepare($sql);
+
+    return $stmt->execute($params);
 }
