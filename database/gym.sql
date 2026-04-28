@@ -3,7 +3,7 @@
 -- PRAGMA foreign_keys = ON;
 
 -- Core User Table (Members, Trainers, and Admins)
-DROP TABLE users;
+DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     real_name TEXT NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE users (
 );
 
 -- Trainer Profiles (1-to-1 relationship with users where role = 'trainer')
-DROP TABLE trainer_profiles;
+DROP TABLE IF EXISTS trainer_profiles;
 CREATE TABLE trainer_profiles (
     user_id INTEGER PRIMARY KEY,
     bio TEXT,
@@ -25,7 +25,7 @@ CREATE TABLE trainer_profiles (
 );
 
 -- Gym Class Catalog
-DROP TABLE gym_classes;
+DROP TABLE IF EXISTS gym_classes;
 CREATE TABLE gym_classes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL, -- more specific than "type", for example  "box, mma, kickbox"
@@ -36,7 +36,7 @@ CREATE TABLE gym_classes (
 );
 
 -- Class Sessions (Specific instances of a Gym Class taught by a Trainer)
-DROP TABLE class_sessions;
+DROP TABLE IF EXISTS class_sessions;
 CREATE TABLE class_sessions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     class_id INTEGER NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE class_sessions (
 );
 
 -- Enrollments M : N relationship between Users Members and Class Sessions 
-DROP TABLE enrollments;
+DROP TABLE IF EXISTS enrollments;
 CREATE TABLE enrollments (
     member_id INTEGER NOT NULL,
     session_id INTEGER NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE enrollments (
 );
 
 -- Equipment (Main training area items)
-DROP TABLE equipment;
+DROP TABLE IF EXISTS equipment;
 CREATE TABLE equipment (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE equipment (
 );
 
 -- Reviews (Feedback from Members on Gym class)
-DROP TABLE reviews;
+DROP TABLE IF EXISTS reviews;
 CREATE TABLE reviews (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     session_id INTEGER NOT NULL,
