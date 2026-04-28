@@ -1,0 +1,26 @@
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# PHP
+vendor/
+composer.lock
+.phpunit.result.cache
+
+# Database
+database/*.db
+database/*.sqlite
+database/*.sqlite-journal
+database/*.sqlite-wal
+
+# Logs and temp
+*.log
+tmp/
+temp/
