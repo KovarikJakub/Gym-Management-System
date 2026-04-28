@@ -16,6 +16,7 @@
     <title>Class Schedule - Gym 2026</title>
     <link rel="stylesheet" href="css/card.css">
     <link rel="stylesheet" href="css/sessions.css">
+    <script src="js/sessions.js" defer></script>
 </head>
 <body>
     <header class="main-header">
@@ -54,9 +55,9 @@
                 </div>
 
                 <?php if (!$session['is_full']): ?>
-                    <button class="btn-enroll">Enroll Now</button>
+                    <button class="btn-enroll" data-id="<?= $session['session_id'] ?>" >Enroll Now</button>
                 <?php else: ?>
-                    <button class="btn-enroll" disabled>Waitlist Only</button>
+                    <button class="btn-enroll" disabled>Session is full</button>
                 <?php endif; ?>
             </div>
         </article>
