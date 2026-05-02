@@ -83,16 +83,17 @@ CREATE TABLE reviews (
 /**********************************************/
 
 -- Seed data for users
+-- Note: all passwords are "1234" stored as a hash
 INSERT INTO users (id, real_name, username, password_hash, email, role, is_deactivated) VALUES
-(1, 'Admin User', 'admin', 'hash_admin', 'admin@gym.com', 'admin', 0),
-(2, 'Trainer One', 'trainer1', 'hash_t1', 't1@gym.com', 'trainer', 0),
-(3, 'Trainer Two', 'trainer2', 'hash_t2', 't2@gym.com', 'trainer', 0),
-(4, 'Trainer Three', 'trainer3', 'hash_t3', 't3@gym.com', 'trainer', 0),
-(5, 'Member One', 'member1', 'hash_m1', 'm1@gym.com', 'member', 0),
-(6, 'Member Two', 'member2', 'hash_m2', 'm2@gym.com', 'member', 0),
-(7, 'Member Three', 'member3', 'hash_m3', 'm3@gym.com', 'member', 0),
-(8, 'Member Four', 'member4', 'hash_m4', 'm4@gym.com', 'member', 0),
-(9, 'Member Five', 'member5', 'hash_m5', 'm5@gym.com', 'member', 0);
+(1, 'Admin User', 'admin', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'admin@gym.com', 'admin', 0),
+(2, 'Trainer One', 'trainer1', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 't1@gym.com', 'trainer', 0),
+(3, 'Trainer Two', 'trainer2', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 't2@gym.com', 'trainer', 0),
+(4, 'Trainer Three', 'trainer3', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 't3@gym.com', 'trainer', 0),
+(5, 'Member One', 'member1', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm1@gym.com', 'member', 0),
+(6, 'Member Two', 'member2', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm2@gym.com', 'member', 0),
+(7, 'Member Three', 'member3', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm3@gym.com', 'member', 0),
+(8, 'Member Four', 'member4', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm4@gym.com', 'member', 0),
+(9, 'Member Five', 'member5', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm5@gym.com', 'member', 0);
 
 -- Seed data for gym_classes
 INSERT INTO gym_classes (id, name, difficulty, description, default_capacity, type) VALUES
