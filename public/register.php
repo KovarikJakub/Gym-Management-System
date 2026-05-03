@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 <body>
     <form method="post">
         <h1>Register</h1>
-        <?php if ($error): ?><p style="color:red;"><?= $error ?></p><?php endif; ?>
+        <?php if ($error): ?><p style="color:red;"><?= htmlspecialchars($error) ?></p><?php endif; ?>
         <input type="text" name="real_name" placeholder="Full Name" required>
         <input type="text" name="username" placeholder="Username" required>
         <input type="email" name="email" placeholder="Email" required>
