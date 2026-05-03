@@ -6,8 +6,7 @@ function requireLogin()
 {
     if (!isset($_SESSION['username']))
     {
-        header('Content-Type: application/json', true, 401);
-        echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+        header('Location: login.php');
         exit;
     }
 }
