@@ -1,11 +1,17 @@
 <?php
 
+require_once __DIR__ . '/../src/auth.php';
 require_once __DIR__ . '/../src/models/users.php';
 
 $error = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
+    if (!verifyCsrf($_POST['csrf_token'] ?? ''))
+    {
+        die("CSRF token validation failed.");
+    }
+
     $realName = $_POST['real_name'];
     $username = $_POST['username'];
     $email    = $_POST['email'];
@@ -43,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 <html>
 <body>
     <form method="post">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
         <h1>Register</h1>
         <?php if ($error): ?><p style="color:red;"><?= htmlspecialchars($error) ?></p><?php endif; ?>
         <input type="text" name="real_name" placeholder="Full Name" required>

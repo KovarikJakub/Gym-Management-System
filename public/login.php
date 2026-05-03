@@ -13,6 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['registered']))
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
+    if (!verifyCsrf($_POST['csrf_token'] ?? ''))
+    {
+        die("CSRF token validation failed.");
+    }
+
     $user = getUserByUsername($_POST['username']);
 
     if ($user && password_verify($_POST['password'], $user['password_hash']))
@@ -38,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 <html>
 <body>
     <form method="post">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
         <h1>Login</h1>
         <?php if ($message): ?><p style="color:green;"><?= htmlspecialchars($message) ?></p><?php endif; ?>
         <?php if ($error): ?><p style="color:red;"><?= htmlspecialchars($error) ?></p><?php endif; ?>
