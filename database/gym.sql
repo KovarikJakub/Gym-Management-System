@@ -11,6 +11,7 @@ CREATE TABLE users (
     password_hash TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
     role TEXT NOT NULL CHECK(role IN ('member', 'trainer', 'admin')),
+    profile_photo TEXT NULL,
     is_deactivated BOOLEAN DEFAULT FALSE
 );
 
