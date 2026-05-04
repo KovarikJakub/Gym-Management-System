@@ -13,9 +13,9 @@ function getUserByUsername($username)
     return $user;
 }
 
-function createUser($realName, $username, $hashedPassword, $email, $role)
+function createUser($realName, $username, $hashedPassword, $email, $role, $profilePhoto = null)
 {
     $db = getDbConnection();
-    $stmt = $db->prepare("INSERT INTO users (real_name, username, password_hash, email, role) VALUES (?, ?, ?, ?, ?)");
-    $stmt->execute([$realName, $username, $hashedPassword, $email, $role]);
+    $stmt = $db->prepare("INSERT INTO users (real_name, username, password_hash, email, role, profile_photo) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$realName, $username, $hashedPassword, $email, $role, $profilePhoto]);
 }
