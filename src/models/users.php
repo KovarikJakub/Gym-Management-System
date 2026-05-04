@@ -31,7 +31,7 @@ function getUserById($id)
     return $user;
 }
 
-function updateUser($id, $realName, $username, $passwordHash = null, $profilePhoto = null)
+function updateUser($id, $realName, $username, $passwordHash = null, $profilePhoto = null, $deletePhoto = false)
 {
     $db = getDbConnection();
     
@@ -44,7 +44,11 @@ function updateUser($id, $realName, $username, $passwordHash = null, $profilePho
         $params[] = $passwordHash;
     }
     
-    if ($profilePhoto)
+    if ($deletePhoto)
+    {
+        $sql .= ", profile_photo = NULL";
+    }
+    elseif ($profilePhoto)
     {
         $sql .= ", profile_photo = ?";
         $params[] = $profilePhoto;

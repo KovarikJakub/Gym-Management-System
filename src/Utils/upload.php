@@ -13,15 +13,19 @@ function validateAndSaveImage($file, $targetDir, $maxSize = 2097152)
     if ($file['error'] !== UPLOAD_ERR_OK)
     {
         $result = ['error' => translateUploadError($file['error'])];
+        // note: the following condition checks the PHP file upload limit, not the "max profile pic size" limit
         // check if the error is file size error to provide better error message:
         $uploadSizeErrors = [UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE];
         if (in_array($file['error'], $uploadSizeErrors) )
             return ['error' => "Image is too large. Max size is " . ($maxSize / 1024 / 1024) . "MB."];
-        // otherwise reutrn the inital upload error
+        // otherwise return the inital upload error
         return $result;
     }
+    // check if image is bigger than 2MB
+    if ($_FILES['file']['size'] > $maxSize)
+        return ['error' => "Image exceeds maximum size of " . ($maxSize / 1024 / 1024) . "MB"];
 
-    // Verify itss an actual image
+    // Verify its an actual image
     $check = getimagesize($file['tmp_name']);
     if ($check === false)
         return ['error' => "Uploaded file is not a valid image."];

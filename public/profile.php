@@ -12,38 +12,58 @@ $uploadDir = __DIR__ . '/uploads/';
 $error = null;
 $success = null;
 
+$uploadsBaseUrl = 'uploads/'; 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
-    if (!verifyCsrf($_POST['csrf_token'] ?? ''))    
-        die("CSRF token validation failed.");
-
-    $realName = $_POST['real_name'];
-    $username = $_POST['username'];
-    $password =  !empty($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : null;
-    $profilePhoto = null;
-
-    // Handle File Upload
-    if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] !== UPLOAD_ERR_NO_FILE)
+    try
     {
-        $uploadResult = validateAndSaveImage($_FILES['profile_photo'], $uploadDir); 
+        if (!verifyCsrf($_POST['csrf_token'] ?? ''))
+            throw new Exception("CSRF token validation failed. Please try again.");
 
-        if (isset($uploadResult['error']))
-            $error = $uploadResult['error'];
-        else
+        $realName = trim($_POST['real_name']);
+        $username = trim($_POST['username']);
+        $password = $_POST['password'];
+        $deletePhoto = isset($_POST['delete_photo']);
+        $profilePhoto = null;
+
+        if (empty($realName) || strlen($realName) > 255)
+            throw new Exception("Invalid full name.");
+        
+        if (empty($username) || strlen($username) > 255)
+            throw new Exception("Invalid username.");
+
+        // Handle File Upload
+        if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] !== UPLOAD_ERR_NO_FILE)
+        {
+            $uploadResult = validateAndSaveImage($_FILES['profile_photo'], $uploadDir); 
+            if (isset($uploadResult['error']))
+                throw new Exception($uploadResult['error']);
             $profilePhoto = $uploadResult['filename'];
-    }
+        }
 
-    if (!$error)
-    {
+        $passwordHash = !empty($password) ? password_hash($password, PASSWORD_DEFAULT) : null;
+        
+        $photoPathToDelete = null;
+        if ($deletePhoto || $profilePhoto)
+        {
+            if (!isNullOrEmptyString($user['profile_photo']))
+                $photoPathToDelete = $uploadDir . $user['profile_photo'];
+        }
 
         try
         {
-        // Update user row in database:
-        updateUser($_SESSION['user_id'], $realName, $username, $password, $profilePhoto);
-        
-        // Delete previous profile photo if file upload happened and previous profile photo is not just a placeholder:
-            if ($profilePhoto && !isNullOrEmptyString($user['profile_photo']))
-            removeFileIfExists($uploadDir . $user['profile_photo']);
+            updateUser($_SESSION['user_id'], $realName, $username, $passwordHash, $profilePhoto, $deletePhoto);
+        } 
+        catch (PDOException $e)
+        {
+            if (strpos($e->getMessage(), 'users.username') !== false)
+                throw new Exception("Username already exists.");
+            throw new Exception("An error occurred. Please try again.");
+        }
+
+        if ($photoPathToDelete)
+            removeFileIfExists($photoPathToDelete);
 
         // Update session in case username changed
         $_SESSION['username'] = $username;
@@ -51,17 +71,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         // Refresh user data
         $user = getUserById($_SESSION['user_id']);
         $success = "Profile updated successfully!";
+
     }
-    catch (PDOException $e)
+    catch (Exception $e)
     {
-        if (strpos($e->getMessage(), 'users.username') !== false)
-            $error = "Username already exists.";
-        else
-            $error = "An error occurred. Please try again.";
-        // Cleanup uploaded photo if update fails
-        if ($profilePhoto && !isNullOrEmptyString($user['profile_photo']))
-        removeFileIfExists($uploadDir . $profilePhoto);
-    }   
+        $error = $e->getMessage();
+        
+        // Cleanup newly uploaded photo if update fails
+        if (isset($profilePhoto) && $profilePhoto) 
+            removeFileIfExists($uploadDir . $profilePhoto);
     }
 }
 
@@ -100,9 +118,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
             <div class="form-group">
                 <label for="profile_photo">Profile Photo:</label>
-                <?php if ($user['profile_photo']): ?>
+                <?php if (!isNullOrEmptyString($user['profile_photo'])): ?>
                     <div class="current-photo">
-                        <img src="<?= "http://localhost:9000/public/uploads/" . htmlspecialchars($user['profile_photo']) ?>" alt="Profile Photo" style="max-width: 150px;">
+                        <img src="<?= $uploadsBaseUrl . htmlspecialchars($user['profile_photo']) ?>" alt="Profile Photo" style="max-width: 150px;">
+                        <div>
+                            <input type="checkbox" name="delete_photo" id="delete_photo">
+                            <label for="delete_photo">Remove current photo</label>
+                        </div>
                     </div>
                 <?php endif; ?>
                 <input type="file" name="profile_photo" id="profile_photo" accept="image/*">
