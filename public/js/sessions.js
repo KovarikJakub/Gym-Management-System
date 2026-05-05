@@ -17,10 +17,19 @@ const onEnrollButtonClick = async (event, buttonElement) => {
         const result = await response.json();
 
         if (result.success) {
-            // Update UI without page refresh
-            buttonElement.innerText = 'Enrolled';
-            buttonElement.disabled = true;
-            buttonElement.classList.add('success');
+            // Refetch the entire sessions list and update UI
+            const fetchResponse = await fetch('sessions.php');
+            const html = await fetchResponse.text();
+            
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newContainer = doc.getElementById('sessions-container');
+            
+            if (newContainer) {
+                document.getElementById('sessions-container').innerHTML = newContainer.innerHTML;
+                attachEnrollListener(); // Re-attach listeners to new buttons
+            }
+
             alert(result.message);
         } else {
             alert(result.message);

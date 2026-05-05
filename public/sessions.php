@@ -23,7 +23,7 @@
         <h1>Weekly Schedule</h1>
     </header>
 
-    <main class="card-container">
+    <main class="card-container" id="sessions-container">
         <?php foreach ($sessions as $session): ?>
         <article class="card <?= $session['is_full'] ? 'card-disabled' : '' ?>">
             <header class="card-header">
@@ -44,11 +44,11 @@
                 <div class="card-details">
                     <div class="detail-item">
                         <strong>Availability</strong>
-                        <span><?= $session['current_enrollment'] ?> / <?= $session['default_capacity'] ?></span>
+                        <span class="enrollment-info"><?= $session['current_enrollment'] ?> / <?= $session['default_capacity'] ?></span>
                     </div>
                     <div class="detail-item">
                         <strong>Status</strong>
-                        <span class="<?= $session['is_full'] ? 'text-danger' : 'text-success' ?>">
+                        <span class="status-info <?= $session['is_full'] ? 'text-danger' : 'text-success' ?>">
                             <?= $session['is_full'] ? 'Full' : $session['spots_left'] . ' left' ?>
                         </span>
                     </div>
