@@ -2,8 +2,11 @@
 
 const onEnrollButtonClick = async (event, buttonElement) => {
     const sessionId = buttonElement.getAttribute('data-id');
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const formData = new URLSearchParams();
     formData.append('session_id', sessionId);
+    formData.append('csrf_token', csrfToken);
+    console.log(`button data-id-${sessionId} clicked`);
 
     try{
         const response = await fetch('action_enroll_to_class.php', {

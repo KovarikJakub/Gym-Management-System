@@ -1,4 +1,5 @@
 <?php 
+    require_once __DIR__ . '/../src/auth.php';
     require_once __DIR__ . '/../src/models/class_sessions.php';
 
     $date="2026-05-01"; // hardcoded "todays date" for development
@@ -11,6 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="<?= $_SESSION['csrf_token'] ?>">
     <title>Class Schedule - Gym 2026</title>
     <link rel="stylesheet" href="css/card.css">
     <link rel="stylesheet" href="css/sessions.css">
