@@ -1,11 +1,16 @@
 <?php
 
+require_once __DIR__ . '/../src/auth.php';
 require_once __DIR__ . '/../src/models/class_sessions.php';
+
+requireLogin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
+    if(!verifyCsrf($_POST['csrf_token'] ?? ''))
+        die("CSRF token validation failed.");
+
     $sessionId = $_POST['session_id'] ?? null;
-    $csrfToken = $_POST['csrf_token'] ?? '';
 
     if($sessionId === null)
     {
@@ -13,10 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         exit;
     }
 
-    // TODO: Verify CSRF Token
-    // TODO: after auth is working, current user_id will be used:
-    // $userId = $_SESSION['user_id'];
-    $userId = 1; // for now
+    $userId = $_SESSION['user_id'];
 
     try {
         enrollUserToSession($userId, $sessionId);
