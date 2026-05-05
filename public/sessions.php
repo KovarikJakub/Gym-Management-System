@@ -2,6 +2,8 @@
     require_once __DIR__ . '/../src/auth.php';
     require_once __DIR__ . '/../src/models/class_sessions.php';
 
+    requireLogin();
+
     $date="2026-05-01"; // hardcoded "todays date" for development
     # call getFilteredSessions with todays date to obtain sessions for today
     $sessions = getFilteredSessions($date);
