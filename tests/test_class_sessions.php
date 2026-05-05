@@ -59,7 +59,7 @@ function test_enrollUserToSession(){
 
     $member_id = 6;
     $session_id = 2;
-    $result = enrollUserToSessi on($member_id, $session_id);
+    $result = enrollUserToSession($member_id, $session_id);
 
     assert($result === true, "Enrollment insert should succeed");
 
