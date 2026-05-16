@@ -95,6 +95,22 @@ function enrollUserToSession($user_id, $session_id)
     # create m:n relationship between a user and chosen session
     $db = getDbConnection();
 
+    // check if target session still has capcity:    
+    $sql = "SELECT c.default_capacity, 
+            (SELECT COUNT(*) FROM enrollments WHERE session_id = s.id) as current_enrollment
+            FROM class_sessions s
+            JOIN gym_classes c ON s.class_id = c.id
+            WHERE s.id = ?";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$session_id]);
+    $session = $stmt->fetch();
+
+    if (!$session || ($session['default_capacity'] - $session['current_enrollment']) <= 0)
+    {
+        throw new PDOException("No spots left in this session.");
+    }
+    
+
     $sql = "INSERT INTO enrollments (member_id, session_id, enrolled_at) 
             VALUES (:member_id, :session_id, :enrolled_at)";
 
