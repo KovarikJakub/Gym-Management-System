@@ -1,8 +1,13 @@
 <?php
 
 # db connection is a singleton
-function getDbConnection() {
+function getDbConnection($custom_db = null) {
     static $db = null;
+
+    if ($custom_db !== null)
+    {
+        $db = $custom_db;
+    }
 
     if ($db === null)
     {
