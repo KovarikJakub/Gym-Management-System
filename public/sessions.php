@@ -1,7 +1,9 @@
 <?php 
     require_once __DIR__ . '/../src/auth.php';
+    require_once __DIR__ . '/../src/Utils/helpers.php';
     require_once __DIR__ . '/../src/models/class_sessions.php';
     require_once __DIR__ . '/../src/templates/class_session_card.php';
+    require_once __DIR__ . '/../src/templates/week_selector.php';
 
 
     requireLogin();
@@ -9,17 +11,7 @@
     $today = "2026-05-01"; // hardcoded "todays date" for development
     $selected_date = $_GET['date'] ?? $today;
 
-    // Calculate Monday of the week for the reference 'today'
-    $monday = date('Y-m-d', strtotime('monday this week', strtotime($today)));
-    $week_days = [];
-    for ($i = 0; $i < 7; $i++) {
-        $timestamp = strtotime("$monday +$i days");
-        $week_days[] = [
-            'date' => date('Y-m-d', $timestamp),
-            'day_name' => date('D', $timestamp),
-            'day_num' => date('j', $timestamp)
-        ];
-    }
+    $week_days = getWeekDays($today);
 
     $sessions = getFilteredSessions($selected_date);
 ?>
@@ -40,15 +32,7 @@
         <h1>Weekly Schedule</h1>
     </header>
 
-    <nav class="week-selector">
-        <?php foreach ($week_days as $day): ?>
-            <a href="?date=<?= $day['date'] ?>" 
-               class="day-item <?= $day['date'] === $selected_date ? 'active' : '' ?> <?= $day['date'] === $today ? 'today-highlight' : '' ?>">
-                <span class="day-name"><?= $day['day_name'] ?></span>
-                <span class="day-date"><?= $day['day_num'] ?></span>
-            </a>
-        <?php endforeach; ?>
-    </nav>
+    <?php outputWeekSelector($week_days, $selected_date, $today); ?>
 
     <main class="card-container-vertical" id="sessions-container">
         <?php foreach ($sessions as $session): ?>
