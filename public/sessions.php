@@ -1,12 +1,27 @@
 <?php 
     require_once __DIR__ . '/../src/auth.php';
     require_once __DIR__ . '/../src/models/class_sessions.php';
+    require_once __DIR__ . '/../src/templates/class_session_card.php';
+
 
     requireLogin();
 
-    $date="2026-05-01"; // hardcoded "todays date" for development
-    # call getFilteredSessions with todays date to obtain sessions for today
-    $sessions = getFilteredSessions($date);
+    $today = "2026-05-01"; // hardcoded "todays date" for development
+    $selected_date = $_GET['date'] ?? $today;
+
+    // Calculate Monday of the week for the reference 'today'
+    $monday = date('Y-m-d', strtotime('monday this week', strtotime($today)));
+    $week_days = [];
+    for ($i = 0; $i < 7; $i++) {
+        $timestamp = strtotime("$monday +$i days");
+        $week_days[] = [
+            'date' => date('Y-m-d', $timestamp),
+            'day_name' => date('D', $timestamp),
+            'day_num' => date('j', $timestamp)
+        ];
+    }
+
+    $sessions = getFilteredSessions($selected_date);
 ?>
 
 <!DOCTYPE html>
@@ -25,44 +40,19 @@
         <h1>Weekly Schedule</h1>
     </header>
 
-    <main class="card-container" id="sessions-container">
+    <nav class="week-selector">
+        <?php foreach ($week_days as $day): ?>
+            <a href="?date=<?= $day['date'] ?>" 
+               class="day-item <?= $day['date'] === $selected_date ? 'active' : '' ?> <?= $day['date'] === $today ? 'today-highlight' : '' ?>">
+                <span class="day-name"><?= $day['day_name'] ?></span>
+                <span class="day-date"><?= $day['day_num'] ?></span>
+            </a>
+        <?php endforeach; ?>
+    </nav>
+
+    <main class="card-container-vertical" id="sessions-container">
         <?php foreach ($sessions as $session): ?>
-        <article class="card <?= $session['is_full'] ? 'card-disabled' : '' ?>">
-            <header class="card-header">
-                <h2 class="card-title"><?= htmlspecialchars($session['class_name']) ?></h2>
-                <span class="badge badge-<?= str_replace(' ', '-', $session['class_type']) ?>">
-                    <?= htmlspecialchars($session['class_type']) ?>
-                </span>
-            </header>
-
-            <div class="card-body">
-                <p class="session-time">
-                    <strong>Time:</strong> <?= date('M j, H:i', strtotime($session['start_time'])) ?>
-                </p>
-                <p class="session-trainer">
-                    <strong>Trainer:</strong> <?= htmlspecialchars($session['trainer_name']) ?>
-                </p>
-                
-                <div class="card-details">
-                    <div class="detail-item">
-                        <strong>Availability</strong>
-                        <span class="enrollment-info"><?= $session['current_enrollment'] ?> / <?= $session['default_capacity'] ?></span>
-                    </div>
-                    <div class="detail-item">
-                        <strong>Status</strong>
-                        <span class="status-info <?= $session['is_full'] ? 'text-danger' : 'text-success' ?>">
-                            <?= $session['is_full'] ? 'Full' : $session['spots_left'] . ' left' ?>
-                        </span>
-                    </div>
-                </div>
-
-                <?php if (!$session['is_full']): ?>
-                    <button class="btn-enroll" data-id="<?= $session['session_id'] ?>" >Enroll Now</button>
-                <?php else: ?>
-                    <button class="btn-enroll" disabled>Session is full</button>
-                <?php endif; ?>
-            </div>
-        </article>
+            <?php outputClassSessionCard($session) ?>
         <?php endforeach; ?>
     </main>
 </body>

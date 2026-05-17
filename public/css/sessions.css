@@ -7,6 +7,51 @@
     color: white;
 }
 
+.week-selector {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: #f4f4f4;
+    border-bottom: 1px solid #ddd;
+    overflow-x: auto;
+}
+
+.day-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #333;
+    border-radius: 8px;
+    min-width: 60px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.day-item:hover {
+    background: #e0e0e0;
+}
+
+.day-item.active {
+    background: #0066cc;
+    color: white;
+}
+
+.day-item.today-highlight {
+    border: 2px solid #0066cc;
+}
+
+.day-name {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.day-date {
+    font-size: 1.2rem;
+}
+
 .session-time, .session-trainer {
     margin: 0.25rem 0;
     font-size: 0.95rem;
