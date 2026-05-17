@@ -22,9 +22,16 @@ function formatAvailabality($session)
     return "$current / $max";
 }
 
-function outputClassSessionCard($session)
+function canEnroll($session, $today)
+{
+    $session_date = date('Y-m-d', strtotime($session['start_time']));
+    // session is not full and is not in the past:
+    return !$session['is_full'] && !($session_date < $today);
+}
+
+function outputClassSessionCard($session, $today)
 { ?>
-<article class="card <?= $session['is_full'] ? 'card-disabled' : '' ?>">
+<article class="card <?= !canEnroll($session, $today) ? 'card-disabled' : '' ?>">
     <header class="card-header">
         <h2 class="card-title"><?= htmlspecialchars($session['class_name']) ?></h2>
         <span class="badge badge-<?= str_replace(' ', '-', $session['class_type']) ?>">
@@ -53,10 +60,10 @@ function outputClassSessionCard($session)
             </div>
         </div>
 
-        <?php if (!$session['is_full']): ?>
+        <?php if (canEnroll($session, $today)): ?>
             <button class="btn-enroll" data-id="<?= $session['session_id'] ?>" >Enroll Now</button>
         <?php else: ?>
-            <button class="btn-enroll" disabled>Session is full</button>
+            <button class="btn-enroll" disabled>Not available</button>
         <?php endif; ?>
     </div>
 </article>

@@ -8,7 +8,7 @@
 
     requireLogin();
 
-    $today = "2026-05-01"; // hardcoded "todays date" for development
+    $today = "2026-05-02"; // hardcoded "todays date" for development
     $selected_date = $_GET['date'] ?? $today;
 
     $week_days = getWeekDays($today);
@@ -36,7 +36,7 @@
 
     <main class="card-container-vertical" id="sessions-container">
         <?php foreach ($sessions as $session): ?>
-            <?php outputClassSessionCard($session) ?>
+            <?php outputClassSessionCard($session, $today) ?>
         <?php endforeach; ?>
     </main>
 </body>
