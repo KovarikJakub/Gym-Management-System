@@ -8,13 +8,22 @@
 
     requireLogin();
 
+    // enforce date("Y-m-d") format so that operators like '<' '>' can be used on dates
     $today = "2026-05-02"; // hardcoded "todays date" for development
     $selected_date = $_GET['date'] ?? $today;
+    
+    // Ensure selected_date is in Y-m-d format if it comes from GET
+    $selected_date = date("Y-m-d", strtotime($selected_date));
 
     $week_days = getWeekDays($today);
 
     $sessions = getFilteredSessions($selected_date);
 ?>
+
+<?php function isSelectedDayInThePast($selected_date, $today)
+{
+    return ($selected_date < $today);
+}?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,8 +40,14 @@
     <header class="main-header">
         <h1>Weekly Schedule</h1>
     </header>
-
+    
     <?php outputWeekSelector($week_days, $selected_date, $today); ?>
+    
+    <?php if (isSelectedDayInThePast($selected_date, $today)): ?>
+        <div class="alert alert-warning">
+            <strong>Note:</strong> You are viewing a date in the past. New enrollments are disabled for these sessions.
+        </div>
+    <?php endif ?>
 
     <main class="card-container-vertical" id="sessions-container">
         <?php foreach ($sessions as $session): ?>
