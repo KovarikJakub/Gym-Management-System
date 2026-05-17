@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../database.php';
 
 // Fetches all upcoming sessions with class details and real-time availability.
-function getAllSessions() {
+function getAllSessions($user_id = null) {
     $db = getDbConnection();
 
     $sql = "SELECT 
@@ -15,14 +15,17 @@ function getAllSessions() {
                 c.default_capacity,
                 -- Subquery to count currently enrolled members
                 (SELECT COUNT(*) FROM enrollments e 
-                 WHERE e.session_id = s.id) AS current_enrollment
+                 WHERE e.session_id = s.id) AS current_enrollment,
+                -- Subquery to check if current user is enrolled
+                (SELECT COUNT(*) FROM enrollments e 
+                 WHERE e.session_id = s.id AND e.member_id = :user_id) > 0 AS is_enrolled
             FROM class_sessions s
             JOIN gym_classes c ON s.class_id = c.id
             JOIN users u ON s.trainer_id = u.id
             ORDER BY s.start_time ASC";
 
     $stmt = $db->prepare($sql);
-    $stmt->execute();
+    $stmt->execute([':user_id' => $user_id]);
     
     $sessions = $stmt->fetchAll();
 
@@ -36,7 +39,7 @@ function getAllSessions() {
     return $sessions;
 }
 
-function getFilteredSessions($date, $filters = [])
+function getFilteredSessions($date, $user_id,  $filters = [])
 {
     $db = getDbConnection();
     
@@ -49,13 +52,20 @@ function getFilteredSessions($date, $filters = [])
                 s.start_time,
                 s.end_time,
                 c.default_capacity,
-                (SELECT COUNT(*) FROM enrollments e WHERE e.session_id = s.id) AS current_enrollment
+                -- Subquery to count currently enrolled members
+                (SELECT COUNT(*) FROM enrollments e WHERE e.session_id = s.id) AS current_enrollment,
+                -- Subquery to check if current user is enrolled
+                (SELECT COUNT(*) FROM enrollments e 
+                 WHERE e.session_id = s.id AND e.member_id = :user_id) > 0 AS is_enrolled
             FROM class_sessions s
             JOIN gym_classes c ON s.class_id = c.id
             JOIN users u ON s.trainer_id = u.id
             WHERE DATE(s.start_time) = :date"; // Base condition
 
-    $params = [':date' => $date];
+    $params = [
+        ':date' => $date,
+        ':user_id' => $user_id
+    ];
 
     // Dynamically append filters
 

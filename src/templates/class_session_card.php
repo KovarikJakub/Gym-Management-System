@@ -30,13 +30,19 @@ function canEnroll($session, $today)
 }
 
 function outputClassSessionCard($session, $today)
-{ ?>
-<article class="card <?= !canEnroll($session, $today) ? 'card-disabled' : '' ?>">
+{ 
+    $is_past = date('Y-m-d', strtotime($session['start_time'])) < $today;
+    ?>
+<article class="card <?= $session['is_enrolled'] ? 'card-enrolled' : '' ?> <?= !canEnroll($session, $today) && !$session['is_enrolled'] ? 'card-disabled' : '' ?>">
     <header class="card-header">
         <h2 class="card-title"><?= htmlspecialchars($session['class_name']) ?></h2>
-        <span class="badge badge-<?= str_replace(' ', '-', $session['class_type']) ?>">
-            <?= htmlspecialchars($session['class_type']) ?>
-        </span>
+        <?php if ($session['is_enrolled']): ?>
+            <span class="badge badge-success">Enrolled</span>
+        <?php else: ?>
+            <span class="badge badge-<?= str_replace(' ', '-', $session['class_type']) ?>">
+                <?= htmlspecialchars($session['class_type']) ?>
+            </span>
+        <?php endif; ?>
     </header>
 
     <div class="card-body">
@@ -60,11 +66,15 @@ function outputClassSessionCard($session, $today)
             </div>
         </div>
 
-        <?php if (canEnroll($session, $today)): ?>
+        <?php if ($session['is_enrolled']): ?>
+            <button class="btn-cancel" data-id="<?= $session['session_id'] ?>" <?= $is_past ? 'disabled' : '' ?>>
+                <?= $is_past ? 'Already Attended' : 'Cancel Enrollment' ?>
+            </button>
+        <?php elseif (canEnroll($session, $today)): ?>
             <button class="btn-enroll" data-id="<?= $session['session_id'] ?>" >Enroll Now</button>
         <?php else: ?>
             <button class="btn-enroll" disabled>Not available</button>
         <?php endif; ?>
     </div>
 </article>
-<?php }
+<?php } ?>

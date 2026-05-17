@@ -8,17 +8,18 @@
 
     requireLogin();
 
+    $user_id = $_SESSION['user_id'];
     // enforce date("Y-m-d") format so that operators like '<' '>' can be used on dates
     $today = "2026-05-02"; // hardcoded "todays date" for development
     $selected_date = $_GET['date'] ?? $today;
-    
+
     // Ensure selected_date is in Y-m-d format if it comes from GET
     $selected_date = date("Y-m-d", strtotime($selected_date));
 
     $week_days = getWeekDays($today);
 
-    $sessions = getFilteredSessions($selected_date);
-?>
+    $sessions = getFilteredSessions($selected_date, $user_id);
+    ?>
 
 <?php function isSelectedDayInThePast($selected_date, $today)
 {
