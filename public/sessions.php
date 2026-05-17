@@ -42,10 +42,16 @@
     </header>
     
     <?php outputWeekSelector($week_days, $selected_date, $today); ?>
-    
+
     <?php if (isSelectedDayInThePast($selected_date, $today)): ?>
         <div class="alert alert-warning">
             <strong>Note:</strong> You are viewing a date in the past. New enrollments are disabled for these sessions.
+        </div>
+    <?php endif ?>
+
+    <?php if (empty($sessions)): ?>
+        <div class="alert alert-info">
+            <strong>Note:</strong> There are no sessions for this day.
         </div>
     <?php endif ?>
 

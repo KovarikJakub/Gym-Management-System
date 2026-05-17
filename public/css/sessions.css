@@ -67,6 +67,11 @@
     border-color: #ffeeba;
     color: #856404;
 }
+.alert-info {
+    background-color: #d5d5d568;
+    color: #3b3b3b;
+}
+
 
 .session-time, .session-trainer {
     margin: 0.25rem 0;
