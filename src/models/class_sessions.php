@@ -134,3 +134,18 @@ function enrollUserToSession($user_id, $session_id)
 
     return $stmt->execute($params);
 }
+
+function cancelEnrollment($user_id, $session_id)
+{
+    $db = getDbConnection();
+
+    $sql = "DELETE FROM enrollments WHERE member_id = :member_id AND session_id = :session_id";
+    $params = [ 
+        ":member_id" => $user_id,
+        ":session_id" => $session_id
+    ];
+    $stmt = $db->prepare($sql);
+
+    // return true on success of the query(note: true doesnt mean rows were affected!)
+    return $stmt->execute($params); 
+}
