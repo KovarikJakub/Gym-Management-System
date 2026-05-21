@@ -142,3 +142,59 @@ INSERT INTO enrollments (member_id, session_id, enrolled_at) VALUES
 
 -- Session 6: Vinyasa Flow (Trainer 4)
 (5, 6, '2026-04-17 08:30:00');
+
+-- Seed data for reviews (40 reviews)
+INSERT INTO reviews (session_id, member_id, rating, posted_date, comment) VALUES
+-- Session 1 (Vinyasa Flow)
+(1, 5, 5, '2026-05-01 10:00:00', 'Amazing class! Really helped with my flexibility.'),
+(1, 6, 4, '2026-05-01 11:30:00', 'Great pace, though the room was a bit crowded.'),
+(1, 7, 5, '2026-05-01 12:15:00', 'Trainer One is the best! Very calming atmosphere.'),
+(1, 8, 4, '2026-05-01 14:00:00', 'Good session, definitely felt the flow.'),
+(1, 9, 3, '2026-05-01 15:45:00', 'A bit too slow for me, but good for beginners.'),
+
+-- Session 2 (Mat Pilates Core)
+(2, 8, 5, '2026-05-01 12:00:00', 'My core is on fire! Loved every minute of it.'),
+(2, 9, 4, '2026-05-01 13:30:00', 'Excellent instructions, very clear and precise.'),
+(2, 5, 5, '2026-05-01 14:15:00', 'Hard work but totally worth it. Highly recommend.'),
+(2, 6, 4, '2026-05-01 16:00:00', 'Solid workout. Trainer Two really knows their stuff.'),
+(2, 7, 5, '2026-05-01 17:30:00', 'Best pilates class I have been to in a while.'),
+
+-- Session 3 (HIIT Blast)
+(3, 6, 5, '2026-05-01 20:00:00', 'Insane energy! Exactly what I needed.'),
+(3, 7, 5, '2026-05-01 20:15:00', 'Hardest 60 minutes of my week, but the best.'),
+(3, 8, 4, '2026-05-01 20:30:00', 'Great workout, very high intensity.'),
+(3, 9, 5, '2026-05-01 21:00:00', 'Loved the music and the trainer''s motivation.'),
+(3, 5, 2, '2026-05-01 21:30:00', 'Too intense for me. I couldn''t keep up at all.'),
+(3, 6, 4, '2026-05-02 08:00:00', 'Great sweat session. Will be back!'),
+(3, 7, 5, '2026-05-02 09:00:00', 'HIIT Blast is no joke. Fantastic trainer.'),
+
+-- Session 4 (Full Body Strength)
+(4, 5, 5, '2026-05-02 09:00:00', 'Great form corrections. Feeling much stronger.'),
+(4, 8, 4, '2026-05-02 10:30:00', 'Good mix of exercises. Focus on heavy lifts was great.'),
+(4, 6, 5, '2026-05-02 11:15:00', 'The trainer was super helpful with technique.'),
+(4, 7, 4, '2026-05-02 12:45:00', 'Solid session, felt every muscle working.'),
+(4, 9, 3, '2026-05-02 14:00:00', 'Wait times for equipment were a bit long today.'),
+
+-- Session 5 (Muay Thai Basics)
+(5, 6, 5, '2026-05-02 21:00:00', 'Loved the technique focus. Authentic feel.'),
+(5, 7, 5, '2026-05-02 21:15:00', 'Great cardio and skill building. Highly addictive!'),
+(5, 9, 4, '2026-05-02 21:30:00', 'Good introduction for beginners. Very patient trainer.'),
+(5, 5, 5, '2026-05-02 22:00:00', 'Oweeeee! Great session today.'),
+(5, 8, 4, '2026-05-03 08:30:00', 'Strong focus on basics, which I appreciated.'),
+
+-- Session 6 (Vinyasa Flow - second instance)
+(6, 5, 5, '2026-05-03 11:00:00', 'Perfect Sunday morning flow. Refreshing.'),
+(6, 6, 4, '2026-05-03 12:30:00', 'Really enjoyed the sequence today.'),
+(6, 7, 5, '2026-05-03 13:15:00', 'Namaste. Great class, great vibe.'),
+(6, 8, 3, '2026-05-03 14:45:00', 'A bit too crowded, hard to move freely.'),
+(6, 9, 5, '2026-05-03 16:00:00', 'Excellent balance of strength and flexibility.'),
+
+-- More reviews to reach 40
+(1, 8, 5, '2026-05-03 17:00:00', 'Really loved the evening flow session.'),
+(2, 5, 4, '2026-05-03 18:00:00', 'Pilates is getting easier, thanks to the trainer!'),
+(3, 9, 5, '2026-05-03 19:00:00', 'HIIT is the best way to end the weekend.'),
+(4, 7, 4, '2026-05-03 20:00:00', 'Strong finish to the week. Great class.'),
+(5, 6, 5, '2026-05-03 21:00:00', 'Muay Thai is definitely my new favorite.'),
+(1, 5, 4, '2026-05-04 08:00:00', 'Good start to the week with some yoga.'),
+(2, 8, 5, '2026-05-04 09:00:00', 'Core strength improving noticeably.'),
+(3, 7, 5, '2026-05-04 10:00:00', 'Always a challenge, always worth it.');
