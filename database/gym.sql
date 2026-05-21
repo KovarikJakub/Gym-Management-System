@@ -74,7 +74,8 @@ CREATE TABLE reviews (
     session_id INTEGER NOT NULL,
     member_id INTEGER NOT NULL,
     rating INTEGER NOT NULL CHECK(rating BETWEEN 1 AND 5),
-    comment TEXT,
+    posted_date DATETIME NOT NULL,
+    comment TEXT NOT NULL,
     FOREIGN KEY (session_id) REFERENCES class_sessions(id) ON DELETE CASCADE,
     FOREIGN KEY (member_id) REFERENCES users(id) ON DELETE CASCADE
 );
