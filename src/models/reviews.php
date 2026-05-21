@@ -21,7 +21,8 @@ function getReviewsForGymClass($gym_class_id)
     JOIN class_sessions cs ON r.session_id = cs.id
     JOIN gym_classes gc ON cs.class_id = gc.id
     JOIN users u ON r.member_id = u.id
-    WHERE gc.id = :gym_class_id";
+    WHERE gc.id = :gym_class_id
+    ORDER BY r.posted_date DESC";
 
     $stmt = $db->prepare($sql);
     $params = [ ':gym_class_id' => $gym_class_id ];
