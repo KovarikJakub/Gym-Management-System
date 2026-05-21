@@ -1,35 +1,43 @@
 
+const refetchPageContent = async () => {
+    // Refetch the entire sessions list and update UI
+    const fetchResponse = await fetch('sessions.php');
+    const html = await fetchResponse.text();
+    
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const newContainer = doc.getElementById('sessions-container');
+    
+    if (newContainer)
+    {
+        document.getElementById('sessions-container').innerHTML = newContainer.innerHTML;
+        attachButtonListeners(); // Re-attach listeners to new buttons
+    }
+}
 
-const onEnrollButtonClick = async (event, buttonElement) => {
-    const sessionId = buttonElement.getAttribute('data-id');
+const buildFormData = (sessionId) =>
+{
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const formData = new URLSearchParams();
     formData.append('session_id', sessionId);
     formData.append('csrf_token', csrfToken);
-    console.log(`button data-id-${sessionId} clicked`);
 
-    try{
+    return formData;
+}
+
+const onEnrollButtonClick = async (event, buttonElement) => {
+
+    const sessionId = buttonElement.getAttribute('data-id');
+    const formData = buildFormData(sessionId);
+    try {
         const response = await fetch('action_enroll_to_class.php', {
             method: 'POST',
             body: formData
         });
-
         const result = await response.json();
-
         if (result.success) {
             // Refetch the entire sessions list and update UI
-            const fetchResponse = await fetch('sessions.php');
-            const html = await fetchResponse.text();
-            
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const newContainer = doc.getElementById('sessions-container');
-            
-            if (newContainer) {
-                document.getElementById('sessions-container').innerHTML = newContainer.innerHTML;
-                attachEnrollListener(); // Re-attach listeners to new buttons
-            }
-
+            refetchPageContent();
             alert(result.message);
         } else {
             alert(result.message);
@@ -39,14 +47,40 @@ const onEnrollButtonClick = async (event, buttonElement) => {
     }
 }
 
-const attachEnrollListener = () => {
+const onCancelButtonClick = async (event, buttonElement) => {
+    const sessionId = buttonElement.getAttribute('data-id');
+    const formData = buildFormData(sessionId);
+    try {
+        const response = await fetch('action_cancel_enrollment.php', {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        if (result.success) {
+            // Refetch the entire sessions list and update UI
+            refetchPageContent();
+            alert(result.message);
+        } else {
+            alert(result.message);
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+}
+
+const attachButtonListeners = () => {
 
     const enrollButtons = document.querySelectorAll(".btn-enroll");
     for(let button of enrollButtons)
     {
-        console.log(`attach for: brn-${button.getAttribute('data-id')}`);
         button.addEventListener('click', async (event) => onEnrollButtonClick(event, button))
+    }
+
+    const cancelButtons = document.querySelectorAll(".btn-cancel");
+    for(let button of cancelButtons)
+    {
+        button.addEventListener('click', async (event) => onCancelButtonClick(event, button));
     }
 }
 
-attachEnrollListener();
+attachButtonListeners();

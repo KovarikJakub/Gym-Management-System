@@ -1,13 +1,30 @@
 <?php 
     require_once __DIR__ . '/../src/auth.php';
+    require_once __DIR__ . '/../src/Utils/helpers.php';
     require_once __DIR__ . '/../src/models/class_sessions.php';
+    require_once __DIR__ . '/../src/templates/class_session_card.php';
+    require_once __DIR__ . '/../src/templates/week_selector.php';
+
 
     requireLogin();
 
-    $date="2026-05-01"; // hardcoded "todays date" for development
-    # call getFilteredSessions with todays date to obtain sessions for today
-    $sessions = getFilteredSessions($date);
-?>
+    $user_id = $_SESSION['user_id'];
+    // enforce date("Y-m-d") format so that operators like '<' '>' can be used on dates
+    $today = "2026-05-02"; // hardcoded "todays date" for development
+    $selected_date = $_GET['date'] ?? $today;
+
+    // Ensure selected_date is in Y-m-d format if it comes from GET
+    $selected_date = date("Y-m-d", strtotime($selected_date));
+
+    $week_days = getWeekDays($today);
+
+    $sessions = getFilteredSessions($selected_date, $user_id);
+    ?>
+
+<?php function isSelectedDayInThePast($selected_date, $today)
+{
+    return ($selected_date < $today);
+}?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,45 +41,24 @@
     <header class="main-header">
         <h1>Weekly Schedule</h1>
     </header>
+    
+    <?php outputWeekSelector($week_days, $selected_date, $today); ?>
 
-    <main class="card-container" id="sessions-container">
+    <?php if (isSelectedDayInThePast($selected_date, $today)): ?>
+        <div class="alert alert-warning">
+            <strong>Note:</strong> You are viewing a date in the past. New enrollments are disabled for these sessions.
+        </div>
+    <?php endif ?>
+
+    <?php if (empty($sessions)): ?>
+        <div class="alert alert-info">
+            <strong>Note:</strong> There are no sessions for this day.
+        </div>
+    <?php endif ?>
+
+    <main class="card-container-vertical" id="sessions-container">
         <?php foreach ($sessions as $session): ?>
-        <article class="card <?= $session['is_full'] ? 'card-disabled' : '' ?>">
-            <header class="card-header">
-                <h2 class="card-title"><?= htmlspecialchars($session['class_name']) ?></h2>
-                <span class="badge badge-<?= str_replace(' ', '-', $session['class_type']) ?>">
-                    <?= htmlspecialchars($session['class_type']) ?>
-                </span>
-            </header>
-
-            <div class="card-body">
-                <p class="session-time">
-                    <strong>Time:</strong> <?= date('M j, H:i', strtotime($session['start_time'])) ?>
-                </p>
-                <p class="session-trainer">
-                    <strong>Trainer:</strong> <?= htmlspecialchars($session['trainer_name']) ?>
-                </p>
-                
-                <div class="card-details">
-                    <div class="detail-item">
-                        <strong>Availability</strong>
-                        <span class="enrollment-info"><?= $session['current_enrollment'] ?> / <?= $session['default_capacity'] ?></span>
-                    </div>
-                    <div class="detail-item">
-                        <strong>Status</strong>
-                        <span class="status-info <?= $session['is_full'] ? 'text-danger' : 'text-success' ?>">
-                            <?= $session['is_full'] ? 'Full' : $session['spots_left'] . ' left' ?>
-                        </span>
-                    </div>
-                </div>
-
-                <?php if (!$session['is_full']): ?>
-                    <button class="btn-enroll" data-id="<?= $session['session_id'] ?>" >Enroll Now</button>
-                <?php else: ?>
-                    <button class="btn-enroll" disabled>Session is full</button>
-                <?php endif; ?>
-            </div>
-        </article>
+            <?php outputClassSessionCard($session, $today) ?>
         <?php endforeach; ?>
     </main>
 </body>

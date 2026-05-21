@@ -1,3 +1,21 @@
+<?php
+
+require_once __DIR__ . '/../src/models/reviews.php';
+require_once __DIR__ . '/../src/templates/review_card.php';
+
+$reviews = [];
+
+if($_SERVER['REQUEST_METHOD'] === 'GET')
+{
+    $gym_class_id = $_GET['gym_class_id'];
+    if(!empty($gym_class_id))
+    {
+        $reviews = getReviewsForGymClass($gym_class_id);
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,22 +121,9 @@
             </form>
 
             <div class="reviews-list">
-                <article class="review-card boxes">
-                    <div class="review-card-header">
-                        <span class="review-card-author-name">John Doe</span>
-                        <span>⭐⭐⭐⭐</span>
-                    </div>
-                    <time>19/2/2026</time>
-                    <p>This class is absolutely brutal but incredibly effective. The energy is amazing!</p>
-                </article>
-                <article class="review-card boxes">
-                    <div class="review-card-header">
-                        <span>Anna Smith</span>
-                        <span>⭐⭐⭐⭐⭐</span>
-                    </div>
-                    <time>12/7/2026</time>
-                    <p>I loved the energy of the class! The trainer, Tabea, is extremly friendly.</p>
-                </article>
+                <?php foreach ($reviews as $review): ?>
+                    <?php outputReviewCard($review) ?>
+                <?php endforeach; ?>
             </div>
         </section>
     </main>
