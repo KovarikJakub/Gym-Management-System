@@ -35,7 +35,9 @@ function outputClassSessionCard($session, $today)
     ?>
 <article class="card <?= $session['is_enrolled'] ? 'card-enrolled' : '' ?> <?= !canEnroll($session, $today) && !$session['is_enrolled'] ? 'card-disabled' : '' ?>">
     <header class="card-header">
-        <h2 class="card-title"><?= htmlspecialchars($session['class_name']) ?></h2>
+        <a href="gym_class_detail.php?gym_class_id=<?= $session['gym_class_id'] ?>">
+            <h2 class="card-title"><?= htmlspecialchars($session['class_name']) ?></h2>
+        </a>
         <?php if ($session['is_enrolled']): ?>
             <span class="badge badge-success">Enrolled</span>
         <?php else: ?>

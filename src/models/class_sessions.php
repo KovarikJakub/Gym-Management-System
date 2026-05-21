@@ -48,6 +48,7 @@ function getFilteredSessions($date, $user_id,  $filters = [])
                 s.id AS session_id,
                 c.name AS class_name,
                 c.type AS class_type,
+                c.id AS gym_class_id,
                 u.real_name AS trainer_name,
                 s.start_time,
                 s.end_time,
