@@ -1,3 +1,8 @@
+/* ═══════════════════════════════════════════════════════════════
+   admin.css  –  uses variables from style.css / layout.css
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Notification ────────────────────────────────────────────── */
 .admin-notification {
     grid-column: 1 / -1;
     text-align: center;
@@ -21,6 +26,7 @@
     background: rgba(109, 191, 103, 0.08);
 }
 
+/* ── Form ────────────────────────────────────────────────────── */
 .admin-form {
     display: flex;
     flex-direction: column;
@@ -64,7 +70,7 @@
 .admin-select {
     cursor: pointer;
     appearance: none;
-    background-image: url("../assets/img/gym_background.jpg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ceaa51' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ceaa51' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     padding-right: 2.5rem;
@@ -95,9 +101,10 @@
     opacity: 1;
 }
 
-/* ── Table box ───────────────────────────────────────────────── */
+/* ── Table ───────────────────────────────────────────────────── */
 .admin-table-box {
     overflow-x: auto;
+    min-width: 0;        /* prevents box from overflowing the grid column */
 }
 
 .admin-table {
@@ -105,6 +112,7 @@
     border-collapse: collapse;
     margin-top: 1rem;
     font-size: 0.9rem;
+    table-layout: auto;
 }
 
 .admin-table th {
@@ -124,6 +132,7 @@
     border-bottom: 1px solid rgba(224, 201, 137, 0.08);
     color: var(--font-color);
     vertical-align: middle;
+    white-space: nowrap;    /* prevents text wrapping that breaks row height */
 }
 
 .admin-table tbody tr:hover td {
@@ -135,7 +144,7 @@
     opacity: 0.75;
 }
 
-/* Status badges */
+/* ── Status badges ───────────────────────────────────────────── */
 .admin-status {
     font-family: Poppins, sans-serif;
     font-size: 0.72rem;
@@ -147,22 +156,17 @@
     border: 1px solid;
 }
 
-.admin-status--on {
-    color: #6dbf67;
-    border-color: #6dbf67;
-}
+.admin-status--on  { color: #6dbf67; border-color: #6dbf67; }
+.admin-status--off { color: #e07a5f; border-color: #e07a5f; }
 
-.admin-status--off {
-    color: #e07a5f;
-    border-color: #e07a5f;
-}
-
-/* Action links/buttons in table */
+/* ── Action buttons in table ─────────────────────────────────── */
 .admin-actions-cell {
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    white-space: nowrap;    /* keep Edit / Deactivate on one line */
+}
+
+.admin-actions-cell form {
+    display: inline;
+    margin-left: 1rem;
 }
 
 .admin-action-link {
@@ -178,14 +182,41 @@
     transition: opacity 0.2s;
 }
 
-.admin-action-link:hover {
-    opacity: 0.7;
+.admin-action-link:hover          { opacity: 0.7; }
+.admin-action-link--deactivate    { color: #e07a5f; }
+.admin-action-link--activate      { color: #6dbf67; }
+
+/* ── Toast (AJAX feedback) ───────────────────────────────────── */
+.admin-toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: Poppins, sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 0.8rem 1.4rem;
+    border-radius: 0.6em;
+    border: 1px solid;
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    z-index: 999;
 }
 
-.admin-action-link--deactivate {
-    color: #e07a5f;
+.admin-toast.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.admin-action-link--activate {
+.admin-toast--success {
     color: #6dbf67;
+    border-color: rgba(109, 191, 103, 0.4);
+    background: rgba(35, 32, 24, 0.95);
+}
+
+.admin-toast--error {
+    color: #e07a5f;
+    border-color: rgba(224, 122, 95, 0.4);
+    background: rgba(35, 32, 24, 0.95);
 }
