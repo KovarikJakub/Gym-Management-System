@@ -150,3 +150,32 @@ function cancelEnrollment($user_id, $session_id)
     // return true on success of the query(note: true doesnt mean rows were affected!)
     return $stmt->execute($params); 
 }
+
+function getUsersPastSessions($user_id, $n)
+{
+    $db = getDbConnection();
+
+    $sql = "SELECT 
+                s.id AS session_id,
+                c.name AS class_name,
+                c.type AS class_type,
+                u.real_name AS trainer_name,
+                s.start_time,
+                s.end_time,
+                (SELECT COUNT(*) FROM reviews r WHERE r.session_id = s.id AND r.member_id = :user_id) > 0 AS is_reviewed
+            FROM enrollments e
+            JOIN class_sessions s ON e.session_id = s.id
+            JOIN gym_classes c ON s.class_id = c.id
+            JOIN users u ON s.trainer_id = u.id
+            WHERE e.member_id = :user_id 
+              AND s.end_time < CURRENT_TIMESTAMP
+            ORDER BY s.start_time DESC
+            LIMIT :limit";
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', $n, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    return $stmt->fetchAll();
+}

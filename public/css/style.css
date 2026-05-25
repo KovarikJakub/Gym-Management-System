@@ -7,6 +7,15 @@
     --title-color: #ceaa51;
     --shadow-color: #85431E;
 
+    --success-color: #6dbf67;
+    --danger-color: #e07a5f;
+    --info-color: #8ab4d4;
+    --warning-color: #f1c40f;
+    --pilates-color: #b28ad4;
+
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+    --border-color: rgba(224, 201, 137, 0.1);
+
     --title-size: 230%;
     --h2-size: 140%;
     --sub-size: 115%;
@@ -23,10 +32,7 @@ header, footer {
     background-color: var(--bg-color);
 }
 
-/* Image is ONLY in the main area */
 main {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                      url('../assets/img/gym_background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -77,7 +83,7 @@ header div h1{
 }
 
 .overlay, #shortcuts, #info {
-    background: rgba(0, 0, 0, 0.7);
+    background: var(--overlay-bg);
 }
 
 li {
@@ -124,4 +130,73 @@ header h2:hover {
 }
 .btn:hover {
     background-color: var(--title-color);
+}
+
+/* Form & Input Styles */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="file"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.8em;
+    margin: 0.5em 0 1.2em 0;
+    display: inline-block;
+    border: 1px solid var(--boxes-color);
+    border-radius: 0.5em;
+    box-sizing: border-box;
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    font-family: Lora, serif;
+}
+
+label {
+    color: var(--font-color);
+}
+
+input[type="file"] {
+    padding: 0.6em;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--title-color);
+}
+
+form button[type="submit"],
+form button.btn {
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    font-family: Poppins, sans-serif;
+    font-weight: bold;
+}
+
+.current-photo-preview {
+    margin-bottom: 1.5em;
+    text-align: center;
+}
+
+.current-photo-preview img {
+    border-radius: 50%;
+    border: 2px solid var(--title-color);
+    object-fit: cover;
+    width: 80px;
+    height: 80px;
+}
+
+.auth-container {
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+.auth-container h1 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.auth-container p {
+    text-align: center;
+    margin-top: 1.5em;
 }

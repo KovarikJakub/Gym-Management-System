@@ -89,51 +89,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile - Gym Management</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <title>Edit Profile - Fit-Pro</title>
 </head>
 <body>
-    <div class="profile-container">
-        <h1>Edit Profile</h1>
-        
-        <?php if ($error): ?><p style="color:red;"><?= htmlspecialchars($error) ?></p><?php endif; ?>
-        <?php if ($success): ?><p style="color:green;"><?= htmlspecialchars($success) ?></p><?php endif; ?>
-
-        <form method="post" enctype="multipart/form-data">
-            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+    <?php 
+        require_once __DIR__ . '/../src/templates/common.php';
+        outputHeader(); 
+    ?>
+    <main class="center-content">
+        <div class="auth-container boxes">
+            <h1>Edit Profile</h1>
             
-            <div class="form-group">
-                <label for="real_name">Full Name:</label>
+            <?php if ($error): ?>
+                <p style="color: var(--danger-color); background: rgba(224, 122, 95, 0.1); padding: 10px; border-radius: 5px;">
+                    <?= htmlspecialchars($error) ?>
+                </p>
+            <?php endif; ?>
+
+            <?php if ($success): ?>
+                <p style="color: var(--success-color); background: rgba(109, 191, 103, 0.1); padding: 10px; border-radius: 5px;">
+                    <?= htmlspecialchars($success) ?>
+                </p>
+            <?php endif; ?>
+
+            <form method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+                
+                <label for="real_name">Full Name</label>
                 <input type="text" name="real_name" id="real_name" value="<?= htmlspecialchars($user['real_name']) ?>" required>
-            </div>
 
-            <div class="form-group">
-                <label for="username">Username:</label>
+                <label for="username">Username</label>
                 <input type="text" name="username" id="username" value="<?= htmlspecialchars($user['username']) ?>" required>
-            </div>
 
-            <div class="form-group">
-                <label for="password">New Password (leave blank to keep current):</label>
-                <input type="password" name="password" id="password">
-            </div>
+                <label for="password">New Password (leave blank to keep current)</label>
+                <input type="password" name="password" id="password" placeholder="••••••••">
 
-            <div class="form-group">
-                <label for="profile_photo">Profile Photo:</label>
-                <?php if (!isNullOrEmptyString($user['profile_photo'])): ?>
-                    <div class="current-photo">
-                        <img src="<?= $uploadsBaseUrl . htmlspecialchars($user['profile_photo']) ?>" alt="Profile Photo" style="max-width: 150px;">
-                        <div>
-                            <input type="checkbox" name="delete_photo" id="delete_photo">
-                            <label for="delete_photo">Remove current photo</label>
+                <div class="form-group">
+                    <label for="profile_photo">Profile Photo</label>
+                    <?php if (!isNullOrEmptyString($user['profile_photo'])): ?>
+                        <div class="current-photo-preview">
+                            <img src="<?= $uploadsBaseUrl . htmlspecialchars($user['profile_photo']) ?>" alt="Profile Photo">
+                            <div style="margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                <input type="checkbox" name="delete_photo" id="delete_photo" style="width: auto; margin: 0;">
+                                <label for="delete_photo" style="font-size: 0.9em; opacity: 0.8;">Remove current photo</label>
+                            </div>
                         </div>
-                    </div>
-                <?php endif; ?>
-                <input type="file" name="profile_photo" id="profile_photo" accept="image/*">
-            </div>
+                    <?php else: ?>
+                        <div class="current-photo-preview">
+                            <img src="<?= $uploadsBaseUrl . "placeholder.jpg" ?>" alt="Profile Photo">
+                        </div>
+                    <?php endif; ?>
+                    <input type="file" name="profile_photo" id="profile_photo" accept="image/*">
+                </div>
 
-            <button type="submit">Update Profile</button>
-        </form>
-        
-        <p><a href="dashboard.php">Back to Dashboard</a></p>
-    </div>
+                <button type="submit" class="btn">Update Profile</button>
+            </form>
+            
+            <p><a href="dashboard.php" style="font-size: 0.9em; opacity: 0.8;">← Back to Dashboard</a></p>
+        </div>
+    </main>
+    <?php outputFooter(); ?>
 </body>
 </html>

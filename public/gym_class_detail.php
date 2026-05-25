@@ -1,17 +1,25 @@
 <?php
 
+require_once __DIR__ . '/../src/auth.php';
+require_once __DIR__ . '/../src/models/gym_classes.php';
 require_once __DIR__ . '/../src/models/reviews.php';
 require_once __DIR__ . '/../src/templates/review_card.php';
+require_once __DIR__ . '/../src/templates/common.php';
 
+$gym_class_id = $_GET['gym_class_id'] ?? null;
+$gym_class = null;
 $reviews = [];
 
-if($_SERVER['REQUEST_METHOD'] === 'GET')
+if(!empty($gym_class_id))
 {
-    $gym_class_id = $_GET['gym_class_id'];
-    if(!empty($gym_class_id))
-    {
+    $gym_class = getGymClassById($gym_class_id);
+    if ($gym_class) {
         $reviews = getReviewsForGymClass($gym_class_id);
     }
+}
+
+if (!$gym_class) {
+    die("Gym class not found.");
 }
 
 ?>
@@ -25,114 +33,68 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
     <link href="css/layout.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
     <link rel="stylesheet" href="css/gym_class_detail.css">
-    <title>Gym Class Detail</title>
+    <title><?= htmlspecialchars($gym_class['name']) ?> - Fit-Pro</title>
 </head>
 <body>
-    <header>
-        <div>
-            <h1><a href="index.html">Fit-Pro</a></h1>
-        </div>
+    <?php outputHeader(); ?>
 
-        <nav id="menu">
-            <!-- just for the hamburguer menu in responsive layout -->
-            <input type="checkbox" id="hamburger"> 
-            <label class="hamburger" for="hamburger"></label>
-            <ul>
-                <li><a href="classes.html">Classes</a></li>
-                <li><a href="equipment.html">Equipment</a></li>
-                <li><a href="trainers.html">Trainers</a></li>
-                <li><a href="schedule.html">Schedule</a></li>
-            </ul>
-        </nav>
-
-        <div id="signup">
-            <!-- 'buttons', add padding ... -->
-            <a href="login.html"><h2>Login</h2></a>
-            <a href="register.html"><h2>Register</h2></a>
-        </div>
-    </header>
     <main>
         <section class="back-button-section">
-            <a href="#" class="back-button">← Back to classes</a>
+            <a href="sessions.php" class="back-button">← Back to schedule</a>
         </section>
         <section class="gym-class-detail-container">
             <div class="image-section">
-                <img src="assets/img/gym_class.jpg" alt="HIIT Bootcamp Class" />
+                <img src="assets/img/gym_class.jpg" alt="<?= htmlspecialchars($gym_class['name']) ?>" />
             </div>
 
             <div class="content-section">
-                <h1>HIIT Bootcamp</h1>
+                <h1><?= htmlspecialchars($gym_class['name']) ?></h1>
                 
                 <div class="meta-info">
-                    <p class="author-name">with {Author Name}</p>
+                    <p class="class-type"><?= htmlspecialchars(ucfirst($gym_class['type'])) ?></p>
                     <div class="rating">
-                        ⭐ 4.8 (127 Reviews)
+                        ⭐ <?= $gym_class['avg_rating'] ? number_format($gym_class['avg_rating'], 1) : 'N/A' ?> 
+                        (<?= $gym_class['review_count'] ?> Reviews)
                     </div>
                 </div>
 
                 <p class="description">
-                    High-intensity interval training designed to maximize calorie burn and build endurance. Perfect for those who want to push their limits.
+                    <?= htmlspecialchars($gym_class['description']) ?>
                 </p>
 
                 <div class="gym-class-attributes-container">
                     <div class="attribute-box boxes">
-                        <span class="attribute-label">🕒 Duration</span>
-                        <span class="attribute-value">45min</span>
-                    </div>
-                    <div class="attribute-box boxes">
-                        <span class="attribute-label">📅 Sessions</span>
-                        <span class="attribute-value">3/week</span>
+                        <span class="attribute-label">📊 Difficulty</span>
+                        <span class="attribute-value"><?= $gym_class['difficulty'] ?>/5</span>
                     </div>
                     <div class="attribute-box boxes">
                         <span class="attribute-label">👤 Capacity</span>
-                        <span class="attribute-value">20</span>
+                        <span class="attribute-value"><?= $gym_class['default_capacity'] ?></span>
                     </div>
                 </div>
                 
                 <div class="book-button-container">
-                    <button class="book-button btn">
-                        Enroll Now
-                    </button>
+                    <a href="sessions.php" class="book-button btn">
+                        View Schedule & Enroll
+                    </a>
                 </div>
             </div>
         </section>
         <section class="gym-class-reviews-container">
             <h1>Reviews</h1>
             
-            <form class="review-form boxes">
-                <div class="current-user-badge">
-                    <span class="user-label">Posting as:</span>
-                    <span class="author-name">{Current user}</span>
-                </div>
-                <div class="rating-selector">
-                    <label for="rating">Score:</label>
-                    <select name="rating" id="rating">
-                        <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
-                        <option value="4">⭐⭐⭐⭐ (Good)</option>
-                        <option value="3">⭐⭐⭐ (Average)</option>
-                        <option value="2">⭐⭐ (Poor)</option>
-                        <option value="1">⭐ (Terrible)</option>
-                    </select>
-                </div>
-                <div class="review-form-input-container">
-                    <input type="text" id="comment" name="comment" placeholder="Let others know what you think..." required />
-                    <button type="submit" class="btn">Post</button>
-                </div>
-            </form>
-
             <div class="reviews-list">
-                <?php foreach ($reviews as $review): ?>
-                    <?php outputReviewCard($review) ?>
-                <?php endforeach; ?>
+                <?php if (empty($reviews)): ?>
+                    <p>No reviews yet for this class.</p>
+                <?php else: ?>
+                    <?php foreach ($reviews as $review): ?>
+                        <?php outputReviewCard($review) ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </section>
     </main>
-    <footer class="site-footer">
-        <p>&copy; 2026 GymFit Studio. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-        </div>
-    </footer>
+
+    <?php outputFooter(); ?>
 </body>
 </html>

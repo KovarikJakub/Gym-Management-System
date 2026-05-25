@@ -21,7 +21,8 @@ function getReviewsForGymClass($gym_class_id)
     JOIN class_sessions cs ON r.session_id = cs.id
     JOIN gym_classes gc ON cs.class_id = gc.id
     JOIN users u ON r.member_id = u.id
-    WHERE gc.id = :gym_class_id";
+    WHERE gc.id = :gym_class_id
+    ORDER BY r.posted_date DESC";
 
     $stmt = $db->prepare($sql);
     $params = [ ':gym_class_id' => $gym_class_id ];
@@ -62,4 +63,20 @@ function getReviewsForSession($session_id)
     $reviews = $stmt->fetchAll();
 
     return $reviews;
+}
+
+function addReview($member_id, $session_id, $rating, $comment)
+{
+    $db = getDbConnection();
+
+    $sql = "INSERT INTO reviews (session_id, member_id, rating, posted_date, comment) 
+            VALUES (:session_id, :member_id, :rating, CURRENT_TIMESTAMP, :comment)";
+    
+    $stmt = $db->prepare($sql);
+    return $stmt->execute([
+        ':session_id' => $session_id,
+        ':member_id' => $member_id,
+        ':rating' => $rating,
+        ':comment' => $comment
+    ]);
 }

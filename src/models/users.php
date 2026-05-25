@@ -20,6 +20,13 @@ function createUser($realName, $username, $hashedPassword, $email, $role, $profi
     $stmt->execute([$realName, $username, $hashedPassword, $email, $role, $profilePhoto]);
 }
 
+function getAllTrainers()
+{
+    $db = getDbConnection();
+    $stmt = $db->query("SELECT id, real_name FROM users WHERE role = 'trainer' AND is_deactivated = 0");
+    return $stmt->fetchAll();
+}
+
 function getUserById($id)
 {
     $db = getDbConnection();
