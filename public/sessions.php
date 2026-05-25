@@ -2,23 +2,29 @@
     require_once __DIR__ . '/../src/auth.php';
     require_once __DIR__ . '/../src/Utils/helpers.php';
     require_once __DIR__ . '/../src/models/class_sessions.php';
+    require_once __DIR__ . '/../src/models/users.php';
+    require_once __DIR__ . '/../src/models/gym_classes.php';
     require_once __DIR__ . '/../src/templates/class_session_card.php';
-    require_once __DIR__ . '/../src/templates/week_selector.php';
-
+    require_once __DIR__ . '/../src/templates/filter_tab.php';
 
     requireLogin();
 
     $user_id = $_SESSION['user_id'];
-    // enforce date("Y-m-d") format so that operators like '<' '>' can be used on dates
     $today = "2026-05-02"; // hardcoded "todays date" for development
     $selected_date = $_GET['date'] ?? $today;
-
-    // Ensure selected_date is in Y-m-d format if it comes from GET
     $selected_date = date("Y-m-d", strtotime($selected_date));
 
-    $week_days = getWeekDays($today);
+    // Get active filters from GET
+    $filters = [
+        'type' => $_GET['type'] ?? '',
+        'trainer_id' => $_GET['trainer_id'] ?? ''
+    ];
 
-    $sessions = getFilteredSessions($selected_date, $user_id);
+    $week_days = getWeekDays($today);
+    $trainers = getAllTrainers();
+    $class_types = getAllClassTypes();
+
+    $sessions = getFilteredSessions($selected_date, $user_id, $filters);
     ?>
 
 <?php function isSelectedDayInThePast($selected_date, $today)
@@ -42,7 +48,7 @@
         <h1>Weekly Schedule</h1>
     </header>
     
-    <?php outputWeekSelector($week_days, $selected_date, $today); ?>
+    <?php outputFilterTab($week_days, $selected_date, $today, $trainers, $class_types, $filters); ?>
 
     <?php if (isSelectedDayInThePast($selected_date, $today)): ?>
         <div class="alert alert-warning">
