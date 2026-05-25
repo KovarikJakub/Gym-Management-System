@@ -32,6 +32,13 @@ main {
     flex: 1;
 }
 
+.center-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #presentation {
     min-height: 85vh;
     display: flex;
