@@ -1,0 +1,128 @@
+/* 
+    Depends on: style.css, layout.css, admin.css
+    Only equipment-specific styles here — everything else comes from admin.css
+*/
+
+.eq-summary {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+    padding: 1.75rem 2rem;
+    background: rgba(0, 0, 0, 0.65);
+    border-bottom: 1px solid rgba(224, 201, 137, 0.12);
+}
+
+.eq-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    min-width: 110px;
+}
+
+.eq-stat__count {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--title-color);
+    line-height: 1;
+}
+
+.eq-stat__label {
+    font-family: Poppins, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.status-available   { color: #6dbf67; }
+.status-inuse       { color: #8ab4d4; }
+.status-maintenance { color: #e07a5f; }
+
+.eq-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;
+    font-family: Poppins, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid;
+    white-space: nowrap;
+}
+
+.eq-status--available   { color: #6dbf67; border-color: #6dbf67; }
+.eq-status--in-use      { color: #8ab4d4; border-color: #8ab4d4; }
+.eq-status--maintenance { color: #e07a5f; border-color: #e07a5f; }
+
+.eq-full-width { grid-column: 1 / -1; }
+
+.cell-equipment-status { text-align: center; }
+
+.eq-table-empty {
+    text-align: center;
+    opacity: 0.5;
+    padding: 2rem 0;
+    font-size: 0.9rem;
+}
+
+#interfaceAlertBox {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    min-width: 280px;
+    max-width: 380px;
+    padding: 1rem 1.4rem;
+    border-radius: 0.5rem;
+    font-family: Poppins, sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(0.75rem);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#interfaceAlertBox.toast-show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+@media (max-width: 60em) {
+    .eq-summary    { gap: 2rem; }
+    .eq-full-width { grid-column: 1; }
+}
+
+@media (max-width: 42em) {
+    .eq-summary {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+}
+
+#equipmentMasterTable {
+    table-layout: fixed;
+    width: 100%;
+}
+
+#equipmentMasterTable td {
+    white-space: normal !important;
+}
+
+#equipmentMasterTable th:nth-child(1),
+#equipmentMasterTable td:nth-child(1) { width: 50%; }
+
+#equipmentMasterTable th:nth-child(2),
+#equipmentMasterTable td:nth-child(2) { width: 25%; text-align: center; }
+
+#equipmentMasterTable th:nth-child(3),
+#equipmentMasterTable td:nth-child(3) { width: 25%; text-align: right; }
