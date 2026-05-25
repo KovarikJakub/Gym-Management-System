@@ -1,17 +1,27 @@
 <?php
 
+function formatDuration($startTime, $endTime)
+{
+    $diffSeconds = $endTime - $startTime;
+    $hours = floor($diffSeconds / 3600);
+    $minutes = floor(($diffSeconds % 3600) / 60);
+    
+    $duration = sprintf('%d:%02d', $hours, $minutes);
+    return $duration;
+}
 
-/**
- * Formats the duration of a class session.
- * 
- * @param array $session The session data containing 'start_time' and 'end_time'.
- * @return string Formatted duration (e.g., "10:00 - 11:30").
- */
+
 function formatClassDuration($session)
 {
-    $start = date('H:i', strtotime($session['start_time']));
-    $end = date('H:i', strtotime($session['end_time']));
-    return "$start - $end";
+    $startTime = strtotime($session['start_time']);
+    $endTime = strtotime($session['end_time']);
+    
+    $start = date('G:i', $startTime);
+    $end = date('G:i', $endTime);
+    
+    $duration = formatDuration($startTime, $endTime);
+    
+    return "$start - $end ($duration hrs)";
 }
 
 function formatAvailabality($session)
@@ -38,18 +48,14 @@ function outputClassSessionCard($session, $today)
         <a href="gym_class_detail.php?gym_class_id=<?= $session['gym_class_id'] ?>">
             <h2 class="card-title"><?= htmlspecialchars($session['class_name']) ?></h2>
         </a>
-        <?php if ($session['is_enrolled']): ?>
-            <span class="badge badge-success">Enrolled</span>
-        <?php else: ?>
-            <span class="badge badge-<?= str_replace(' ', '-', $session['class_type']) ?>">
-                <?= htmlspecialchars($session['class_type']) ?>
-            </span>
-        <?php endif; ?>
+        <span class="badge badge-<?= str_replace(' ', '-', $session['class_type']) ?>">
+            <?= htmlspecialchars($session['class_type']) ?>
+        </span>
     </header>
 
     <div class="card-body">
         <p class="session-time">
-            <strong>Time:</strong> <?= formatClassDuration($session) ?>
+            <?= formatClassDuration($session) ?>
         </p>
         <p class="session-trainer">
             <strong>Trainer:</strong> <?= htmlspecialchars($session['trainer_name']) ?>
