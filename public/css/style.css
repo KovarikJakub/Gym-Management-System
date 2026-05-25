@@ -151,6 +151,10 @@ select {
     font-family: Lora, serif;
 }
 
+label {
+    color: var(--font-color);
+}
+
 input[type="file"] {
     padding: 0.6em;
 }

@@ -50,11 +50,8 @@
 </head>
 <body>
     <?php outputHeader(); ?>
-    <?php outputFilterTab($week_days, $selected_date, $today, $trainers, $class_types, $filters); ?>
     <main>
-        
-        <?php outputWeekSelector($week_days, $selected_date, $today); ?>
-
+        <?php outputFilterTab($week_days, $selected_date, $today, $trainers, $class_types, $filters); ?>
         <?php if (isSelectedDayInThePast($selected_date, $today)): ?>
             <div class="alert alert-warning">
                 <strong>Note:</strong> You are viewing a date in the past. New enrollments are disabled for these sessions.

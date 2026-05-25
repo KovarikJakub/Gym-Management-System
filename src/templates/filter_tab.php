@@ -4,7 +4,7 @@ require_once __DIR__ . '/week_selector.php';
 function outputFilterTab($week_days, $selected_date, $today, $trainers, $class_types, $active_filters)
 {
     ?>
-    <div class="filter-tab-container boxes">
+    <div class="filter-tab-container">
         <?php outputWeekSelector($week_days, $selected_date, $today); ?>
 
         <form action="sessions.php" method="GET" class="additional-filters">
@@ -48,7 +48,6 @@ function outputFilterTab($week_days, $selected_date, $today, $trainers, $class_t
         .filter-tab-container {
             margin-bottom: 20px;
             padding: 15px;
-            background: #f9f9f9;
         }
         .additional-filters {
             display: flex;
@@ -56,7 +55,6 @@ function outputFilterTab($week_days, $selected_date, $today, $trainers, $class_t
             align-items: flex-end;
             margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px solid #eee;
             flex-wrap: wrap;
         }
         .filter-group {
@@ -67,7 +65,6 @@ function outputFilterTab($week_days, $selected_date, $today, $trainers, $class_t
         .filter-group select {
             padding: 8px;
             border-radius: 4px;
-            border: 1px solid #ccc;
         }
         .clear-filters {
             font-size: 0.9em;
