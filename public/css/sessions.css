@@ -1,12 +1,5 @@
 /* Session-specific enhancements */
 
-.main-header {
-    text-align: center;
-    padding: 2rem 1rem;
-    background: var(--boxes-color);
-    color: var(--title-color);
-}
-
 .week-selector {
     display: flex;
     justify-content: center;

@@ -40,9 +40,6 @@
     <?php outputHeader(); ?>
 
     <main>
-        <header class="main-header">
-            <h1>Weekly Schedule</h1>
-        </header>
         
         <?php outputWeekSelector($week_days, $selected_date, $today); ?>
 

@@ -30,6 +30,8 @@ header ul {
 main {
     width: 100%;
     flex: 1;
+    max-width: 1080px;
+    margin: 0 auto;
 }
 
 .center-content {
