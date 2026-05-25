@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../src/auth.php';
 require_once __DIR__ . '/../src/models/users.php';
+require_once __DIR__ . '/../src/templates/common.php';
 
 requireLogin();
 
@@ -112,32 +113,8 @@ foreach ($equipmentList as $item) {
     <link href="css/equipment.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div>
-            <h1><a href="index.html">Fit-Pro</a></h1>
-        </div>
-        <nav id="menu">
-            <input type="checkbox" id="hamburger">
-            <label class="hamburger" for="hamburger"></label>
-            <ul>
-                <li><a href="sessions.php"><h2>Classes</h2></a></li>
-                <li><a href="equipment.php"><h2>Equipment</h2></a></li>
-                <li><a href="schedule.php"><h2>Schedule</h2></a></li>
-            </ul>
-        </nav>
-        <div id="signup">
-            <a href="logout.php"><h2>Logout</h2></a>
-        </div>
-    </header>
-
+    <?php outputHeader(); ?>
     <main>
-        <section id="presentation">
-            <div class="overlay">
-                <h1>Equipment</h1>
-                <p><?= $isAdmin ? 'Manage gym equipment' : 'Check equipment availability' ?></p>
-            </div>
-        </section>
-
         <!-- Status summary -->
         <section class="eq-summary">
             <div class="eq-stat">
@@ -234,15 +211,7 @@ foreach ($equipmentList as $item) {
 
         </section>
     </main>
-
-    <footer>
-        <p>&copy; 2026 GymFit Studio. All rights reserved.</p>
-        <nav class="footer-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-        </nav>
-    </footer>
-
+    <?php outputFooter() ?>
     <!-- Toast using admin-notification colours -->
     <div id="interfaceAlertBox"></div>
 
