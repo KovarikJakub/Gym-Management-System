@@ -137,6 +137,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                                 <label for="delete_photo" style="font-size: 0.9em; opacity: 0.8;">Remove current photo</label>
                             </div>
                         </div>
+                    <?php else: ?>
+                        <div class="current-photo-preview">
+                            <img src="<?= $uploadsBaseUrl . "placeholder.jpg" ?>" alt="Profile Photo">
+                        </div>
                     <?php endif; ?>
                     <input type="file" name="profile_photo" id="profile_photo" accept="image/*">
                 </div>
