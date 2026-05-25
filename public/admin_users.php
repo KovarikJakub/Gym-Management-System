@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../src/auth.php';
 require_once __DIR__ . '/../src/models/users.php';
+require_once __DIR__ . '/../src/templates/common.php';
 
 requireLogin();
 
@@ -130,25 +131,7 @@ $users = $stmt->fetchAll();
     <link href="css/admin.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div>
-            <h1><a href="index.html">Fit-Pro</a></h1>
-        </div>
-        <nav id="menu">
-            <input type="checkbox" id="hamburger">
-            <label class="hamburger" for="hamburger"></label>
-            <ul>
-                <li><a href="admin_classes.php"><h2>Classes</h2></a></li>
-                <li><a href="admin_sessions.php"><h2>Sessions</h2></a></li>
-                <li><a href="equipment.php"><h2>Equipment</h2></a></li>
-                <li><a href="admin_users.php"><h2>Users</h2></a></li>
-            </ul>
-        </nav>
-        <div id="signup">
-            <a href="logout.php"><h2>Logout</h2></a>
-        </div>
-    </header>
-
+    <?php outputHeader(); ?>
     <main>
         <section id="presentation">
             <div class="overlay">
@@ -240,15 +223,7 @@ $users = $stmt->fetchAll();
 
         </section>
     </main>
-
-    <footer>
-        <p>&copy; 2026 GymFit Studio. All rights reserved.</p>
-        <nav class="footer-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-        </nav>
-    </footer>
-
+    <?php outputFooter(); ?>
     <!-- Notification Toast System -->
     <div class="admin-toast" id="toast"></div>
 
