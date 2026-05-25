@@ -2,7 +2,10 @@
     require_once __DIR__ . '/../src/auth.php';
     require_once __DIR__ . '/../src/Utils/helpers.php';
     require_once __DIR__ . '/../src/models/class_sessions.php';
+    require_once __DIR__ . '/../src/models/users.php';
+    require_once __DIR__ . '/../src/models/gym_classes.php';
     require_once __DIR__ . '/../src/templates/class_session_card.php';
+    require_once __DIR__ . '/../src/templates/filter_tab.php';
     require_once __DIR__ . '/../src/templates/week_selector.php';
     require_once __DIR__ . '/../src/templates/common.php';
 
@@ -13,9 +16,18 @@
     $selected_date = $_GET['date'] ?? $today;
     $selected_date = date("Y-m-d", strtotime($selected_date));
 
+    // Get active filters from GET
+    $filters = [
+        'type' => $_GET['type'] ?? '',
+        'trainer_id' => $_GET['trainer_id'] ?? ''
+    ];
+
     $week_days = getWeekDays($today);
-    $sessions = getFilteredSessions($selected_date, $user_id);
-?>
+    $trainers = getAllTrainers();
+    $class_types = getAllClassTypes();
+
+    $sessions = getFilteredSessions($selected_date, $user_id, $filters);
+    ?>
 
 <?php function isSelectedDayInThePast($selected_date, $today)
 {
@@ -38,7 +50,7 @@
 </head>
 <body>
     <?php outputHeader(); ?>
-
+    <?php outputFilterTab($week_days, $selected_date, $today, $trainers, $class_types, $filters); ?>
     <main>
         
         <?php outputWeekSelector($week_days, $selected_date, $today); ?>
