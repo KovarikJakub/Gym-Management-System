@@ -18,7 +18,7 @@ function outputHeader()
             <label class="hamburger" for="hamburger"></label>
             <ul>
                 <li><a href="sessions.php">Schedule</a></li>
-                <li><a href="equipment.html">Equipment</a></li>
+                <li><a href="equipment.php">Equipment</a></li>
                 <li><a href="trainers.html">Trainers</a></li>
                 <?php if ($isLoggedIn): ?>
                     <li><a href="dashboard.php">Dashboard</a></li>

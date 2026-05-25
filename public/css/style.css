@@ -82,7 +82,7 @@ header div h1{
     display: none;
 }
 
-.overlay, #shortcuts, #info {
+.overlay-bg, #shortcuts-bg, #info-bg {
     background: var(--overlay-bg);
 }
 

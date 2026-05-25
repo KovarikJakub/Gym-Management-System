@@ -41,11 +41,6 @@ main {
     align-items: center;
 }
 
-#presentation {
-    min-height: 85vh;
-    display: flex;
-}
-
 .overlay {
     flex: 1; 
     display: flex;
