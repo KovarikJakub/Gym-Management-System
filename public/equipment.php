@@ -104,7 +104,7 @@ foreach ($equipmentList as $item) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fit-Pro – Equipment</title>
+    <title>Fit-Pro - Equipment</title>
     <link href="css/style.css" rel="stylesheet">
     <link href="css/layout.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
