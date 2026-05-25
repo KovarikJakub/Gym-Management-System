@@ -1,3 +1,8 @@
+/* ═══════════════════════════════════════════════════════════════
+   admin.css  –  uses variables from style.css / layout.css
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Notification ────────────────────────────────────────────── */
 .admin-notification {
     grid-column: 1 / -1;
     text-align: center;
@@ -21,6 +26,7 @@
     background: rgba(109, 191, 103, 0.08);
 }
 
+/* ── Form ────────────────────────────────────────────────────── */
 .admin-form {
     display: flex;
     flex-direction: column;
@@ -95,9 +101,10 @@
     opacity: 1;
 }
 
+/* ── Table ───────────────────────────────────────────────────── */
 .admin-table-box {
     overflow-x: auto;
-    min-width: 0;        
+    min-width: 0;        /* prevents box from overflowing the grid column */
 }
 
 .admin-table {
@@ -126,6 +133,7 @@
     color: var(--font-color);
     vertical-align: middle;
     white-space: nowrap;    
+    white-space: nowrap;    /* prevents text wrapping that breaks row height */
 }
 
 .admin-table tbody tr:hover td {
@@ -137,6 +145,7 @@
     opacity: 0.75;
 }
 
+/* ── Status badges ───────────────────────────────────────────── */
 .admin-status {
     font-family: Poppins, sans-serif;
     font-size: 0.72rem;
@@ -151,8 +160,9 @@
 .admin-status--on  { color: #6dbf67; border-color: #6dbf67; }
 .admin-status--off { color: #e07a5f; border-color: #e07a5f; }
 
+/* ── Action buttons in table ─────────────────────────────────── */
 .admin-actions-cell {
-    white-space: nowrap;   
+    white-space: nowrap;    /* keep Edit / Deactivate on one line */
 }
 
 .admin-actions-cell form {
@@ -177,6 +187,7 @@
 .admin-action-link--deactivate    { color: #e07a5f; }
 .admin-action-link--activate      { color: #6dbf67; }
 
+/* ── Toast (AJAX feedback) ───────────────────────────────────── */
 .admin-toast {
     position: fixed;
     bottom: 2rem;
