@@ -7,6 +7,15 @@
     --title-color: #ceaa51;
     --shadow-color: #85431E;
 
+    --success-color: #6dbf67;
+    --danger-color: #e07a5f;
+    --info-color: #8ab4d4;
+    --warning-color: #f1c40f;
+    --pilates-color: #b28ad4;
+
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+    --border-color: rgba(224, 201, 137, 0.1);
+
     --title-size: 230%;
     --h2-size: 140%;
     --sub-size: 115%;
@@ -74,7 +83,7 @@ header div h1{
 }
 
 .overlay, #shortcuts, #info {
-    background: rgba(0, 0, 0, 0.7);
+    background: var(--overlay-bg);
 }
 
 li {
