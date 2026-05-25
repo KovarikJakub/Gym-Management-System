@@ -3,7 +3,6 @@
 require_once __DIR__ . '/../src/auth.php';
 require_once __DIR__ . '/../src/models/reviews.php';
 require_once __DIR__ . '/../src/templates/review_card.php';
-require_once __DIR__ . '/../src/templates/review_form.php';
 
 $reviews = [];
 $gym_class_id = $_GET['gym_class_id'] ?? null;
@@ -98,8 +97,6 @@ if(!empty($gym_class_id))
         <section class="gym-class-reviews-container">
             <h1>Reviews</h1>
             
-            <?php outputReviewForm($gym_class_id) ?>
-
             <div class="reviews-list">
                 <?php foreach ($reviews as $review): ?>
                     <?php outputReviewCard($review) ?>

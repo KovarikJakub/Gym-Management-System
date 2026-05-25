@@ -64,3 +64,19 @@ function getReviewsForSession($session_id)
 
     return $reviews;
 }
+
+function addReview($member_id, $session_id, $rating, $comment)
+{
+    $db = getDbConnection();
+
+    $sql = "INSERT INTO reviews (session_id, member_id, rating, posted_date, comment) 
+            VALUES (:session_id, :member_id, :rating, CURRENT_TIMESTAMP, :comment)";
+    
+    $stmt = $db->prepare($sql);
+    return $stmt->execute([
+        ':session_id' => $session_id,
+        ':member_id' => $member_id,
+        ':rating' => $rating,
+        ':comment' => $comment
+    ]);
+}
