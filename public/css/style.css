@@ -136,6 +136,7 @@ header h2:hover {
 input[type="text"],
 input[type="password"],
 input[type="email"],
+input[type="file"],
 textarea,
 select {
     width: 100%;
@@ -150,17 +151,35 @@ select {
     font-family: Lora, serif;
 }
 
+input[type="file"] {
+    padding: 0.6em;
+}
+
 input:focus, textarea:focus, select:focus {
     outline: none;
     border-color: var(--title-color);
 }
 
-form button[type="submit"] {
+form button[type="submit"],
+form button.btn {
     width: 100%;
     cursor: pointer;
     border: none;
     font-family: Poppins, sans-serif;
     font-weight: bold;
+}
+
+.current-photo-preview {
+    margin-bottom: 1.5em;
+    text-align: center;
+}
+
+.current-photo-preview img {
+    border-radius: 50%;
+    border: 2px solid var(--title-color);
+    object-fit: cover;
+    width: 120px;
+    height: 120px;
 }
 
 .auth-container {
