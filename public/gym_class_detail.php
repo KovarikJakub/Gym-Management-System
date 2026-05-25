@@ -1,17 +1,15 @@
 <?php
 
+require_once __DIR__ . '/../src/auth.php';
 require_once __DIR__ . '/../src/models/reviews.php';
 require_once __DIR__ . '/../src/templates/review_card.php';
 
 $reviews = [];
+$gym_class_id = $_GET['gym_class_id'] ?? null;
 
-if($_SERVER['REQUEST_METHOD'] === 'GET')
+if(!empty($gym_class_id))
 {
-    $gym_class_id = $_GET['gym_class_id'];
-    if(!empty($gym_class_id))
-    {
-        $reviews = getReviewsForGymClass($gym_class_id);
-    }
+    $reviews = getReviewsForGymClass($gym_class_id);
 }
 
 ?>
@@ -99,27 +97,6 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
         <section class="gym-class-reviews-container">
             <h1>Reviews</h1>
             
-            <form class="review-form boxes">
-                <div class="current-user-badge">
-                    <span class="user-label">Posting as:</span>
-                    <span class="author-name">{Current user}</span>
-                </div>
-                <div class="rating-selector">
-                    <label for="rating">Score:</label>
-                    <select name="rating" id="rating">
-                        <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
-                        <option value="4">⭐⭐⭐⭐ (Good)</option>
-                        <option value="3">⭐⭐⭐ (Average)</option>
-                        <option value="2">⭐⭐ (Poor)</option>
-                        <option value="1">⭐ (Terrible)</option>
-                    </select>
-                </div>
-                <div class="review-form-input-container">
-                    <input type="text" id="comment" name="comment" placeholder="Let others know what you think..." required />
-                    <button type="submit" class="btn">Post</button>
-                </div>
-            </form>
-
             <div class="reviews-list">
                 <?php foreach ($reviews as $review): ?>
                     <?php outputReviewCard($review) ?>
