@@ -1,4 +1,3 @@
-
 const refetchPageContent = async () => {
     // Refetch the entire sessions list and update UI
     const fetchResponse = await fetch('sessions.php');
@@ -84,3 +83,32 @@ const attachButtonListeners = () => {
 }
 
 attachButtonListeners();
+
+const sessionForm = document.getElementById('sessionForm');
+if (sessionForm) {
+    sessionForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); 
+        
+        const formData = new FormData(sessionForm);
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        formData.append('csrf_token', csrfToken);
+
+        try {
+            const response = await fetch('action_add_session.php', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            
+            alert(result.message); 
+            
+            if (result.success) {
+                sessionForm.reset(); 
+                refetchPageContent(); 
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+            alert('An error occurred while connecting to the server.');
+        }
+    });
+}

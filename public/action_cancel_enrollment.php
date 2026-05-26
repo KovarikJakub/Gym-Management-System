@@ -1,28 +1,30 @@
 <?php
-
 require_once __DIR__ . '/../src/auth.php';
-require_once __DIR__ . '/../src/models/class_sessions.php';
+require_once __DIR__ . '/../src/models/users.php';
 
 requireLogin();
+header('Content-Type: application/json');
 
-if($_SERVER['REQUEST_METHOD'] === 'POST')
-{
-    if(!verifyCsrf($_POST['csrf_token'] ?? ''))
-        die("CSRF token validation failed.");
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+    exit;
+}
 
-    $sessionId = $_POST['session_id'] ?? null;
+if (!verifyCsrf($_POST['csrf_token'] ?? '')) {
+    echo json_encode(['success' => false, 'message' => 'CSRF validation failed.']);
+    exit;
+}
 
-    if($sessionId === null)
-    {
-        echo json_encode(['success' => false, 'message' => 'No session_id provided.']);
-        exit;
-    }
+$session_id = (int)($_POST['session_id'] ?? 0);
+$user_id = $_SESSION['user_id'];
 
-    $userId = $_SESSION['user_id'];
+$db = getDbConnection();
 
-    $ok = cancelEnrollment($userId, $sessionId);
-    if($ok)
-        echo json_encode(['success' => true, 'message' => 'Cancelled successfully!']);
-    else
-        echo json_encode(['success' => false, 'message' => 'Failed to cancel enrollment. Please try again later.']);
+try {
+    $stmt = $db->prepare("DELETE FROM enrollments WHERE session_id = ? AND member_id = ?");
+    $stmt->execute([$session_id, $user_id]);
+    
+    echo json_encode(['success' => true, 'message' => 'Enrollment successfully cancelled.']);
+} catch (PDOException $e) {
+    echo json_encode(['success' => false, 'message' => 'Database error while cancelling enrollment.']);
 }
