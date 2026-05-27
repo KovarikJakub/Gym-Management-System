@@ -44,34 +44,5 @@ function outputFilterTab($week_days, $selected_date, $today, $trainers, $class_t
             <?php endif; ?>
         </form>
     </div>
-    <style>
-        .filter-tab-container {
-            margin-bottom: 20px;
-            padding: 15px;
-        }
-        .additional-filters {
-            display: flex;
-            gap: 20px;
-            align-items: flex-end;
-            margin-top: 15px;
-            padding-top: 15px;
-            flex-wrap: wrap;
-        }
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .filter-group select {
-            padding: 8px;
-            border-radius: 4px;
-        }
-        .clear-filters {
-            font-size: 0.9em;
-            color: #666;
-            text-decoration: underline;
-            padding-bottom: 8px;
-        }
-    </style>
     <?php
 }

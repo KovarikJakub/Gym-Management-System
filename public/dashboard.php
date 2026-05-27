@@ -18,6 +18,7 @@ $success = $_GET['success'] ?? null;
 <html>
 <head>
     <title>Dashboard - Fit-Pro</title>
+    <link href="css/templates/review_form.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/layout.css" rel="stylesheet">
 </head>

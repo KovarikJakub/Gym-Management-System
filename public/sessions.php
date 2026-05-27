@@ -41,7 +41,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="<?= $_SESSION['csrf_token'] ?>">
     <title>Class Schedule - Fit-Pro</title>
-    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/templates/session_card.css">
+    <link rel="stylesheet" href="css/templates/filter_tab.css">
+    <link rel="stylesheet" href="css/templates/user_badge.css">
+
     <link rel="stylesheet" href="css/sessions.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/style.css">
