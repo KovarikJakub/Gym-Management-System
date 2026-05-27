@@ -12,7 +12,7 @@ function outputUserBadge($user)
     $username = htmlspecialchars($user['username']);
     $userId = $user['id'];
     ?>
-    <a href="user_profile.php?id=<?= $userId ?>" class="user-badge">
+    <a href="view_profile.php?id=<?= $userId ?>" class="user-badge">
         <img src="<?= $photo ?>" alt="<?= $username ?>" class="user-badge-photo">
         <span class="user-badge-name"><?= $username ?></span>
     </a>
