@@ -22,7 +22,7 @@ if (!$user) {
     <link href="css/style.css" rel="stylesheet">
     <link href="css/layout.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
-    <link href="css/users.css" rel="stylesheet">
+    <link href="css/view_profile.css" rel="stylesheet">
     <title><?= $user ? htmlspecialchars($user['username']) . "'s Profile" : "User Not Found" ?> - Fit-Pro</title>
 </head>
 <body>
