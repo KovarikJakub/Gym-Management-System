@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__ . '/user_badge.php';
+
 function formatDuration($startTime, $endTime)
 {
     $diffSeconds = $endTime - $startTime;
@@ -9,7 +11,6 @@ function formatDuration($startTime, $endTime)
     $duration = sprintf('%d:%02d', $hours, $minutes);
     return $duration;
 }
-
 
 function formatClassDuration($session)
 {
@@ -42,6 +43,12 @@ function canEnroll($session, $today)
 function outputClassSessionCard($session, $today)
 { 
     $is_past = date('Y-m-d', strtotime($session['start_time'])) < $today;
+    // Map session trainer data to standard user object for user_badge template
+    $trainer = [
+        'id' => $session['trainer_id'],
+        'username' => $session['trainer_name'],
+        'profile_photo' => $session['trainer_profile_photo']
+    ];
     ?>
 <article class="card <?= $session['is_enrolled'] ? 'card-enrolled' : '' ?> <?= !canEnroll($session, $today) && !$session['is_enrolled'] ? 'card-disabled' : '' ?>">
     <header class="card-header">
@@ -58,7 +65,7 @@ function outputClassSessionCard($session, $today)
             <?= formatClassDuration($session) ?>
         </p>
         <p class="session-trainer">
-            <strong>Trainer:</strong> <?= htmlspecialchars($session['trainer_name']) ?>
+            <?= outputUserBadge($trainer) ?>
         </p>
         
         <div class="card-details">

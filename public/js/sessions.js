@@ -38,7 +38,6 @@ const onEnrollButtonClick = async (event, buttonElement) => {
         if (result.success) {
             // Refetch the entire sessions list and update UI
             refetchPageContent();
-            alert(result.message);
         } else {
             alert(result.message);
         }
@@ -59,7 +58,6 @@ const onCancelButtonClick = async (event, buttonElement) => {
         if (result.success) {
             // Refetch the entire sessions list and update UI
             refetchPageContent();
-            alert(result.message);
         } else {
             alert(result.message);
         }
