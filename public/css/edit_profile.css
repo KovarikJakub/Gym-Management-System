@@ -1,0 +1,27 @@
+.current-photo-preview {
+    margin-bottom: 1.5em;
+    text-align: center;
+}
+
+.current-photo-preview img {
+    border-radius: 50%;
+    border: 2px solid var(--title-color);
+    object-fit: cover;
+    width: 80px;
+    height: 80px;
+}
+
+.auth-container {
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+.auth-container h1 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.auth-container p {
+    text-align: center;
+    margin-top: 1.5em;
+}

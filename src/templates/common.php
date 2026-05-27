@@ -22,7 +22,7 @@ function outputHeader()
                 <li><a href="trainers.html">Trainers</a></li>
                 <?php if ($isLoggedIn): ?>
                     <li><a href="dashboard.php">Dashboard</a></li>
-                    <li><a href="profile.php">Profile</a></li>
+                    <li><a href="edit_profile.php">Profile</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
