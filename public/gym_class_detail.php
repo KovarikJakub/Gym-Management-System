@@ -33,6 +33,7 @@ if (!$gym_class) {
     <link href="css/templates/user_badge.css" rel="stylesheet">
 
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/sessions.css" rel="stylesheet">
     <link href="css/layout.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
     <link href="css/gym_class_detail.css" rel="stylesheet">

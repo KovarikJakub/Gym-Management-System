@@ -31,7 +31,12 @@ function getUserById($id)
 {
     $db = getDbConnection();
     
-    $stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt = $db->prepare("
+        SELECT users.*, trainer_profiles.bio, trainer_profiles.specializations, trainer_profiles.certifications 
+        FROM users 
+        LEFT JOIN trainer_profiles ON users.id = trainer_profiles.user_id 
+        WHERE users.id = ?
+    ");
     $stmt->execute([$id]);
     $user = $stmt->fetch();
 
