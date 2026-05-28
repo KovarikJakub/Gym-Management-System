@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../src/auth.php';
 require_once __DIR__ . '/../src/models/trainers.php';
+require_once __DIR__ . '/../src/templates/common.php';
 
 requireRole('trainer');
 
@@ -15,17 +16,14 @@ $sessions = getTrainerSessions($trainerId);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Schedule - Gym Management</title>
-    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/templates/session_card.css">
     <link rel="stylesheet" href="css/sessions.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-    <header class="main-header">
-        <h1>My Schedule</h1>
-        <nav>
-            <h3><a href="edit_profile.php">Profile</a></h3>
-            <h3><a href="logout.php">Logout</a></h3>
-        </nav>
-    </header>
+    <?php outputHeader(); ?>
 
     <main class="card-container">
         <?php if (empty($sessions)): ?>

@@ -243,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 <label for="password">New Password (leave blank to keep current)</label>
                 <input type="password" name="password" id="password" placeholder="••••••••">
 
-                <div class="form-group">
+                <div class="form-group profile-photo-group">
                     <label for="profile_photo">Profile Photo</label>
                     <?php if (!isNullOrEmptyString($user['profile_photo'])): ?>
                         <div class="current-photo-preview">

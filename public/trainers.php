@@ -4,8 +4,6 @@ require_once __DIR__ . '/../src/auth.php';
 require_once __DIR__ . '/../src/models/trainers.php';
 require_once __DIR__ . '/../src/templates/common.php';
 
-requireLogin();
-
 $trainers = getAllTrainerProfiles();
 $uploadsBaseUrl = 'uploads/';
 $defaultPhoto = 'uploads/placeholder.jpg';
