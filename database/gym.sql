@@ -25,6 +25,20 @@ CREATE TABLE trainer_profiles (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+-- Trainer certificates (multiple uploaded files per trainer)
+DROP TABLE IF EXISTS trainer_certificates;
+CREATE TABLE trainer_certificates (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    trainer_id INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    original_name TEXT NOT NULL,
+    file_name TEXT NOT NULL,
+    file_path TEXT NOT NULL,
+    mime_type TEXT NOT NULL,
+    uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (trainer_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 -- Gym Class Catalog
 DROP TABLE IF EXISTS gym_classes;
 CREATE TABLE gym_classes (
@@ -96,6 +110,12 @@ INSERT INTO users (id, real_name, username, password_hash, email, role, is_deact
 (7, 'Member Three', 'member3', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm3@gym.com', 'member', 0),
 (8, 'Member Four', 'member4', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm4@gym.com', 'member', 0),
 (9, 'Member Five', 'member5', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm5@gym.com', 'member', 0);
+
+-- Seed data for trainer profiles
+INSERT INTO trainer_profiles (user_id, bio, specializations, certifications) VALUES
+(2, 'Focused on strength fundamentals and accessible movement for all levels.', 'Strength training, Yoga', 'Certified Personal Trainer, Yoga Foundations Certificate'),
+(3, 'Pilates and martial arts coach with a focus on technique and injury prevention.', 'Pilates, Martial arts', 'Pilates Mat Certification, Muay Thai Coaching Certificate'),
+(4, 'High-energy cardio and conditioning trainer for members building endurance.', 'Cardio, HIIT, Conditioning', 'Group Fitness Instructor, HIIT Specialist');
 
 -- Seed data for gym_classes
 INSERT INTO gym_classes (id, name, difficulty, description, default_capacity, type) VALUES

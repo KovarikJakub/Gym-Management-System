@@ -21,3 +21,14 @@ function requireLogin()
         exit;
     }
 }
+
+function requireRole($role)
+{
+    requireLogin();
+
+    if (($_SESSION['role'] ?? null) !== $role)
+    {
+        http_response_code(403);
+        die('Access denied.');
+    }
+}
