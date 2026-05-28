@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../src/auth.php';
 require_once __DIR__ . '/../src/models/trainers.php';
+require_once __DIR__ . '/../src/templates/common.php';
 
 requireLogin();
 
@@ -16,33 +17,13 @@ $defaultPhoto = 'uploads/placeholder.jpg';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trainers - Gym Management</title>
-    <link rel="stylesheet" href="css/card.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/templates/session_card.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-    <header>
-        <div>
-            <h1><a href="index.html">Fit-Pro</a></h1>
-        </div>
-
-        <nav id="menu">
-            <input type="checkbox" id="hamburger">
-            <label class="hamburger" for="hamburger"></label>
-            <ul>
-                <li><a href="classes.html">Classes</a></li>
-                <li><a href="equipment.html">Equipment</a></li>
-                <li><a href="trainers.php">Trainers</a></li>
-                <li><a href="schedule.html">Schedule</a></li>
-            </ul>
-        </nav>
-
-        <div id="signup">
-            <a href="profile.php"><h2>Profile</h2></a>
-            <a href="logout.php"><h2>Logout</h2></a>
-        </div>
-    </header>
+    <?php outputHeader(); ?>
 
     <main class="card-container trainers-container">
         <?php if (empty($trainers)): ?>
@@ -65,10 +46,9 @@ $defaultPhoto = 'uploads/placeholder.jpg';
                         <img
                             src="<?= htmlspecialchars($uploadsBaseUrl . ($trainer['profile_photo'] ?: 'placeholder.jpg')) ?>"
                             alt="<?= htmlspecialchars($trainer['real_name']) ?>"
-                            style="max-width: 160px; width: 100%; height: auto;"
                         >
                         <?php if (($_SESSION['role'] ?? null) === 'trainer' && (int)$trainer['trainer_id'] === (int)$_SESSION['user_id']): ?>
-                            <a href="profile.php" class="btn trainer-profile-btn">View Profile</a>
+                            <a href="view_profile.php?id=<?= urlencode((string)$trainer['trainer_id']) ?>" class="btn trainer-profile-btn">View Profile</a>
                         <?php endif; ?>
                     </div>
 

@@ -5,14 +5,16 @@
     padding: 1.5rem;
 }
 
-.card-container-vertical {
 .trainers-container {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-                      url('../assets/img/gym_background.jpg');
-    background-position: center;
-    background-size: cover;
+    background-color: var(--bg-color);
     grid-template-columns: repeat(auto-fit, minmax(300px, 360px));
     justify-content: center;
+}
+
+@media (min-width: 1000px) {
+    .trainers-container {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }
 
 .card {
@@ -41,6 +43,7 @@
     background-color: var(--bg-color);
     border: none;
     border-radius: 1em;
+    box-shadow: 0.4em 0.4em 0.8em rgba(0, 0, 0, 0.45);
 }
 
 .trainers-container .card-header {
@@ -83,12 +86,14 @@
 .trainer-photo img {
     aspect-ratio: 1;
     border-radius: 50%;
+    max-width: 160px;
     object-fit: cover;
+    width: 100%;
 }
 
 .trainer-profile-btn {
     align-self: center;
-    box-shadow: 0.4em 0.4em 0.2em var(--shadow-color);
+    box-shadow: 0.15em 0.15em 0.7em var(--title-color);
 }
 
 .card:hover {
@@ -163,3 +168,4 @@
 .badge-workout { background-color: rgba(0, 128, 0, 0.2); color: var(--success-color); }
 .badge-martial-arts { background-color: rgba(204, 82, 0, 0.2); color: var(--title-color); }
 .badge-success { background-color: rgba(40, 167, 69, 0.2); color: var(--success-color); }
+}

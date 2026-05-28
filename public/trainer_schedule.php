@@ -22,7 +22,7 @@ $sessions = getTrainerSessions($trainerId);
     <header class="main-header">
         <h1>My Schedule</h1>
         <nav>
-            <h3><a href="profile.php">Profile</a></h3>
+            <h3><a href="edit_profile.php">Profile</a></h3>
             <h3><a href="logout.php">Logout</a></h3>
         </nav>
     </header>

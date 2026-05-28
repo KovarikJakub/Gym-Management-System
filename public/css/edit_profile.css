@@ -25,3 +25,7 @@
     text-align: center;
     margin-top: 1.5em;
 }
+
+.auth-container > fieldset {
+    margin-top: 3em;
+}
