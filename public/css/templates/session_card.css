@@ -91,11 +91,6 @@
     width: 100%;
 }
 
-.trainer-profile-btn {
-    align-self: center;
-    box-shadow: 0.15em 0.15em 0.7em var(--title-color);
-}
-
 .card:hover {
     transform: translateY(-2px);
 }

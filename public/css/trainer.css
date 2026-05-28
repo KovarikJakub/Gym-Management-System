@@ -1,0 +1,194 @@
+.trainers-container {
+    align-items: start;
+    background-color: var(--bg-color);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 280px));
+    justify-content: center;
+}
+
+@media (min-width: 1000px) {
+    .trainers-container {
+        grid-template-columns: repeat(3, minmax(0, 280px));
+    }
+}
+
+.trainer-card {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 0;
+    box-shadow: 0.4em 0.4em 0.8em rgba(0, 0, 0, 0.45);
+    gap: 0;
+    overflow: hidden;
+    padding: 1em;
+}
+
+.trainer-card-photo {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: block;
+    margin: 1rem auto 0;
+    max-width: 115px;
+    object-fit: cover;
+    width: 42%;
+}
+
+.trainer-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1rem;
+}
+
+.trainer-card .card-title {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.trainer-card-bio {
+    color: var(--font-color);
+    display: -webkit-box;
+    line-height: 1.45;
+    margin: 0;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.trainer-card-specializations strong,
+.trainer-profile-section h2 {
+    color: var(--title-color);
+}
+
+.trainer-card-specializations p {
+    margin: 0.35rem 0 0;
+}
+
+.trainer-card .btn {
+    align-self: flex-start;
+    margin-top: 0.25rem;
+}
+
+.trainer-profile-page {
+    background-color: var(--bg-color);
+    padding: 2rem 1rem;
+}
+
+.trainer-profile {
+    background-color: var(--boxes-color);
+    border: 1px solid var(--border-color);
+    border-radius: 1em;
+    box-shadow: 0.4em 0.4em 0.8em rgba(0, 0, 0, 0.45);
+    margin: 0 auto;
+    max-width: 980px;
+    padding: 2rem;
+}
+
+.trainer-profile-hero {
+    align-items: center;
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.trainer-profile-photo {
+    aspect-ratio: 1;
+    border: 3px solid var(--title-color);
+    border-radius: 50%;
+    max-width: 190px;
+    object-fit: cover;
+    width: 32%;
+}
+
+.trainer-profile-heading h1 {
+    color: var(--title-color);
+    margin: 0 0 0.5rem;
+}
+
+.trainer-profile-heading p {
+    margin: 0.35rem 0;
+}
+
+.trainer-profile-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.trainer-profile-section {
+    background-color: var(--bg-color);
+    border-radius: 0.75em;
+    padding: 1.25rem;
+}
+
+.trainer-profile-section h2 {
+    font-size: 1.15rem;
+    margin: 0 0 0.75rem;
+}
+
+.trainer-profile-section p {
+    margin: 0;
+}
+
+.trainer-profile-section ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.trainer-profile-section li {
+    margin-bottom: 0.55rem;
+}
+
+.trainer-profile-section li span {
+    opacity: 0.8;
+}
+
+.trainer-profile-files {
+    grid-column: 1 / -1;
+}
+
+.trainer-profile-files ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.trainer-profile-files li {
+    margin-bottom: 0.7rem;
+}
+
+.trainer-profile-files span {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.trainer-back-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+}
+
+.trainer-profile-empty {
+    text-align: center;
+}
+
+@media (max-width: 700px) {
+    .trainers-container {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .trainer-profile {
+        padding: 1.25rem;
+    }
+
+    .trainer-profile-hero {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .trainer-profile-photo {
+        width: 150px;
+    }
+
+    .trainer-profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
