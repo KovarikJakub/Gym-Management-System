@@ -60,8 +60,8 @@ function outputClassSessionCard($session, $today)
     <header class="card-header">
         <a href="gym_class_detail.php?gym_class_id=<?= $session['gym_class_id'] ?>" class="card-title-link">
             <h2 class="card-title"><?= htmlspecialchars($session['class_name']) ?></h2>
-            <span class="badge badge-<?= str_replace(' ', '-', $session['class_type']) ?>">
-                <?= htmlspecialchars($session['class_type']) ?>
+            <span class="class-type-italic">
+                (<?= htmlspecialchars($session['class_type']) ?>)
             </span>
         </a>
         <?php if ($session['is_enrolled']): ?>
