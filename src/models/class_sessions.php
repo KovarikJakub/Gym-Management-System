@@ -154,6 +154,48 @@ function cancelEnrollment($user_id, $session_id)
     return $stmt->execute($params); 
 }
 
+function getUsersUpcomingSessions($user_id, $limit = 3)
+{
+    $db = getDbConnection();
+
+    $sql = "SELECT 
+                s.id AS session_id,
+                c.name AS class_name,
+                c.type AS class_type,
+                c.id AS gym_class_id,
+                u.real_name AS trainer_name,
+                u.username AS trainer_username,
+                u.profile_photo AS trainer_profile_photo,
+                u.id AS trainer_id,
+                s.start_time,
+                s.end_time,
+                c.default_capacity,
+                (SELECT COUNT(*) FROM enrollments e WHERE e.session_id = s.id) AS current_enrollment,
+                1 AS is_enrolled
+            FROM enrollments e
+            JOIN class_sessions s ON e.session_id = s.id
+            JOIN gym_classes c ON s.class_id = c.id
+            JOIN users u ON s.trainer_id = u.id
+            WHERE e.member_id = :user_id 
+              AND s.start_time >= CURRENT_TIMESTAMP
+            ORDER BY s.start_time ASC
+            LIMIT :limit";
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    $sessions = $stmt->fetchAll();
+
+    foreach ($sessions as &$session) {
+        $session['spots_left'] = $session['default_capacity'] - $session['current_enrollment'];
+        $session['is_full'] = ($session['spots_left'] <= 0);
+    }
+
+    return $sessions;
+}
+
 function getUsersPastSessions($user_id, $limit, $offset = 0)
 {
     $db = getDbConnection();

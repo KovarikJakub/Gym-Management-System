@@ -9,7 +9,6 @@
 }
 
 .rating-selector {
-    margin-bottom: 1rem;
     color: var(--font-color);
 }
 
@@ -22,7 +21,5 @@
 }
 
 .review-form-input-container {
-    display: flex;
     gap: 1rem;
-    margin-top: 1rem;
 }
