@@ -37,13 +37,10 @@ $defaultPhoto = 'uploads/placeholder.jpg';
                         src="<?= htmlspecialchars($uploadsBaseUrl . ($trainer['profile_photo'] ?: 'placeholder.jpg')) ?>"
                         alt="<?= htmlspecialchars($trainer['real_name']) ?>"
                     >
+                    <h2 class="card-title"><?= htmlspecialchars($trainer['real_name']) ?></h2>
                 </a>
 
                 <div class="trainer-card-body">
-                    <a href="trainer_public_profile.php?id=<?= $trainer['trainer_id'] ?>" class="trainer-link">
-                        <h2 class="card-title"><?= htmlspecialchars($trainer['real_name']) ?></h2>
-                    </a>
-
                     <p class="trainer-card-bio">
                         <?= htmlspecialchars($trainer['bio'] ?? 'No bio provided yet.') ?>
                     </p>
