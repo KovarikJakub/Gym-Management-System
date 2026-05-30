@@ -1,6 +1,25 @@
 <?php
 
 /**
+ * Outputs the shared center navigation menu.
+ */
+function outputNavigationMenu()
+{
+    $isLoggedIn = isset($_SESSION['user_id']);
+    ?>
+    <ul>
+        <li><a href="sessions.php">Schedule</a></li>
+        <li><a href="equipment.php">Equipment</a></li>
+        <li><a href="trainers.php">Trainers</a></li>
+        <?php if ($isLoggedIn): ?>
+            <li><a href="dashboard.php">Dashboard</a></li>
+            <li><a href="edit_profile.php">Profile</a></li>
+        <?php endif; ?>
+    </ul>
+    <?php
+}
+
+/**
  * Outputs the common site header.
  */
 function outputHeader()
@@ -16,15 +35,7 @@ function outputHeader()
             <!-- just for the hamburger menu in responsive layout -->
             <input type="checkbox" id="hamburger"> 
             <label class="hamburger" for="hamburger"></label>
-            <ul>
-                <li><a href="sessions.php">Schedule</a></li>
-                <li><a href="equipment.php">Equipment</a></li>
-                <li><a href="trainers.html">Trainers</a></li>
-                <?php if ($isLoggedIn): ?>
-                    <li><a href="dashboard.php">Dashboard</a></li>
-                    <li><a href="edit_profile.php">Profile</a></li>
-                <?php endif; ?>
-            </ul>
+            <?php outputNavigationMenu(); ?>
         </nav>
 
         <div id="signup">

@@ -65,7 +65,9 @@ function outputClassSessionCard($session, $today)
             <?= formatClassDuration($session) ?>
         </p>
         <p class="session-trainer">
-            <?= outputUserBadge($trainer) ?>
+            <a href="trainer_public_profile.php?id=<?= $trainer['id'] ?>" class="trainer-link">
+                <?= outputUserBadge($trainer) ?>
+            </a>
         </p>
         
         <div class="card-details">
