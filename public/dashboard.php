@@ -7,16 +7,19 @@ require_once __DIR__ . '/../src/templates/past_sessions.php';
 require_once __DIR__ . '/../src/templates/pager.php';
 require_once __DIR__ . '/../src/templates/common.php';
 require_once __DIR__ . '/../src/templates/review_form.php';
+require_once __DIR__ . '/../src/templates/class_session_card.php';
 
 requireLogin();
 
 $user_id = $_SESSION['user_id'];
+$today = date('Y-m-d');
 
 $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $page_size = 5;
 $offset = ($page - 1) * $page_size;
 
 $user = getUserById($user_id);
+$upcoming_sessions = getUsersUpcomingSessions($user_id, 3);
 $past_sessions = getUsersPastSessions($user_id, $page_size, $offset);
 $total_past_sessions = countUsersPastSessions($user_id);
 $total_pages = ceil($total_past_sessions / $page_size);
@@ -29,13 +32,18 @@ $success = $_GET['success'] ?? null;
 <html>
 <head>
     <title>Dashboard - Fit-Pro</title>
+    <meta name="csrf-token" content="<?= $_SESSION['csrf_token'] ?>">
     <link href="css/templates/review_form.css" rel="stylesheet">
     <link href="css/templates/past_session.css" rel="stylesheet">
     <link href="css/templates/user_badge.css" rel="stylesheet">
+    <link href="css/templates/session_card.css" rel="stylesheet">
+    <link href="css/sessions.css" rel="stylesheet">
     <link href="css/modal.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/layout.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
     <script src="js/modal.js" defer></script>
+    <script src="js/sessions.js" defer></script>
 </head>
 <body>
     <?php outputHeader(); ?>
@@ -53,9 +61,22 @@ $success = $_GET['success'] ?? null;
                 <?= htmlspecialchars($error) ?>
             </div>
         <?php endif; ?>
-
-        <p>This is a protected dashboard area.</p>
         
+        <section class="upcoming-sessions-section">
+            <h2>Your Upcoming Sessions</h2>
+            <div id="sessions-container">
+                <?php if (empty($upcoming_sessions)): ?>
+                    <p>You have no upcoming sessions scheduled.</p>
+                <?php else: ?>
+                    <div class="card-container">
+                        <?php foreach ($upcoming_sessions as $session): ?>
+                            <?php outputClassSessionCard($session, $today); ?>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </section>
+
         <section class="past-sessions-section">
             <h2>Your Past Sessions</h2>
             <?php 

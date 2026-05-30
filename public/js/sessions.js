@@ -1,7 +1,7 @@
 
 const refetchPageContent = async () => {
-    // Refetch the entire sessions list and update UI
-    const fetchResponse = await fetch('sessions.php');
+    // Refetch the current page and update the sessions container
+    const fetchResponse = await fetch(window.location.href);
     const html = await fetchResponse.text();
     
     const parser = new DOMParser();
