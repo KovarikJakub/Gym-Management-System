@@ -47,7 +47,8 @@ function outputClassSessionCard($session, $today)
     $trainer = [
         'id' => $session['trainer_id'],
         'username' => $session['trainer_name'],
-        'profile_photo' => $session['trainer_profile_photo']
+        'profile_photo' => $session['trainer_profile_photo'],
+        'role' => 'trainer'
     ];
     ?>
 <article class="card <?= $session['is_enrolled'] ? 'card-enrolled' : '' ?> <?= !canEnroll($session, $today) && !$session['is_enrolled'] ? 'card-disabled' : '' ?>">
@@ -65,9 +66,7 @@ function outputClassSessionCard($session, $today)
             <?= formatClassDuration($session) ?>
         </p>
         <p class="session-trainer">
-            <a href="trainer_public_profile.php?id=<?= $trainer['id'] ?>" class="trainer-link">
-                <?= outputUserBadge($trainer) ?>
-            </a>
+            <?= outputUserBadge($trainer) ?>
         </p>
         
         <div class="card-details">

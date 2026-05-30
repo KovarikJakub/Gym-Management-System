@@ -1,0 +1,79 @@
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+.trainers-container {
+    background-color: var(--bg-color);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 360px));
+    justify-content: center;
+}
+
+.card {
+    background-color: var(--boxes-color);
+    border: 1px solid var(--bg-color);
+    border-radius: 1em;
+    display: flex;
+    border: 1px solid var(--border-color);
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.trainers-container .card {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 1em;
+    box-shadow: 0.4em 0.4em 0.8em rgba(0, 0, 0, 0.45);
+}
+
+.trainers-container .card-header {
+    background-color: var(--bg-color);
+}
+
+.trainers-container .card-header {
+    border-bottom: none;
+}
+
+.trainers-container .card-body {
+    padding: 1.25rem;
+}
+
+.trainers-container .trainer-section {
+    margin-top: 1.25rem;
+}
+
+.trainers-container .card-title,
+.trainers-container strong {
+    color: var(--title-color);
+}
+
+.trainers-container .badge-trainer {
+    background-color: rgba(220, 220, 220, 0.28);
+    border-radius: 9999px;
+    color: var(--bg-color);
+    padding: 0.3rem 0.6rem;
+}
+
+.trainer-photo {
+    align-items: flex-start;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-right: 1rem;
+}
+
+.trainer-photo img {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    max-width: 160px;
+    object-fit: cover;
+    width: 100%;
+}

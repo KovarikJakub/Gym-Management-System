@@ -13,7 +13,8 @@ function outputReviewCard($review)
     $user = [
         'id' => $review['author_id'],
         'username' => $review['username'],
-        'profile_photo' => $review['profile_photo']
+        'profile_photo' => $review['profile_photo'],
+        'role' => 'member'
     ];
     ?>
 <article class="review-card boxes">
