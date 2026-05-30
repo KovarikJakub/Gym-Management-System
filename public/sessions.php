@@ -12,7 +12,7 @@
     requireLogin();
 
     $user_id = $_SESSION['user_id'];
-    $today = "2026-05-02"; // hardcoded "todays date" for development
+    $today = "2026-06-02"; // hardcoded "todays date" for development
     $selected_date = $_GET['date'] ?? $today;
     $selected_date = date("Y-m-d", strtotime($selected_date));
 
