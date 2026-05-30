@@ -12,7 +12,7 @@ function outputReviewCard($review)
     $rating = (int)$review['rating'];
     $user = [
         'id' => $review['author_id'],
-        'username' => $review['username'],
+        'username' => $review['real_name'],
         'profile_photo' => $review['profile_photo'],
         'role' => 'member'
     ];
