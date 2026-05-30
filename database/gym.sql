@@ -1,4 +1,3 @@
-
 -- Enable foreign key support in SQLite
 -- PRAGMA foreign_keys = ON;
 
@@ -100,16 +99,33 @@ CREATE TABLE reviews (
 
 -- Seed data for users
 -- Note: all passwords are "1234" stored as a hash
+-- Admin
 INSERT INTO users (id, real_name, username, password_hash, email, role, is_deactivated) VALUES
-(1, 'Admin User', 'admin', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'admin@gym.com', 'admin', 0),
-(2, 'Trainer One', 'trainer1', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 't1@gym.com', 'trainer', 0),
-(3, 'Trainer Two', 'trainer2', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 't2@gym.com', 'trainer', 0),
-(4, 'Trainer Three', 'trainer3', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 't3@gym.com', 'trainer', 0),
-(5, 'Member One', 'member1', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm1@gym.com', 'member', 0),
-(6, 'Member Two', 'member2', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm2@gym.com', 'member', 0),
-(7, 'Member Three', 'member3', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm3@gym.com', 'member', 0),
-(8, 'Member Four', 'member4', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm4@gym.com', 'member', 0),
-(9, 'Member Five', 'member5', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm5@gym.com', 'member', 0);
+(1, 'James Smith', 'admin', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'admin@gym.com', 'admin', 0);
+
+-- Trainers
+INSERT INTO users (id, real_name, username, password_hash, email, role, profile_photo, is_deactivated) VALUES
+(2, 'Sarah Johnson', 'trainer1', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 't1@gym.com', 'trainer', 'pp_1780006449_af60e5f135e13e1c.png', 0),
+(3, 'Michael Chen', 'trainer2', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 't2@gym.com', 'trainer', 'pp_1780006484_f04aed6b2e5840ed.png', 0),
+(4, 'Elena Rodriguez', 'trainer3', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 't3@gym.com', 'trainer', 'pp_1780006530_70a870cc2e091b7e.png', 0);
+
+-- Members
+INSERT INTO users (id, real_name, username, password_hash, email, role, is_deactivated) VALUES
+(5, 'David Brown', 'member1', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm1@gym.com', 'member', 0),
+(6, 'Emily Davis', 'member2', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm2@gym.com', 'member', 0),
+(7, 'Chris Wilson', 'member3', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm3@gym.com', 'member', 0),
+(8, 'Jessica Taylor', 'member4', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm4@gym.com', 'member', 0),
+(9, 'Daniel Moore', 'member5', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm5@gym.com', 'member', 0),
+(10, 'Sophia Anderson', 'member6', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm6@gym.com', 'member', 0),
+(11, 'Matthew Thomas', 'member7', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm7@gym.com', 'member', 0),
+(12, 'Olivia Jackson', 'member8', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm8@gym.com', 'member', 0),
+(13, 'Andrew White', 'member9', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm9@gym.com', 'member', 0),
+(14, 'Isabella Harris', 'member10', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm10@gym.com', 'member', 0),
+(15, 'Joshua Martin', 'member11', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm11@gym.com', 'member', 0),
+(16, 'Mia Thompson', 'member12', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm12@gym.com', 'member', 0),
+(17, 'Ryan Garcia', 'member13', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm13@gym.com', 'member', 0),
+(18, 'Charlotte Martinez', 'member14', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm14@gym.com', 'member', 0),
+(19, 'Nathan Robinson', 'member15', '$2y$10$8i79MncYrZ02pFA5666uh.U7YArFnH1qYwWMyu.EZEFSzul5BT4uC', 'm15@gym.com', 'member', 0);
 
 -- Seed data for trainer profiles
 INSERT INTO trainer_profiles (user_id, bio, specializations, certifications) VALUES
@@ -119,102 +135,145 @@ INSERT INTO trainer_profiles (user_id, bio, specializations, certifications) VAL
 
 -- Seed data for gym_classes
 INSERT INTO gym_classes (id, name, difficulty, description, default_capacity, type) VALUES
-(1, 'Vinyasa Flow', 3, 'A dynamic yoga practice connecting breath with movement.', 20, 'yoga'),
-(2, 'Mat Pilates Core', 4, 'Focus on core strength, flexibility, and alignment.', 15, 'pilates'),
-(3, 'HIIT Blast', 5, 'High intensity interval training to boost metabolism.', 25, 'cardio'),
-(4, 'Full Body Strength', 3, 'Weightlifting and resistance training for all muscle groups.', 15, 'workout'),
-(5, 'Muay Thai Basics', 4, 'Introduction to the art of eight limbs.', 20, 'martial arts');
+(1, 'Vinyasa Flow', 3, 'A dynamic yoga practice connecting breath with movement.', 8, 'yoga'),
+(2, 'Mat Pilates Core', 4, 'Focus on core strength, flexibility, and alignment.', 5, 'pilates'),
+(3, 'HIIT Blast', 5, 'High intensity interval training to boost metabolism.', 10, 'cardio'),
+(4, 'Full Body Strength', 3, 'Weightlifting and resistance training for all muscle groups.', 6, 'workout'),
+(5, 'Muay Thai Basics', 4, 'Introduction to the art of eight limbs.', 4, 'martial arts'),
+(6, 'Yin Yoga', 2, 'Slow-paced style of yoga with postures held for longer periods.', 5, 'yoga'),
+(7, 'Power Pilates', 4, 'Intense pilates session focusing on strength and stamina.', 7, 'pilates'),
+(8, 'Spin Cycle', 5, 'High-energy indoor cycling workout.', 10, 'cardio'),
+(9, 'Kettlebell Power', 4, 'Functional strength training using kettlebells.', 6, 'workout'),
+(10, 'Brazilian Jiu-Jitsu', 5, 'Grappling-based martial art and combat sport.', 4, 'martial arts');
 
--- Seed data for class_sessions
+-- Seed data for class_sessions (June 1st - June 7th, 2026)
 INSERT INTO class_sessions (id, class_id, trainer_id, start_time, end_time) VALUES
-(1, 1, 2, '2026-05-01 08:00:00', '2026-05-01 09:00:00'),
-(2, 2, 3, '2026-05-01 10:00:00', '2026-05-01 11:00:00'),
-(3, 3, 4, '2026-05-01 18:00:00', '2026-05-01 19:00:00'),
-(4, 4, 2, '2026-05-02 07:00:00', '2026-05-02 08:00:00'),
-(5, 5, 3, '2026-05-02 19:00:00', '2026-05-02 20:30:00'),
-(6, 1, 4, '2026-05-03 09:00:00', '2026-05-03 10:00:00');
+(1, 1, 2, '2026-06-01 08:00:00', '2026-06-01 09:00:00'),
+(2, 3, 4, '2026-06-01 18:00:00', '2026-06-01 19:00:00'),
+(3, 2, 3, '2026-06-02 10:00:00', '2026-06-02 11:00:00'),
+(4, 5, 3, '2026-06-02 19:00:00', '2026-06-02 20:30:00'),
+(5, 4, 2, '2026-06-03 07:00:00', '2026-06-03 08:00:00'),
+(6, 8, 4, '2026-06-03 17:00:00', '2026-06-03 18:00:00'),
+(7, 6, 2, '2026-06-04 09:00:00', '2026-06-04 10:00:00'),
+(8, 10, 3, '2026-06-04 20:00:00', '2026-06-04 21:30:00'),
+(9, 7, 3, '2026-06-05 11:00:00', '2026-06-05 12:00:00'),
+(10, 9, 4, '2026-06-05 18:30:00', '2026-06-05 19:30:00'),
+(11, 1, 4, '2026-06-06 10:00:00', '2026-06-06 11:00:00'),
+(12, 3, 2, '2026-06-06 16:00:00', '2026-06-06 17:00:00'),
+(13, 2, 3, '2026-06-07 10:00:00', '2026-06-07 11:00:00'),
+(14, 5, 3, '2026-06-07 15:00:00', '2026-06-07 16:30:00');
 
+-- Historical Sessions (May 2026)
+INSERT INTO class_sessions (id, class_id, trainer_id, start_time, end_time) VALUES
+(101, 1, 2, '2026-05-11 08:00:00', '2026-05-11 09:00:00'),
+(102, 3, 4, '2026-05-11 18:00:00', '2026-05-11 19:00:00'),
+(103, 2, 3, '2026-05-12 10:00:00', '2026-05-12 11:00:00'),
+(104, 4, 2, '2026-05-13 07:00:00', '2026-05-13 08:00:00'),
+(105, 5, 3, '2026-05-13 19:00:00', '2026-05-13 20:30:00'),
+(106, 1, 4, '2026-05-14 09:00:00', '2026-05-14 10:00:00'),
+(107, 8, 4, '2026-05-15 17:00:00', '2026-05-15 18:00:00'),
+(108, 6, 2, '2026-05-16 09:00:00', '2026-05-16 10:00:00'),
+(109, 10, 3, '2026-05-16 20:00:00', '2026-05-16 21:30:00'),
+(110, 9, 4, '2026-05-17 18:30:00', '2026-05-17 19:30:00'),
+(111, 1, 2, '2026-05-18 08:00:00', '2026-05-18 09:00:00'),
+(112, 3, 4, '2026-05-18 18:00:00', '2026-05-18 19:00:00'),
+(113, 2, 3, '2026-05-19 10:00:00', '2026-05-19 11:00:00'),
+(114, 4, 2, '2026-05-20 07:00:00', '2026-05-20 08:00:00'),
+(115, 5, 3, '2026-05-20 19:00:00', '2026-05-20 20:30:00');
+
+-- Enrollments (Dates before June 1st, 2026)
 INSERT INTO enrollments (member_id, session_id, enrolled_at) VALUES
--- Session 1: Vinyasa Flow (Trainer 2)
-(5, 1, '2026-04-10 10:00:00'),
-(6, 1, '2026-04-11 09:30:00'),
-(7, 1, '2026-04-12 14:00:00'),
+-- Session 4: Muay Thai Basics (Trainer 3, Cap 4) - FULLY BOOKED
+(5, 4, '2026-05-20 10:00:00'),
+(6, 4, '2026-05-21 09:30:00'),
+(7, 4, '2026-05-22 14:00:00'),
+(8, 4, '2026-05-23 08:00:00'),
 
--- Session 2: Mat Pilates Core (Trainer 3)
-(8, 2, '2026-04-10 11:00:00'),
-(9, 2, '2026-04-11 15:45:00'),
-(5, 2, '2026-04-13 08:00:00'),
+-- Session 2: HIIT Blast (Trainer 4, Cap 10)
+(9, 2, '2026-05-24 11:00:00'),
+(10, 2, '2026-05-24 15:45:00'),
+(11, 2, '2026-05-25 08:00:00'),
+(12, 2, '2026-05-25 12:00:00'),
+(13, 2, '2026-05-25 12:05:00'),
 
--- Session 3: HIIT Blast (Trainer 4)
-(6, 3, '2026-04-14 12:00:00'),
-(7, 3, '2026-04-14 12:05:00'),
-(8, 3, '2026-04-14 12:10:00'),
-(9, 3, '2026-04-14 12:15:00'),
+-- Session 1: Vinyasa Flow (Trainer 2, Cap 8)
+(14, 1, '2026-05-26 12:10:00'),
+(15, 1, '2026-05-26 12:15:00'),
+(16, 1, '2026-05-27 17:00:00'),
+(17, 1, '2026-05-27 17:30:00'),
+(18, 1, '2026-05-28 09:00:00'),
+(19, 1, '2026-05-28 09:15:00'),
 
--- Session 4: Full Body Strength (Trainer 2)
-(5, 4, '2026-04-15 17:00:00'),
-(8, 4, '2026-04-15 17:30:00'),
+-- Past Enrollments for Member 1 (David Brown, id=5)
+-- 1 current enrollment in future session 1 (from previous seed) + 1 in future session 4 (booked above).
+(5, 101, '2026-05-01 10:00:00'),
+(5, 102, '2026-05-01 11:00:00'),
+(5, 103, '2026-05-02 08:00:00'),
+(5, 104, '2026-05-03 09:00:00'),
+(5, 105, '2026-05-03 10:00:00'),
+(5, 106, '2026-05-04 11:00:00'),
+(5, 107, '2026-05-05 12:00:00'),
+(5, 108, '2026-05-06 13:00:00'),
+(5, 109, '2026-05-07 14:00:00'),
+(5, 110, '2026-05-08 15:00:00'),
+(5, 111, '2026-05-09 16:00:00'),
+(5, 112, '2026-05-10 17:00:00'),
+(5, 113, '2026-05-11 08:00:00'),
+(5, 114, '2026-05-12 09:00:00'),
+(5, 115, '2026-05-13 10:00:00'),
 
--- Session 5: Muay Thai Basics (Trainer 3)
-(6, 5, '2026-04-16 09:00:00'),
-(7, 5, '2026-04-16 09:15:00'),
-(9, 5, '2026-04-16 10:00:00'),
+-- Past Enrollments for other members (1-3 each)
+(6, 101, '2026-05-01 10:30:00'),
+(6, 105, '2026-05-03 10:30:00'),
+(7, 102, '2026-05-01 11:30:00'),
+(8, 103, '2026-05-02 08:30:00'),
+(8, 107, '2026-05-05 12:30:00'),
+(8, 110, '2026-05-08 15:30:00'),
+(9, 104, '2026-05-03 09:30:00'),
 
--- Session 6: Vinyasa Flow (Trainer 4)
-(5, 6, '2026-04-17 08:30:00');
+-- Random others for future sessions (June)
+(5, 1, '2026-05-28 10:00:00'),
+(6, 2, '2026-05-28 10:30:00'),
+(7, 3, '2026-05-29 08:30:00'),
+(8, 5, '2026-05-29 09:00:00'),
+(9, 6, '2026-05-29 10:00:00'),
+(10, 7, '2026-05-30 11:00:00'),
+(11, 8, '2026-05-30 12:00:00'),
+(12, 9, '2026-05-30 13:00:00'),
+(13, 10, '2026-05-30 14:00:00'),
+(14, 11, '2026-05-30 15:00:00'),
+(15, 12, '2026-05-30 16:00:00'),
+(16, 13, '2026-05-30 17:00:00'),
+(17, 14, '2026-05-30 18:00:00');
 
--- Seed data for reviews (40 reviews)
+-- Reviews (Ensuring at most 1 review per user per session)
 INSERT INTO reviews (session_id, member_id, rating, posted_date, comment) VALUES
--- Session 1 (Vinyasa Flow)
-(1, 5, 5, '2026-05-01 10:00:00', 'Amazing class! Really helped with my flexibility.'),
-(1, 6, 4, '2026-05-01 11:30:00', 'Great pace, though the room was a bit crowded.'),
-(1, 7, 5, '2026-05-01 12:15:00', 'Trainer One is the best! Very calming atmosphere.'),
-(1, 8, 4, '2026-05-01 14:00:00', 'Good session, definitely felt the flow.'),
-(1, 9, 3, '2026-05-01 15:45:00', 'A bit too slow for me, but good for beginners.'),
+(1, 5, 5, '2026-06-01 10:00:00', 'Amazing start to the week!'),
+(1, 14, 4, '2026-06-01 11:30:00', 'Great pace, really enjoyed it.'),
+(2, 9, 5, '2026-06-01 20:00:00', 'Insane energy! Exactly what I needed.'),
+(2, 10, 5, '2026-06-01 20:15:00', 'Hardest 60 minutes of my week, but the best.'),
+(4, 5, 5, '2026-06-02 21:00:00', 'Loved the technique focus. Authentic feel.'),
+(4, 6, 5, '2026-06-02 21:15:00', 'Great cardio and skill building. Highly addictive!'),
+(5, 8, 4, '2026-06-03 09:00:00', 'Feeling much stronger after this session.'),
+(6, 9, 5, '2026-06-03 19:00:00', 'Best spin class ever.'),
+(7, 10, 4, '2026-06-04 11:00:00', 'Very relaxing and mindful.'),
+(8, 11, 5, '2026-06-04 22:00:00', 'BJJ is tough but rewarding.'),
+(9, 12, 4, '2026-06-05 13:00:00', 'Great core workout.'),
+(10, 13, 5, '2026-06-05 20:30:00', 'Kettlebells are no joke!'),
+(11, 14, 5, '2026-06-06 12:00:00', 'Wonderful Saturday morning yoga.'),
+(12, 15, 4, '2026-06-06 18:00:00', 'High intensity, high reward.'),
+(13, 16, 5, '2026-06-07 12:00:00', 'Perfect Sunday pilates.'),
+(14, 17, 5, '2026-06-07 17:00:00', 'Muay Thai is definitely my new favorite.');
 
--- Session 2 (Mat Pilates Core)
-(2, 8, 5, '2026-05-01 12:00:00', 'My core is on fire! Loved every minute of it.'),
-(2, 9, 4, '2026-05-01 13:30:00', 'Excellent instructions, very clear and precise.'),
-(2, 5, 5, '2026-05-01 14:15:00', 'Hard work but totally worth it. Highly recommend.'),
-(2, 6, 4, '2026-05-01 16:00:00', 'Solid workout. Trainer Two really knows their stuff.'),
-(2, 7, 5, '2026-05-01 17:30:00', 'Best pilates class I have been to in a while.'),
-
--- Session 3 (HIIT Blast)
-(3, 6, 5, '2026-05-01 20:00:00', 'Insane energy! Exactly what I needed.'),
-(3, 7, 5, '2026-05-01 20:15:00', 'Hardest 60 minutes of my week, but the best.'),
-(3, 8, 4, '2026-05-01 20:30:00', 'Great workout, very high intensity.'),
-(3, 9, 5, '2026-05-01 21:00:00', 'Loved the music and the trainer''s motivation.'),
-(3, 5, 2, '2026-05-01 21:30:00', 'Too intense for me. I couldn''t keep up at all.'),
-(3, 6, 4, '2026-05-02 08:00:00', 'Great sweat session. Will be back!'),
-(3, 7, 5, '2026-05-02 09:00:00', 'HIIT Blast is no joke. Fantastic trainer.'),
-
--- Session 4 (Full Body Strength)
-(4, 5, 5, '2026-05-02 09:00:00', 'Great form corrections. Feeling much stronger.'),
-(4, 8, 4, '2026-05-02 10:30:00', 'Good mix of exercises. Focus on heavy lifts was great.'),
-(4, 6, 5, '2026-05-02 11:15:00', 'The trainer was super helpful with technique.'),
-(4, 7, 4, '2026-05-02 12:45:00', 'Solid session, felt every muscle working.'),
-(4, 9, 3, '2026-05-02 14:00:00', 'Wait times for equipment were a bit long today.'),
-
--- Session 5 (Muay Thai Basics)
-(5, 6, 5, '2026-05-02 21:00:00', 'Loved the technique focus. Authentic feel.'),
-(5, 7, 5, '2026-05-02 21:15:00', 'Great cardio and skill building. Highly addictive!'),
-(5, 9, 4, '2026-05-02 21:30:00', 'Good introduction for beginners. Very patient trainer.'),
-(5, 5, 5, '2026-05-02 22:00:00', 'Oweeeee! Great session today.'),
-(5, 8, 4, '2026-05-03 08:30:00', 'Strong focus on basics, which I appreciated.'),
-
--- Session 6 (Vinyasa Flow - second instance)
-(6, 5, 5, '2026-05-03 11:00:00', 'Perfect Sunday morning flow. Refreshing.'),
-(6, 6, 4, '2026-05-03 12:30:00', 'Really enjoyed the sequence today.'),
-(6, 7, 5, '2026-05-03 13:15:00', 'Namaste. Great class, great vibe.'),
-(6, 8, 3, '2026-05-03 14:45:00', 'A bit too crowded, hard to move freely.'),
-(6, 9, 5, '2026-05-03 16:00:00', 'Excellent balance of strength and flexibility.'),
-
--- More reviews to reach 40
-(1, 8, 5, '2026-05-03 17:00:00', 'Really loved the evening flow session.'),
-(2, 5, 4, '2026-05-03 18:00:00', 'Pilates is getting easier, thanks to the trainer!'),
-(3, 9, 5, '2026-05-03 19:00:00', 'HIIT is the best way to end the weekend.'),
-(4, 7, 4, '2026-05-03 20:00:00', 'Strong finish to the week. Great class.'),
-(5, 6, 5, '2026-05-03 21:00:00', 'Muay Thai is definitely my new favorite.'),
-(1, 5, 4, '2026-05-04 08:00:00', 'Good start to the week with some yoga.'),
-(2, 8, 5, '2026-05-04 09:00:00', 'Core strength improving noticeably.'),
-(3, 7, 5, '2026-05-04 10:00:00', 'Always a challenge, always worth it.');
+-- Equipment (Main training area items)
+INSERT INTO equipment (name, status) VALUES
+('Treadmill 1', 'Functional'),
+('Treadmill 2', 'Functional'),
+('Power Rack 1', 'Functional'),
+('Power Rack 2', 'Functional'),
+('Bench Press 1', 'Functional'),
+('Dumbbell Set 1-10kg', 'Functional'),
+('Dumbbell Set 12-30kg', 'Functional'),
+('Leg Press Machine', 'Maintenance'),
+('Stationary Bike 1', 'Functional'),
+('Stationary Bike 2', 'Functional');
