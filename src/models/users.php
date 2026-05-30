@@ -5,24 +5,34 @@ require_once __DIR__ . '/../database.php';
 function getUserByUsername($username)
 {
     $db = getDbConnection();
-    
-    $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->execute([$username]);
-    $user = $stmt->fetch();
-
-    return $user;
+    // Retrieve user profile by username
+    $stmt = $db->prepare("SELECT * FROM users WHERE username = :username");
+    $stmt->execute([':username' => $username]);
+    return $stmt->fetch();
 }
 
 function createUser($realName, $username, $hashedPassword, $email, $role, $profilePhoto = null)
 {
     $db = getDbConnection();
-    $stmt = $db->prepare("INSERT INTO users (real_name, username, password_hash, email, role, profile_photo) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$realName, $username, $hashedPassword, $email, $role, $profilePhoto]);
+    // Register new user
+    $sql = "INSERT INTO users (real_name, username, password_hash, email, role, profile_photo) 
+            VALUES (:real_name, :username, :password_hash, :email, :role, :profile_photo)";
+            
+    $stmt = $db->prepare($sql);
+    return $stmt->execute([
+        ':real_name'     => $realName,
+        ':username'      => $username,
+        ':password_hash' => $hashedPassword,
+        ':email'         => $email,
+        ':role'          => $role,
+        ':profile_photo' => $profilePhoto
+    ]);
 }
 
 function getAllTrainers()
 {
     $db = getDbConnection();
+    // Fetch only active trainers
     $stmt = $db->query("SELECT id, real_name FROM users WHERE role = 'trainer' AND is_deactivated = 0");
     return $stmt->fetchAll();
 }
@@ -47,28 +57,64 @@ function updateUser($id, $realName, $username, $passwordHash = null, $profilePho
 {
     $db = getDbConnection();
     
-    $sql = "UPDATE users SET real_name = ?, username = ?";
-    $params = [$realName, $username];
+    // Dynamic update query builder
+    $sql = "UPDATE users SET real_name = :real_name, username = :username";
+    $params = [':real_name' => $realName, ':username' => $username, ':id' => $id];
     
-    if ($passwordHash)
-    {
-        $sql .= ", password_hash = ?";
-        $params[] = $passwordHash;
+    if ($passwordHash) {
+        $sql .= ", password_hash = :password";
+        $params[':password'] = $passwordHash;
     }
     
-    if ($deletePhoto)
-    {
+    if ($deletePhoto) {
         $sql .= ", profile_photo = NULL";
-    }
-    elseif ($profilePhoto)
-    {
-        $sql .= ", profile_photo = ?";
-        $params[] = $profilePhoto;
+    } elseif ($profilePhoto) {
+        $sql .= ", profile_photo = :photo";
+        $params[':photo'] = $profilePhoto;
     }
     
-    $sql .= " WHERE id = ?";
-    $params[] = $id;
-    
+    $sql .= " WHERE id = :id";
     $stmt = $db->prepare($sql);
-    $stmt->execute($params);
+    return $stmt->execute($params);
+}
+
+function getAllNonAdminUsers() 
+{
+    $db = getDbConnection();
+    // List all members and trainers
+    $sql = "SELECT id, real_name, username, email, role, is_deactivated 
+            FROM users 
+            WHERE role != 'admin' 
+            ORDER BY role, real_name";
+    return $db->query($sql)->fetchAll();
+}
+
+function updateUserRole($id, $role) 
+{
+    $db = getDbConnection();
+    // Change user access level
+    $stmt = $db->prepare("UPDATE users SET role = :role WHERE id = :id AND role != 'admin'");
+    return $stmt->execute([':role' => $role, ':id' => $id]);
+}
+
+function getUserRole($id) 
+{
+    $db = getDbConnection();
+    // Verify user role
+    $stmt = $db->prepare("SELECT role FROM users WHERE id = :id");
+    $stmt->execute([':id' => $id]);
+    return $stmt->fetchColumn();
+}
+
+function toggleUserStatus($id) 
+{
+    $db = getDbConnection();
+    // Switch active/deactivated flag
+    $stmtUpdate = $db->prepare("UPDATE users SET is_deactivated = NOT is_deactivated WHERE id = :id AND role != 'admin'");
+    $stmtUpdate->execute([':id' => $id]);
+    
+    // Return the new status
+    $stmtCheck = $db->prepare("SELECT is_deactivated FROM users WHERE id = :id");
+    $stmtCheck->execute([':id' => $id]);
+    return (bool)$stmtCheck->fetchColumn();
 }

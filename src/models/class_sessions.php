@@ -56,7 +56,6 @@ function getFilteredSessions($date, $user_id,  $filters = [])
                 s.start_time,
                 s.end_time,
                 c.default_capacity,
-                -- Subquery to count currently enrolled members
                 (SELECT COUNT(*) FROM enrollments e WHERE e.session_id = s.id) AS current_enrollment,
                 -- Subquery to check if current user is enrolled
                 (SELECT COUNT(*) FROM enrollments e 
