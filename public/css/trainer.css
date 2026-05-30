@@ -21,8 +21,22 @@
     padding: 1em;
 }
 
+.trainer-link {
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.trainer-link:hover {
+    opacity: 0.8;
+}
+
+.trainer-link:hover .card-title {
+    text-decoration: underline;
+}
+
 .trainer-card-photo {
     aspect-ratio: 1;
+    border: 2px solid var(--font-color);
     border-radius: 50%;
     display: block;
     margin: 1rem auto 0;
@@ -60,11 +74,6 @@
 
 .trainer-card-specializations p {
     margin: 0.35rem 0 0;
-}
-
-.trainer-card .btn {
-    align-self: flex-start;
-    margin-top: 0.25rem;
 }
 
 .trainer-profile-page {

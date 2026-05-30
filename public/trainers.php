@@ -31,14 +31,18 @@ $defaultPhoto = 'uploads/placeholder.jpg';
 
         <?php foreach ($trainers as $trainer): ?>
             <article class="card trainer-card">
-                <img
-                    class="trainer-card-photo"
-                    src="<?= htmlspecialchars($uploadsBaseUrl . ($trainer['profile_photo'] ?: 'placeholder.jpg')) ?>"
-                    alt="<?= htmlspecialchars($trainer['real_name']) ?>"
-                >
+                <a href="trainer_public_profile.php?id=<?= $trainer['trainer_id'] ?>" class="trainer-link">
+                    <img
+                        class="trainer-card-photo"
+                        src="<?= htmlspecialchars($uploadsBaseUrl . ($trainer['profile_photo'] ?: 'placeholder.jpg')) ?>"
+                        alt="<?= htmlspecialchars($trainer['real_name']) ?>"
+                    >
+                </a>
 
                 <div class="trainer-card-body">
-                    <h2 class="card-title"><?= htmlspecialchars($trainer['real_name']) ?></h2>
+                    <a href="trainer_public_profile.php?id=<?= $trainer['trainer_id'] ?>" class="trainer-link">
+                        <h2 class="card-title"><?= htmlspecialchars($trainer['real_name']) ?></h2>
+                    </a>
 
                     <p class="trainer-card-bio">
                         <?= htmlspecialchars($trainer['bio'] ?? 'No bio provided yet.') ?>
@@ -48,10 +52,6 @@ $defaultPhoto = 'uploads/placeholder.jpg';
                         <strong>Specializations</strong>
                         <p><?= htmlspecialchars($trainer['specializations'] ?? 'No specializations listed.') ?></p>
                     </div>
-
-                    <a href="trainer.php?id=<?= $trainer['trainer_id'] ?>" class="btn">
-                        View Profile
-                    </a>
                 </div>
             </article>
         <?php endforeach; ?>
