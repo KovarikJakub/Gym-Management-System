@@ -154,7 +154,7 @@ function cancelEnrollment($user_id, $session_id)
     return $stmt->execute($params); 
 }
 
-function getUsersPastSessions($user_id, $n)
+function getUsersPastSessions($user_id, $limit, $offset = 0)
 {
     $db = getDbConnection();
 
@@ -162,23 +162,45 @@ function getUsersPastSessions($user_id, $n)
                 s.id AS session_id,
                 c.name AS class_name,
                 c.type AS class_type,
+                u.id AS trainer_id,
                 u.real_name AS trainer_name,
+                u.username,
+                u.profile_photo,
+                u.role,
                 s.start_time,
                 s.end_time,
-                (SELECT COUNT(*) FROM reviews r WHERE r.session_id = s.id AND r.member_id = :user_id) > 0 AS is_reviewed
+                r.rating AS review_rating,
+                r.comment AS review_comment,
+                CASE WHEN r.id IS NOT NULL THEN 1 ELSE 0 END AS is_reviewed
             FROM enrollments e
             JOIN class_sessions s ON e.session_id = s.id
             JOIN gym_classes c ON s.class_id = c.id
             JOIN users u ON s.trainer_id = u.id
+            LEFT JOIN reviews r ON r.session_id = s.id AND r.member_id = e.member_id
             WHERE e.member_id = :user_id 
               AND s.end_time < CURRENT_TIMESTAMP
             ORDER BY s.start_time DESC
-            LIMIT :limit";
+            LIMIT :limit OFFSET :offset";
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-    $stmt->bindValue(':limit', $n, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
     $stmt->execute();
     
     return $stmt->fetchAll();
+}
+
+function countUsersPastSessions($user_id)
+{
+    $db = getDbConnection();
+    $sql = "SELECT COUNT(*)
+            FROM enrollments e
+            JOIN class_sessions s ON e.session_id = s.id
+            WHERE e.member_id = :user_id 
+              AND s.end_time < CURRENT_TIMESTAMP";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return (int) $stmt->fetchColumn();
 }

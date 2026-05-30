@@ -1,0 +1,133 @@
+.past-session-card {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0 !important; /* Reset boxes padding to control header/footer */
+}
+
+.past-session-main {
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.past-session-top {
+    font-size: 0.8rem;
+    color: var(--title-color);
+    opacity: 0.8;
+    font-style: italic;
+}
+
+.past-session-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.session-info-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.session-info-group h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--title-color);
+}
+
+.session-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.session-time-details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.session-date, .session-time {
+    font-size: 0.9rem;
+    color: var(--font-color);
+    white-space: nowrap;
+}
+
+/* Footer Section */
+.past-session-footer {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--border-color);
+    padding: 0.5rem 1.25rem;
+}
+
+.session-review-status {
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.no-review-text {
+    color: var(--font-color);
+    opacity: 0.7;
+}
+
+.write-review-link {
+    color: var(--title-color);
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.write-review-link:hover {
+    opacity: 0.8;
+}
+
+.review-snippet {
+    display: block;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-style: italic;
+    opacity: 0.8;
+    color: var(--font-color);
+}
+
+.rating-stars {
+    color: var(--title-color);
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .session-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .session-time-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+    }
+
+    .past-session-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .session-review-status {
+        text-align: left;
+    }
+    
+    .review-snippet {
+        max-width: 100%;
+    }
+}
