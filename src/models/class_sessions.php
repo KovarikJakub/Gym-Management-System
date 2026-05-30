@@ -202,6 +202,7 @@ function getUsersPastSessions($user_id, $limit, $offset = 0)
 
     $sql = "SELECT 
                 s.id AS session_id,
+                c.id AS gym_class_id,
                 c.name AS class_name,
                 c.type AS class_type,
                 u.id AS trainer_id,

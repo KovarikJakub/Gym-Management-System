@@ -36,6 +36,11 @@
     margin: 0;
     font-size: 1.1rem;
     color: var(--title-color);
+    cursor: pointer;
+}
+
+.session-info-group a:hover h3 {
+    text-decoration: underline;
 }
 
 .session-meta {

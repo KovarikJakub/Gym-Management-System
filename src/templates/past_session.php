@@ -22,7 +22,9 @@ function outputPastSession($session)
             
             <div class="past-session-content">
                 <div class="session-info-group">
-                    <h3><?= htmlspecialchars($session['class_name']) ?></h3>
+                    <a href="gym_class_detail.php?gym_class_id=<?= $session['gym_class_id'] ?>">
+                        <h3><?= htmlspecialchars($session['class_name']) ?></h3>
+                    </a>
                     <div class="session-meta">
                         <?php outputUserBadge($trainer); ?>
                         <div class="session-time-details">
