@@ -17,7 +17,7 @@ $defaultPhoto = 'uploads/placeholder.jpg';
     <title>Trainers - Gym Management</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/templates/session_card.css">
+    <link rel="stylesheet" href="css/trainers.css">
     <link rel="stylesheet" href="css/trainer.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>

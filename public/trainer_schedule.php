@@ -18,8 +18,7 @@ $sessions = getTrainerSessions($trainerId);
     <title>My Schedule - Gym Management</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/templates/session_card.css">
-    <link rel="stylesheet" href="css/sessions.css">
+    <link rel="stylesheet" href="css/trainer_schedule.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
