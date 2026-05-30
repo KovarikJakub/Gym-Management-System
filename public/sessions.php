@@ -55,12 +55,6 @@
     <?php outputHeader(); ?>
     <main id="sessions-dynamic-area">
     	<?php if ($isAdmin) outputAdminScheduleMenu(); ?>
-        <?php outputFilterTab($week_days, $selected_date, $today, $trainers, $class_types, $filters); ?>
-        <?php if (isSelectedDayInThePast($selected_date, $today)): ?>
-            <div class="alert alert-warning">
-                <strong>Note:</strong> You are viewing a date in the past. New enrollments are disabled for these sessions.
-            </div>
-        <?php endif ?>
 
         <div id="view-schedule" class="<?= $isAdmin ? 'admin-tab active' : '' ?>" style="<?= $isAdmin ? 'display: block;' : '' ?>">
             
