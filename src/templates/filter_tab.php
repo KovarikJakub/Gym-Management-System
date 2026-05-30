@@ -13,7 +13,7 @@ function outputFilterTab($week_days, $selected_date, $today, $trainers, $class_t
 
             <div class="filter-group">
                 <label for="trainer_id">Trainer:</label>
-                <select name="trainer_id" id="trainer_id" onchange="this.form.submit()">
+                <select name="trainer_id" id="trainer_id">
                     <option value="">All Trainers</option>
                     <?php foreach ($trainers as $trainer): ?>
                         <option value="<?= $trainer['id'] ?>" <?= (isset($active_filters['trainer_id']) && $active_filters['trainer_id'] == $trainer['id']) ? 'selected' : '' ?>>
@@ -25,7 +25,7 @@ function outputFilterTab($week_days, $selected_date, $today, $trainers, $class_t
 
             <div class="filter-group">
                 <label for="type">Class Type:</label>
-                <select name="type" id="type" onchange="this.form.submit()">
+                <select name="type" id="type">
                     <option value="">All Types</option>
                     <?php foreach ($class_types as $type): ?>
                         <option value="<?= htmlspecialchars($type) ?>" <?= (isset($active_filters['type']) && $active_filters['type'] === $type) ? 'selected' : '' ?>>

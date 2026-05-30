@@ -53,7 +53,7 @@
 </head>
 <body>
     <?php outputHeader(); ?>
-    <main>
+    <main id="sessions-dynamic-area">
         <?php outputFilterTab($week_days, $selected_date, $today, $trainers, $class_types, $filters); ?>
         <?php if (isSelectedDayInThePast($selected_date, $today)): ?>
             <div class="alert alert-warning">
