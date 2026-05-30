@@ -51,7 +51,7 @@
     gap: 1rem;
 }
 
-.session-date, .session-time {
+.past-session-date, .past-session-time {
     font-size: 0.9rem;
     color: var(--font-color);
     white-space: nowrap;

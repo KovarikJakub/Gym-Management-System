@@ -26,8 +26,8 @@ function outputPastSession($session)
                     <div class="session-meta">
                         <?php outputUserBadge($trainer); ?>
                         <div class="session-time-details">
-                            <span class="session-time">🕒 <?= htmlspecialchars($formatted_time['time']) ?></span>
-                            <span class="session-date">📅 <?= htmlspecialchars($formatted_time['date']) ?></span>
+                            <span class="past-session-time">🕒 <?= htmlspecialchars($formatted_time['time']) ?></span>
+                            <span class="past-session-date">📅 <?= htmlspecialchars($formatted_time['date']) ?></span>
                         </div>
                     </div>
                 </div>

@@ -72,12 +72,6 @@
     color: var(--font-color);
 }
 
-
-.session-time, .session-trainer {
-    margin: 0.25rem 0;
-    font-size: 0.95rem;
-}
-
 .text-danger { color: var(--danger-color); font-weight: bold; }
 .text-success { color: var(--success-color); font-weight: bold; }
 

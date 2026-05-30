@@ -12,6 +12,11 @@ function formatDuration($startTime, $endTime)
     return $duration;
 }
 
+function formatDate($session)
+{
+    return date('jS \of F Y', strtotime($session['start_time']));
+}
+
 function formatClassDuration($session)
 {
     $startTime = strtotime($session['start_time']);
@@ -53,17 +58,26 @@ function outputClassSessionCard($session, $today)
     ?>
 <article class="card <?= $session['is_enrolled'] ? 'card-enrolled' : '' ?> <?= !canEnroll($session, $today) && !$session['is_enrolled'] ? 'card-disabled' : '' ?>">
     <header class="card-header">
-        <a href="gym_class_detail.php?gym_class_id=<?= $session['gym_class_id'] ?>">
+        <a href="gym_class_detail.php?gym_class_id=<?= $session['gym_class_id'] ?>" class="card-title-link">
             <h2 class="card-title"><?= htmlspecialchars($session['class_name']) ?></h2>
+            <span class="badge badge-<?= str_replace(' ', '-', $session['class_type']) ?>">
+                <?= htmlspecialchars($session['class_type']) ?>
+            </span>
         </a>
-        <span class="badge badge-<?= str_replace(' ', '-', $session['class_type']) ?>">
-            <?= htmlspecialchars($session['class_type']) ?>
-        </span>
+        <?php if ($session['is_enrolled']): ?>
+            <div class="enrolled-status">
+                <span class="status-dot"></span>
+                <span class="status-label">Enrolled!</span>
+            </div>
+        <?php endif; ?>
     </header>
 
     <div class="card-body">
         <p class="session-time">
             <?= formatClassDuration($session) ?>
+        </p>
+        <p class="session-date">
+            <?= formatDate($session) ?>
         </p>
         <p class="session-trainer">
             <?= outputUserBadge($trainer) ?>
