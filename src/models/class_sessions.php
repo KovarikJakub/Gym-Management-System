@@ -154,7 +154,7 @@ function cancelEnrollment($user_id, $session_id)
     return $stmt->execute($params); 
 }
 
-function getUsersPastSessions($user_id, $n)
+function getUsersUpcomingSessions($user_id, $limit = 3)
 {
     $db = getDbConnection();
 
@@ -162,23 +162,88 @@ function getUsersPastSessions($user_id, $n)
                 s.id AS session_id,
                 c.name AS class_name,
                 c.type AS class_type,
+                c.id AS gym_class_id,
                 u.real_name AS trainer_name,
+                u.username AS trainer_username,
+                u.profile_photo AS trainer_profile_photo,
+                u.id AS trainer_id,
                 s.start_time,
                 s.end_time,
-                (SELECT COUNT(*) FROM reviews r WHERE r.session_id = s.id AND r.member_id = :user_id) > 0 AS is_reviewed
+                c.default_capacity,
+                (SELECT COUNT(*) FROM enrollments e WHERE e.session_id = s.id) AS current_enrollment,
+                1 AS is_enrolled
             FROM enrollments e
             JOIN class_sessions s ON e.session_id = s.id
             JOIN gym_classes c ON s.class_id = c.id
             JOIN users u ON s.trainer_id = u.id
             WHERE e.member_id = :user_id 
-              AND s.end_time < CURRENT_TIMESTAMP
-            ORDER BY s.start_time DESC
+              AND s.start_time >= CURRENT_TIMESTAMP
+            ORDER BY s.start_time ASC
             LIMIT :limit";
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-    $stmt->bindValue(':limit', $n, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    $sessions = $stmt->fetchAll();
+
+    foreach ($sessions as &$session) {
+        $session['spots_left'] = $session['default_capacity'] - $session['current_enrollment'];
+        $session['is_full'] = ($session['spots_left'] <= 0);
+    }
+
+    return $sessions;
+}
+
+function getUsersPastSessions($user_id, $limit, $offset = 0)
+{
+    $db = getDbConnection();
+
+    $sql = "SELECT 
+                s.id AS session_id,
+                c.id AS gym_class_id,
+                c.name AS class_name,
+                c.type AS class_type,
+                u.id AS trainer_id,
+                u.real_name AS trainer_name,
+                u.username,
+                u.profile_photo,
+                u.role,
+                s.start_time,
+                s.end_time,
+                r.rating AS review_rating,
+                r.comment AS review_comment,
+                CASE WHEN r.id IS NOT NULL THEN 1 ELSE 0 END AS is_reviewed
+            FROM enrollments e
+            JOIN class_sessions s ON e.session_id = s.id
+            JOIN gym_classes c ON s.class_id = c.id
+            JOIN users u ON s.trainer_id = u.id
+            LEFT JOIN reviews r ON r.session_id = s.id AND r.member_id = e.member_id
+            WHERE e.member_id = :user_id 
+              AND s.end_time < CURRENT_TIMESTAMP
+            ORDER BY s.start_time DESC
+            LIMIT :limit OFFSET :offset";
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
     $stmt->execute();
     
     return $stmt->fetchAll();
+}
+
+function countUsersPastSessions($user_id)
+{
+    $db = getDbConnection();
+    $sql = "SELECT COUNT(*)
+            FROM enrollments e
+            JOIN class_sessions s ON e.session_id = s.id
+            WHERE e.member_id = :user_id 
+              AND s.end_time < CURRENT_TIMESTAMP";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return (int) $stmt->fetchColumn();
 }

@@ -16,7 +16,6 @@ composer.lock
 
 # Database
 database/*.db
-database/*.sqlite
 database/*.sqlite-journal
 database/*.sqlite-wal
 

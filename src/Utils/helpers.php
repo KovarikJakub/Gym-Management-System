@@ -39,3 +39,39 @@ function getWeekDays(string $today): array
     }
     return $week_days;
 }
+
+/**
+ * Returns the number of days since a given date compared to current date.
+ * 
+ * @param string $dateString The target date string.
+ * @return int The number of days elapsed.
+ */
+function formatTimeSinceDate(string $dateString): int
+{
+    $date = new DateTime($dateString);
+    $now = new DateTime();
+    $diff = $now->diff($date);
+    return abs($diff->days);
+}
+
+/**
+ * Formats session start and end times into a readable array.
+ * Example: ['date' => '6th of July 2026', 'time' => '19:00 - 20:00']
+ * 
+ * @param string $start Start time timestamp.
+ * @param string $end End time timestamp.
+ * @return array Formatted parts.
+ */
+function formatSessionTime(string $start, string $end): array
+{
+    $startTime = strtotime($start);
+    $endTime = strtotime($end);
+    
+    $datePart = date('jS \of F Y', $startTime);
+    $timePart = date('G:i', $startTime) . ' - ' . date('G:i', $endTime);
+    
+    return [
+        'date' => $datePart,
+        'time' => $timePart
+    ];
+}

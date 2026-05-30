@@ -12,7 +12,7 @@
     requireLogin();
 
     $user_id = $_SESSION['user_id'];
-    $today = "2026-05-02"; // hardcoded "todays date" for development
+    $today = "2026-06-02"; // hardcoded "todays date" for development
     $selected_date = $_GET['date'] ?? $today;
     $selected_date = date("Y-m-d", strtotime($selected_date));
 
@@ -53,7 +53,7 @@
 </head>
 <body>
     <?php outputHeader(); ?>
-    <main>
+    <main id="sessions-dynamic-area">
         <?php outputFilterTab($week_days, $selected_date, $today, $trainers, $class_types, $filters); ?>
         <?php if (isSelectedDayInThePast($selected_date, $today)): ?>
             <div class="alert alert-warning">
