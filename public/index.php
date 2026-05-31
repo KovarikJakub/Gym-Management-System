@@ -2,7 +2,32 @@
 
 require_once __DIR__ . '/../src/auth.php';
 require_once __DIR__ . '/../src/templates/common.php';
+require_once __DIR__ . '/../src/database.php';
 
+$db = getDbConnection();
+
+// Fetch next 2 sessions including trainer info
+$sessions_sql = "SELECT 
+                    s.id AS session_id,
+                    c.name AS class_name,
+                    c.type AS class_type,
+                    u.real_name AS trainer_name,
+                    u.profile_photo AS trainer_profile_photo,
+                    u.id AS trainer_id,
+                    s.start_time
+                FROM class_sessions s
+                JOIN gym_classes c ON s.class_id = c.id
+                JOIN users u ON s.trainer_id = u.id
+                WHERE s.start_time >= CURRENT_TIMESTAMP
+                ORDER BY s.start_time ASC
+                LIMIT 3";
+$next_sessions = $db->query($sessions_sql)->fetchAll();
+
+// Fetch 3 available equipment items
+$equipment_sql = "SELECT name, status FROM equipment WHERE status = 'Functional' LIMIT 3";
+$available_equipment = $db->query($equipment_sql)->fetchAll();
+
+$uploadsBaseUrl = 'uploads/';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +38,7 @@ require_once __DIR__ . '/../src/templates/common.php';
     <link href="css/style.css" rel="stylesheet">
     <link href="css/layout.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/templates/user_badge.css" rel="stylesheet">
 </head>
 <body>
     <?php outputHeader(); ?>
@@ -29,18 +55,28 @@ require_once __DIR__ . '/../src/templates/common.php';
             <article class="boxes">
                 <h3>Classes</h3>
                 <ul>
-                    <li>Yoga - schedule</li>
-                    <li>HIIT -schedule</li>
+                    <?php if (empty($next_sessions)): ?>
+                        <li>No upcoming classes.</li>
+                    <?php else: ?>
+                        <?php foreach ($next_sessions as $session): ?>
+                            <li><?= htmlspecialchars($session['class_name']) ?> - <?= date('M j, H:i', strtotime($session['start_time'])) ?></li>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </ul>
                 <br>
-                <a href="gym_class_detail.php" class="btn">View Classes</a>
+                <a href="sessions.php" class="btn">View Classes Schedule</a>
             </article>
 
             <article class="boxes">
                 <h3>Equipment</h3>
                 <ul>
-                    <li>Treadmills - 3/5</li>
-                    <li>Legpress - 2/4</li>
+                    <?php if (empty($available_equipment)): ?>
+                        <li>No equipment available.</li>
+                    <?php else: ?>
+                        <?php foreach ($available_equipment as $eq): ?>
+                            <li><?= htmlspecialchars($eq['name']) ?> - <?= htmlspecialchars($eq['status']) ?></li>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </ul>
                 <br>
                 <a href="equipment.php" class="btn">Check Equipment</a>
@@ -48,10 +84,22 @@ require_once __DIR__ . '/../src/templates/common.php';
 
             <article class="boxes">
                 <h3>Trainers</h3>
-                <ul>
-                    <li>Photo - Name</li>
-                    <li>Photo - Name</li>
-                </ul>
+                <div class="home-trainers-list">
+                    <?php if (empty($next_sessions)): ?>
+                        <p>No trainers scheduled.</p>
+                    <?php else: ?>
+                        <?php foreach (array_slice($next_sessions, 0, 2) as $session): ?>
+                            <div class="home-trainer-item" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <img 
+                                    src="<?= htmlspecialchars($uploadsBaseUrl . ($session['trainer_profile_photo'] ?: 'placeholder.jpg')) ?>" 
+                                    alt="<?= htmlspecialchars($session['trainer_name']) ?>"
+                                    style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--title-color);"
+                                >
+                                <span style="color: var(--font-color); font-weight: bold;"><?= htmlspecialchars($session['trainer_name']) ?></span>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
                 <br>
                 <a href="trainers.php" class="btn">Book Trainers</a>
             </article>
