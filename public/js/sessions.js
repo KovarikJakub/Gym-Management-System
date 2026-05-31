@@ -1,4 +1,3 @@
-
 const updateContent = async (url, pushState = true) => {
     if (pushState) {
         window.history.pushState({}, '', url);
@@ -68,6 +67,15 @@ const attachEventListeners = () => {
         btn.addEventListener('click', () => handleEnrollmentAction('action_cancel_enrollment.php', btn.getAttribute('data-id')));
     });
 
+    // Delete Session button
+    document.querySelectorAll(".btn-delete-session").forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to delete this session?')) {
+                handleEnrollmentAction('action_delete_session.php', btn.getAttribute('data-id'));
+            }
+        });
+    });
+
     // Week Selector Links
     document.querySelectorAll(".week-selector a").forEach(link => {
         link.addEventListener('click', (e) => {
@@ -95,6 +103,43 @@ const attachEventListeners = () => {
                 updateContent(clearLink.href);
             });
         }
+    }
+
+    const sessionForm = document.getElementById('sessionForm');
+    if (sessionForm) {
+        sessionForm.onsubmit = async (e) => {
+            e.preventDefault(); 
+            
+            const formData = new FormData(sessionForm);
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            formData.append('csrf_token', csrfToken);
+
+            try {
+                const response = await fetch('action_add_session.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                
+                alert(result.message); 
+                
+                if (result.success) {
+                    const startTime = formData.get('start_time');
+                    const targetDate = startTime.split('T')[0];
+                    
+                    sessionForm.reset(); 
+                    
+                    if (typeof switchAdminTab === 'function') {
+                        switchAdminTab('view-schedule');
+                    }
+                    
+                    updateContent(`sessions.php?date=${targetDate}`);
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                alert('Wystąpił błąd podczas łączenia z serwerem.');
+            }
+        };
     }
 };
 

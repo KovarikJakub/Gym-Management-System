@@ -74,7 +74,7 @@
 
             <div class="card-container-vertical" id="sessions-container">
                 <?php foreach ($sessions as $session): ?>
-                    <?php outputClassSessionCard($session, $today) ?>
+                    <?php outputClassSessionCard($session, $today, $isAdmin) ?>
                 <?php endforeach; ?>
             </div>
             

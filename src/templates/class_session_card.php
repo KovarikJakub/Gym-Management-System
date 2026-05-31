@@ -45,7 +45,7 @@ function canEnroll($session, $today)
     return !$session['is_full'] && !($session_date < $today);
 }
 
-function outputClassSessionCard($session, $today)
+function outputClassSessionCard($session, $today, $isAdmin = false)
 { 
     $is_past = date('Y-m-d', strtotime($session['start_time'])) < $today;
     // Map session trainer data to standard user object for user_badge template
@@ -96,15 +96,21 @@ function outputClassSessionCard($session, $today)
             </div>
         </div>
 
-        <?php if ($session['is_enrolled']): ?>
-            <button class="btn-cancel" data-id="<?= $session['session_id'] ?>" <?= $is_past ? 'disabled' : '' ?>>
-                <?= $is_past ? 'Already Attended' : 'Cancel Enrollment' ?>
-            </button>
-        <?php elseif (canEnroll($session, $today)): ?>
-            <button class="btn-enroll" data-id="<?= $session['session_id'] ?>" >Enroll Now</button>
-        <?php else: ?>
-            <button class="btn-enroll" disabled>Not available</button>
-        <?php endif; ?>
+        <div class="card-actions">
+            <?php if ($session['is_enrolled']): ?>
+                <button class="btn-cancel" data-id="<?= $session['session_id'] ?>" <?= $is_past ? 'disabled' : '' ?>>
+                    <?= $is_past ? 'Already Attended' : 'Cancel Enrollment' ?>
+                </button>
+            <?php elseif (canEnroll($session, $today)): ?>
+                <button class="btn-enroll" data-id="<?= $session['session_id'] ?>" >Enroll Now</button>
+            <?php else: ?>
+                <button class="btn-enroll" disabled>Not available</button>
+            <?php endif; ?>
+
+            <?php if ($isAdmin): ?>
+                <button class="btn-delete-session" data-id="<?= $session['session_id'] ?>">Delete Session</button>
+            <?php endif; ?>
+        </div>
     </div>
 </article>
 <?php } ?>
