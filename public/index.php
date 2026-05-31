@@ -17,7 +17,7 @@ require_once __DIR__ . '/../src/templates/common.php';
 <body>
     <?php outputHeader(); ?>
 
-    <main>
+    <main class="home-main">
         <section id="presentation">
             <div class="overlay">
                 <h1>Welcome to Fit-Pro</h1>

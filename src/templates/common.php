@@ -7,20 +7,33 @@ function outputNavigationMenu()
 {
     $isLoggedIn = isset($_SESSION['user_id']);
     $isAdmin    = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+    $currentPage = basename($_SERVER['PHP_SELF']);
+
+    $links = [
+        'sessions.php' => 'Schedule',
+        'equipment.php' => 'Equipment',
+        'trainers.php' => 'Trainers'
+    ];
+
+    if ($isLoggedIn) {
+        $links['dashboard.php'] = 'Dashboard';
+        $links['edit_profile.php'] = 'Profile';
+    }
+
+    if ($isAdmin) {
+        $links['admin_analytics.php'] = 'Analytics';
+        $links['admin_users.php'] = 'Users';
+        $links['admin_classes.php'] = 'Classes';
+    }
     ?>
     <ul>
-        <li><a href="sessions.php">Schedule</a></li>
-        <li><a href="equipment.php">Equipment</a></li>
-        <li><a href="trainers.php">Trainers</a></li>
-        <?php if ($isLoggedIn): ?>
-            <li><a href="dashboard.php">Dashboard</a></li>
-            <li><a href="edit_profile.php">Profile</a></li>
-        <?php endif; ?>
-        <?php if ($isAdmin): ?>
-            <li><a href="admin_analytics.php">Analytics</a></li>
-            <li><a href="admin_users.php">Users</a></li>
-            <li><a href="admin_classes.php">Classes</a></li>
-        <?php endif; ?>
+        <?php foreach ($links as $url => $label): ?>
+            <li>
+                <a href="<?= $url ?>" class="<?= $currentPage === $url ? 'active' : '' ?>">
+                    <?= $label ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
     </ul>
     <?php
 }
@@ -31,6 +44,7 @@ function outputNavigationMenu()
 function outputHeader()
 {
     $isLoggedIn = isset($_SESSION['user_id']);
+    $currentPage = basename($_SERVER['PHP_SELF']);
     ?>
     <header>
         <div>
@@ -48,8 +62,8 @@ function outputHeader()
             <?php if ($isLoggedIn): ?>
                 <a href="logout.php"><h2>Logout</h2></a>
             <?php else: ?>
-                <a href="login.php"><h2>Login</h2></a>
-                <a href="register.php"><h2>Register</h2></a>
+                <a href="login.php" class="<?= $currentPage === 'login.php' ? 'active-auth' : '' ?>"><h2>Login</h2></a>
+                <a href="register.php" class="<?= $currentPage === 'register.php' ? 'active-auth' : '' ?>"><h2>Register</h2></a>
             <?php endif; ?>
         </div>
     </header>
