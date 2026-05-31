@@ -267,13 +267,13 @@ INSERT INTO reviews (session_id, member_id, rating, posted_date, comment) VALUES
 
 -- Equipment (Main training area items)
 INSERT INTO equipment (name, status) VALUES
-('Treadmill 1', 'Functional'),
-('Treadmill 2', 'Functional'),
-('Power Rack 1', 'Functional'),
-('Power Rack 2', 'Functional'),
-('Bench Press 1', 'Functional'),
-('Dumbbell Set 1-10kg', 'Functional'),
-('Dumbbell Set 12-30kg', 'Functional'),
-('Leg Press Machine', 'Maintenance'),
-('Stationary Bike 1', 'Functional'),
-('Stationary Bike 2', 'Functional');
+('Treadmill 1', 'available'),
+('Treadmill 2', 'in use'),
+('Power Rack 1', 'available'),
+('Power Rack 2', 'available'),
+('Bench Press 1', 'in use'),
+('Dumbbell Set 1-10kg', 'available'),
+('Dumbbell Set 12-30kg', 'available'),
+('Leg Press Machine', 'maintenance'),
+('Stationary Bike 1', 'available'),
+('Stationary Bike 2', 'maintenance');
