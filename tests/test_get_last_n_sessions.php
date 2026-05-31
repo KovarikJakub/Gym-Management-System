@@ -28,8 +28,9 @@ function test_getUsersPastSessions() {
     // Seed data: Session 6 (2026-05-03), Session 4 (2026-05-02), Session 2 (2026-05-01), Session 1 (2026-05-01)
     $user_id = 5;
     $n = 10;
+    $today = "2026-06-02";
     
-    $sessions = getUsersPastSessions($user_id, $n);
+    $sessions = getUsersPastSessions($user_id, $today, $n);
     
     // In seed data, member 5 is enrolled in sessions 1, 2, 4, 6.
     // All are in the past for the seeded test calendar.
@@ -41,7 +42,7 @@ function test_getUsersPastSessions() {
 
     // Test LIMIT
     $n = 1;
-    $sessions = getUsersPastSessions($user_id, $n);
+    $sessions = getUsersPastSessions($user_id, $today, $n);
     assert(count($sessions) === 1, "Should return only 1 session when n=1");
     assert($sessions[0]['session_id'] == 6, "Should return the most recent session (ID 6)");
     echo "  - Test 2 passed: LIMIT works correctly.\n";

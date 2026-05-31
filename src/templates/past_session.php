@@ -4,7 +4,7 @@ require_once __DIR__ . '/../Utils/helpers.php';
 
 function outputPastSession($session)
 {
-    $days_ago = formatTimeSinceDate($session['end_time']);
+    $days_ago = formatTimeSinceDate($session['end_time']) + 1;
     $formatted_time = formatSessionTime($session['start_time'], $session['end_time']);
     
     $trainer = [
