@@ -15,7 +15,7 @@
     $user_id = $_SESSION['user_id'];
     $isAdmin = $_SESSION['role'] === 'admin'; 
 
-    $today = "2026-06-02"; // hardcoded "todays date" for development
+    $today = "2026-06-02"; // Seed calendar date
     $selected_date = $_GET['date'] ?? $today;
     $selected_date = date("Y-m-d", strtotime($selected_date));
     

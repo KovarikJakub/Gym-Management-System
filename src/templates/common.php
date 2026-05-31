@@ -6,6 +6,7 @@
 function outputNavigationMenu()
 {
     $isLoggedIn = isset($_SESSION['user_id']);
+    $isAdmin    = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
     ?>
     <ul>
         <li><a href="sessions.php">Schedule</a></li>
@@ -14,6 +15,11 @@ function outputNavigationMenu()
         <?php if ($isLoggedIn): ?>
             <li><a href="dashboard.php">Dashboard</a></li>
             <li><a href="edit_profile.php">Profile</a></li>
+        <?php endif; ?>
+        <?php if ($isAdmin): ?>
+            <li><a href="admin_analytics.php">Analytics</a></li>
+            <li><a href="admin_users.php">Users</a></li>
+            <li><a href="admin_classes.php">Classes</a></li>
         <?php endif; ?>
     </ul>
     <?php
@@ -28,7 +34,7 @@ function outputHeader()
     ?>
     <header>
         <div>
-            <h1><a href="index.html">Fit-Pro</a></h1>
+            <h1><a href="index.php">Fit-Pro</a></h1>
         </div>
 
         <nav id="menu">

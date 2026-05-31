@@ -23,7 +23,6 @@ $classesList = getAllGymClasses();
     <link href="css/layout.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
     <link href="css/admin.css" rel="stylesheet">
-    <link href="css/equipment.css" rel="stylesheet">
     
     <?php if ($isAdmin): ?>
         <script src="js/admin_classes.js" defer></script>
@@ -32,10 +31,10 @@ $classesList = getAllGymClasses();
 <body>
     <?php outputHeader(); ?>
 
-    <main>
+    <main class="admin-wide-main">
         <?php outputAdminHeader('Class Catalog', 'Browse our curriculum and difficulty levels'); ?>
 
-        <section id="info">
+        <section id="info" class="admin-management-layout">
             <?php outputAdminToast('interfaceAlertBox', 'admin-notification'); ?>
 
             <?php if ($isAdmin): ?>
@@ -88,7 +87,7 @@ $classesList = getAllGymClasses();
                 <?php outputAdminBoxEnd(); ?>
             <?php endif; ?>
 
-            <?php outputAdminBoxStart('Active Curriculum Catalog', '', 'admin-table-box ' . (!$isAdmin ? 'eq-full-width' : '')); ?>
+            <?php outputAdminBoxStart('Active Curriculum Catalog', '', 'admin-table-box ' . (!$isAdmin ? 'admin-full-width' : '')); ?>
                 <table class="admin-table" id="classesTable">
                     <thead>
                         <tr>
@@ -139,7 +138,7 @@ $classesList = getAllGymClasses();
                         <?php endforeach; ?>
                         
                         <tr id="emptyInventoryRow" style="<?= empty($classesList) ? '' : 'display:none;' ?>">
-                            <td colspan="<?= $isAdmin ? 3 : 2 ?>" class="eq-table-empty">No active courses cataloged in the curriculum logs.</td>
+                            <td colspan="<?= $isAdmin ? 3 : 2 ?>" class="admin-table-empty">No active courses cataloged in the curriculum logs.</td>
                         </tr>
                     </tbody>
                 </table>

@@ -75,8 +75,6 @@ const resetForm = () => {
 
     document.querySelector('#classFormBox h2').textContent = 'Add New Course';
     document.getElementById('formSubmitTrigger').textContent = 'Save Course';
-
-    document.getElementById('formCancelTrigger').style.display = 'none';
 };
 
 const onTableClick = async (event) => {
@@ -93,7 +91,6 @@ const onTableClick = async (event) => {
 
         document.querySelector('#classFormBox h2').textContent = `Modify Curriculum: ${editBtn.getAttribute('data-name')}`;
         document.getElementById('formSubmitTrigger').textContent = 'Save Changes';
-        document.getElementById('formCancelTrigger').style.display = 'inline-block';
 
         document.getElementById('classFormBox').scrollIntoView({
             behavior: 'smooth'
@@ -148,11 +145,6 @@ const onFormSubmit = async (event) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     attachButtonListeners();
-
-    const cancelBtn = document.getElementById('formCancelTrigger');
-    if (cancelBtn) {
-        cancelBtn.addEventListener('click', resetForm);
-    }
 
     const classForm = document.getElementById('classForm');
     if (classForm) {

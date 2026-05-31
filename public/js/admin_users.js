@@ -71,13 +71,19 @@ const resetForm = () => {
     document.getElementById('formAction').value = 'create';
     document.getElementById('formUserId').value = '';
     document.getElementById('formSubmitBtn').textContent = 'Create User';
-    document.getElementById('formCancelBtn').style.display = 'none';
+    //document.getElementById('formCancelBtn').style.display = 'none';
 
     document.getElementById('emailRow').style.display = '';
     document.getElementById('roleRow').style.display = '';
 
     document.getElementById('fieldEmail').setAttribute('required', 'required');
     document.getElementById('fieldPassword').placeholder = 'Leave blank to keep current';
+
+    const roleSelect = document.getElementById('fieldRole');
+    if (roleSelect) {
+        const adminOpt = Array.from(roleSelect.options).find(opt => opt.value === 'admin');
+        if (adminOpt) adminOpt.remove();
+    }
 };
 
 const onTableClick = async (event) => {
@@ -89,7 +95,7 @@ const onTableClick = async (event) => {
         document.getElementById('formAction').value = 'update';
         document.getElementById('formUserId').value = editBtn.getAttribute('data-id');
         document.getElementById('formSubmitBtn').textContent = 'Save Changes';
-        document.getElementById('formCancelBtn').style.display = '';
+        //document.getElementById('formCancelBtn').style.display = '';
 
         document.getElementById('emailRow').style.display = 'none';
         document.getElementById('roleRow').style.display = '';
@@ -99,6 +105,15 @@ const onTableClick = async (event) => {
         document.getElementById('fieldUsername').value = editBtn.getAttribute('data-username');
         document.getElementById('fieldPassword').value = '';
         document.getElementById('fieldPassword').placeholder = 'Leave blank to keep current';
+
+        const roleSelect = document.getElementById('fieldRole');
+        if (roleSelect && !Array.from(roleSelect.options).find(opt => opt.value === 'admin')) {
+            const adminOpt = document.createElement('option');
+            adminOpt.value = 'admin';
+            adminOpt.textContent = 'Admin';
+            roleSelect.appendChild(adminOpt);
+        }
+
         document.getElementById('fieldRole').value = editBtn.getAttribute('data-role');
 
         document.getElementById('formBox').scrollIntoView({ behavior: 'smooth' });
@@ -147,10 +162,12 @@ const onFormSubmit = async (event) => {
 document.addEventListener('DOMContentLoaded', () => {
     attachButtonListeners();
 
+    /*
     const cancelBtn = document.getElementById('formCancelBtn');
     if (cancelBtn) {
         cancelBtn.addEventListener('click', resetForm);
     }
+    */
 
     const userForm = document.getElementById('userForm');
     if (userForm) {

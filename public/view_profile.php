@@ -9,7 +9,7 @@ $user = getUserById($id);
 
 if (!$user) {
     // If user not found, we could redirect or show an error.
-    // Let's show a simple error message within the layout.
+    // Show a simple error message within the layout.
     $error = "User not found.";
 }
 

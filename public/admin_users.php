@@ -30,10 +30,10 @@ $users = getAllNonAdminUsers();
 </head>
 <body>
     <?php outputHeader(); ?>
-    <main>
+    <main class="admin-wide-main">
         <?php outputAdminHeader('User Management', 'Fit-Pro Administration Dashboard'); ?>
 
-        <section id="info">
+        <section id="info" class="admin-management-layout">
             <?php outputAdminBoxStart('Create New User', 'formBox'); ?>
                 <form class="admin-form" id="userForm">
                     <input type="hidden" name="action"     value="create" id="formAction">

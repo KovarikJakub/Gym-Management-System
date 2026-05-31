@@ -36,7 +36,7 @@ foreach ($equipmentList as $item) {
 </head>
 <body>
     <?php outputHeader(); ?>
-    <main>
+    <main class="admin-wide-main">
         <section class="eq-summary">
             <div class="eq-stat">
                 <span class="eq-stat__count" id="count-available"><?= $statusCounters['available'] ?></span>
@@ -52,7 +52,7 @@ foreach ($equipmentList as $item) {
             </div>
         </section>
 
-        <section id="info">
+        <section id="info" class="admin-management-layout">
 
             <?php if ($isAdmin): ?>
             <?php outputAdminBoxStart('Add New Equipment', 'equipmentFormModule'); ?>
@@ -79,7 +79,7 @@ foreach ($equipmentList as $item) {
             <?php outputAdminBoxEnd(); ?>
             <?php endif; ?>
 
-            <?php outputAdminBoxStart('All Equipment', '', 'admin-table-box ' . (!$isAdmin ? 'eq-full-width' : '')); ?>
+            <?php outputAdminBoxStart('All Equipment', '', 'admin-table-box ' . (!$isAdmin ? 'admin-full-width' : '')); ?>
                 <table class="admin-table" id="equipmentMasterTable">
                     <thead>
                         <tr>
@@ -116,7 +116,7 @@ foreach ($equipmentList as $item) {
                         <?php endforeach; ?>
 
                         <tr id="emptyInventoryRow" <?= !empty($equipmentList) ? 'style="display:none;"' : '' ?>>
-                            <td colspan="<?= $isAdmin ? 3 : 2 ?>" class="eq-table-empty">
+                            <td colspan="<?= $isAdmin ? 3 : 2 ?>" class="admin-table-empty">
                                 No equipment found.
                             </td>
                         </tr>

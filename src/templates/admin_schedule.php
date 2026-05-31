@@ -1,7 +1,7 @@
 <?php
 function outputAdminScheduleMenu() {
     ?>
-    <section style="padding: 2rem; display: flex; gap: 1rem; justify-content: center;">
+    <section class="admin-schedule-menu">
         <button class="btn active" onclick="switchAdminTab('view-schedule')" id="btn-view-schedule">1. View Schedule</button>
         <button class="btn" onclick="switchAdminTab('add-session')" id="btn-add-session">2. Schedule Session</button>
     </section>
@@ -14,7 +14,7 @@ function outputAdminScheduleForm($trainers) {
         SELECT id, name FROM gym_classes ORDER BY name ASC
     ")->fetchAll();
     ?>
-    <div id="add-session" class="admin-tab" style="display: none; padding: 2rem;">
+    <div id="add-session" class="admin-tab admin-tab-padded" style="display: none;">
         <article class="boxes">
             <h2>Schedule a Session</h2>
             <form class="admin-form" id="sessionForm">

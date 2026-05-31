@@ -246,3 +246,12 @@ function countUsersPastSessions($user_id)
     $stmt->execute();
     return (int) $stmt->fetchColumn();
 }
+
+function deleteSession($session_id) {
+    $db = getDbConnection();
+    $stmt1 = $db->prepare("DELETE FROM enrollments WHERE session_id = ?");
+    $stmt1->execute([$session_id]);
+    
+    $stmt2 = $db->prepare("DELETE FROM class_sessions WHERE id = ?");
+    return $stmt2->execute([$session_id]);
+}

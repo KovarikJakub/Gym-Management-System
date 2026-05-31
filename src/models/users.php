@@ -93,7 +93,7 @@ function updateUserRole($id, $role)
 {
     $db = getDbConnection();
     // Change user access level
-    $stmt = $db->prepare("UPDATE users SET role = :role WHERE id = :id AND role != 'admin'");
+    $stmt = $db->prepare("UPDATE users SET role = :role WHERE id = :id");
     return $stmt->execute([':role' => $role, ':id' => $id]);
 }
 

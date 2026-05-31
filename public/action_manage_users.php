@@ -54,7 +54,7 @@ if ($action === 'update') {
     $password = $_POST['password'] ?? '';
     $role     = $_POST['role'] ?? '';
 
-    if (!$id || empty($realName) || empty($username) || (!empty($role) && !in_array($role, ['member', 'trainer']))) {
+    if (!$id || empty($realName) || empty($username) || (!empty($role) && !in_array($role, ['member', 'trainer', 'admin']))) {
         echo json_encode(['success' => false, 'message' => 'Invalid parameters.']);
         exit;
     }
