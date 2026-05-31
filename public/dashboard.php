@@ -12,16 +12,16 @@ require_once __DIR__ . '/../src/templates/class_session_card.php';
 requireLogin();
 
 $user_id = $_SESSION['user_id'];
-$today = date('Y-m-d');
+$today = "2026-06-02";
 
 $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $page_size = 5;
 $offset = ($page - 1) * $page_size;
 
 $user = getUserById($user_id);
-$upcoming_sessions = getUsersUpcomingSessions($user_id, 3);
-$past_sessions = getUsersPastSessions($user_id, $page_size, $offset);
-$total_past_sessions = countUsersPastSessions($user_id);
+$upcoming_sessions = getUsersUpcomingSessions($user_id, $today, 3);
+$past_sessions = getUsersPastSessions($user_id, $today, $page_size, $offset);
+$total_past_sessions = countUsersPastSessions($user_id, $today);
 $total_pages = ceil($total_past_sessions / $page_size);
 
 $error = $_GET['error'] ?? null;

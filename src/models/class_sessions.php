@@ -153,7 +153,7 @@ function cancelEnrollment($user_id, $session_id)
     return $stmt->execute($params); 
 }
 
-function getUsersUpcomingSessions($user_id, $limit = 3)
+function getUsersUpcomingSessions($user_id, $today, $limit = 3)
 {
     $db = getDbConnection();
 
@@ -176,12 +176,13 @@ function getUsersUpcomingSessions($user_id, $limit = 3)
             JOIN gym_classes c ON s.class_id = c.id
             JOIN users u ON s.trainer_id = u.id
             WHERE e.member_id = :user_id 
-              AND s.start_time >= CURRENT_TIMESTAMP
+              AND s.start_time >= :today
             ORDER BY s.start_time ASC
             LIMIT :limit";
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->bindValue(':today', $today);
     $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
     $stmt->execute();
     
@@ -195,7 +196,7 @@ function getUsersUpcomingSessions($user_id, $limit = 3)
     return $sessions;
 }
 
-function getUsersPastSessions($user_id, $limit, $offset = 0)
+function getUsersPastSessions($user_id, $today, $limit, $offset = 0)
 {
     $db = getDbConnection();
 
@@ -220,12 +221,13 @@ function getUsersPastSessions($user_id, $limit, $offset = 0)
             JOIN users u ON s.trainer_id = u.id
             LEFT JOIN reviews r ON r.session_id = s.id AND r.member_id = e.member_id
             WHERE e.member_id = :user_id 
-              AND s.end_time < CURRENT_TIMESTAMP
+              AND s.end_time < :today
             ORDER BY s.start_time DESC
             LIMIT :limit OFFSET :offset";
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->bindValue(':today', $today);
     $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
     $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
     $stmt->execute();
@@ -233,16 +235,17 @@ function getUsersPastSessions($user_id, $limit, $offset = 0)
     return $stmt->fetchAll();
 }
 
-function countUsersPastSessions($user_id)
+function countUsersPastSessions($user_id, $today)
 {
     $db = getDbConnection();
     $sql = "SELECT COUNT(*)
             FROM enrollments e
             JOIN class_sessions s ON e.session_id = s.id
             WHERE e.member_id = :user_id 
-              AND s.end_time < CURRENT_TIMESTAMP";
+              AND s.end_time < :today";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->bindValue(':today', $today);
     $stmt->execute();
     return (int) $stmt->fetchColumn();
 }
