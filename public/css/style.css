@@ -39,6 +39,10 @@ main {
     background-repeat: no-repeat;
 }
 
+.home-main {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../assets/img/gym_background.jpg');
+}
+
 h1, h2 {
     color: var(--title-color);
     font-family: Poppins, sans-serif;
@@ -125,6 +129,31 @@ header > div > h1 > a:hover{
 #menu a:hover {
     text-shadow: 0.2em 0.2em 0.2em black;
 }
+
+#menu a.active {
+    background-color: rgba(255, 243, 205, 0.1);
+    color: var(--title-color);
+    padding: 0.25rem 0.6rem;
+    border-radius: 2rem;
+    text-shadow: none;
+    box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.5);
+}
+
+#signup a.active-auth h2 {
+    background-color: rgba(255, 243, 205, 0.1);
+    color: var(--title-color);
+    padding: 0.25rem 0.6rem;
+    border-radius: 2rem;
+    text-shadow: none;
+    margin: 0;
+    box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.5);
+}
+
+#signup a.active-auth {
+    display: flex;
+    align-items: center;
+}
+
 header h2:hover {
     text-shadow: 0.2em 0.2em 0.1em black;
 }
@@ -171,32 +200,4 @@ form button.btn {
     border: none;
     font-family: Poppins, sans-serif;
     font-weight: bold;
-}
-
-.current-photo-preview {
-    margin-bottom: 1.5em;
-    text-align: center;
-}
-
-.current-photo-preview img {
-    border-radius: 50%;
-    border: 2px solid var(--title-color);
-    object-fit: cover;
-    width: 80px;
-    height: 80px;
-}
-
-.auth-container {
-    max-width: 400px;
-    margin: 40px auto;
-}
-
-.auth-container h1 {
-    text-align: center;
-    margin-bottom: 1em;
-}
-
-.auth-container p {
-    text-align: center;
-    margin-top: 1.5em;
 }

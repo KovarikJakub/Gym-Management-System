@@ -1,6 +1,6 @@
 /* 
     Depends on: style.css, layout.css, admin.css
-    Only equipment-specific styles here — everything else comes from admin.css
+    Only equipment-specific styles here. Everything else comes from admin.css.
 */
 
 .eq-summary {
@@ -59,45 +59,10 @@
 .eq-status--in-use      { color: #8ab4d4; border-color: #8ab4d4; }
 .eq-status--maintenance { color: #e07a5f; border-color: #e07a5f; }
 
-.eq-full-width { grid-column: 1 / -1; }
-
 .cell-equipment-status { text-align: center; }
-
-.eq-table-empty {
-    text-align: center;
-    opacity: 0.5;
-    padding: 2rem 0;
-    font-size: 0.9rem;
-}
-
-#interfaceAlertBox {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 9999;
-    min-width: 280px;
-    max-width: 380px;
-    padding: 1rem 1.4rem;
-    border-radius: 0.5rem;
-    font-family: Poppins, sans-serif;
-    font-size: 0.88rem;
-    font-weight: 500;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    pointer-events: none;
-    opacity: 0;
-    transform: translateY(0.75rem);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#interfaceAlertBox.toast-show {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
 
 @media (max-width: 60em) {
     .eq-summary    { gap: 2rem; }
-    .eq-full-width { grid-column: 1; }
 }
 
 @media (max-width: 42em) {
@@ -125,3 +90,5 @@
 
 #equipmentMasterTable th:nth-child(3),
 #equipmentMasterTable td:nth-child(3) { width: 25%; text-align: right; }
+
+

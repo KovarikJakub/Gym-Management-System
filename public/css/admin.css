@@ -1,8 +1,5 @@
-/* ═══════════════════════════════════════════════════════════════
-   admin.css  –  uses variables from style.css / layout.css
-   ═══════════════════════════════════════════════════════════════ */
 
-/* ── Notification ────────────────────────────────────────────── */
+/* Notifications */
 .admin-notification {
     grid-column: 1 / -1;
     text-align: center;
@@ -26,7 +23,32 @@
     background: rgba(109, 191, 103, 0.08);
 }
 
-/* ── Form ────────────────────────────────────────────────────── */
+#interfaceAlertBox {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    min-width: 280px;
+    max-width: 380px;
+    padding: 1rem 1.4rem;
+    border-radius: 0.5rem;
+    font-family: Poppins, sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(0.75rem);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#interfaceAlertBox.toast-show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Forms */
 .admin-form {
     display: flex;
     flex-direction: column;
@@ -90,25 +112,15 @@
     font-weight: 700;
 }
 
-.admin-cancel-link {
-    color: var(--font-color);
-    font-size: 0.88rem;
-    opacity: 0.65;
-    transition: opacity 0.2s;
-}
-
-.admin-cancel-link:hover {
-    opacity: 1;
-}
-
-/* ── Table ───────────────────────────────────────────────────── */
 .admin-table-box {
     overflow-x: auto;
-    min-width: 0;        /* prevents box from overflowing the grid column */
+    width: 100%;
+    min-width: 0;
 }
 
 .admin-table {
     width: 100%;
+    min-width: 35rem;
     border-collapse: collapse;
     margin-top: 1rem;
     font-size: 0.9rem;
@@ -133,11 +145,31 @@
     color: var(--font-color);
     vertical-align: middle;
     white-space: nowrap;    
-    white-space: nowrap;    /* prevents text wrapping that breaks row height */
 }
 
 .admin-table tbody tr:hover td {
     background: rgba(255, 255, 255, 0.02);
+}
+
+.admin-full-width {
+    grid-column: 1 / -1;
+}
+
+.admin-table-empty {
+    text-align: center;
+    opacity: 0.5;
+    padding: 2rem 0;
+    font-size: 0.9rem;
+}
+
+.admin-management-layout {
+    grid-template-columns: minmax(14rem, 0.55fr) minmax(0, 1.9fr);
+    align-items: start;
+    gap: 1.5rem;
+}
+
+.admin-wide-main {
+    max-width: 1320px;
 }
 
 .admin-role {
@@ -145,7 +177,6 @@
     opacity: 0.75;
 }
 
-/* ── Status badges ───────────────────────────────────────────── */
 .admin-status {
     font-family: Poppins, sans-serif;
     font-size: 0.72rem;
@@ -160,14 +191,24 @@
 .admin-status--on  { color: #6dbf67; border-color: #6dbf67; }
 .admin-status--off { color: #e07a5f; border-color: #e07a5f; }
 
-/* ── Action buttons in table ─────────────────────────────────── */
 .admin-actions-cell {
-    white-space: nowrap;    /* keep Edit / Deactivate on one line */
+    text-align: right;
+    white-space: nowrap;
+    vertical-align: middle;
 }
 
 .admin-actions-cell form {
     display: inline;
     margin-left: 1rem;
+}
+
+.admin-actions-cell .admin-action-link {
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+.admin-actions-cell .admin-action-link:first-child {
+    margin-left: 0;
 }
 
 .admin-action-link {
@@ -187,7 +228,7 @@
 .admin-action-link--deactivate    { color: #e07a5f; }
 .admin-action-link--activate      { color: #6dbf67; }
 
-/* ── Toast (AJAX feedback) ───────────────────────────────────── */
+/* Toasts */
 .admin-toast {
     position: fixed;
     bottom: 2rem;
@@ -221,3 +262,76 @@
     border-color: rgba(224, 122, 95, 0.4);
     background: rgba(35, 32, 24, 0.95);
 }
+
+/* Utilities */
+.admin-schedule-menu {
+    padding: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.admin-tab-padded {
+    padding: 2rem;
+}
+
+.class-stats {
+    font-size: 0.78rem;
+    opacity: 0.6;
+    margin-top: 0.2rem;
+}
+
+.desc-val {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    font-style: italic;
+    margin-top: 0.15rem;
+}
+
+.cell-centered {
+    text-align: center;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.analytics-dashboard {
+    grid-template-rows: none;
+}
+
+.analytics-card {
+    min-height: 8rem;
+    justify-content: center;
+    gap: 0.35rem;
+}
+
+.analytics-card h2 {
+    margin-bottom: 0.2rem;
+}
+
+.analytics-card strong {
+    color: var(--title-color);
+    font-family: Poppins, sans-serif;
+    font-size: 2.4rem;
+    line-height: 1;
+}
+
+.analytics-card span {
+    color: var(--font-color);
+    font-family: Poppins, sans-serif;
+    font-size: 0.82rem;
+    opacity: 0.72;
+}
+
+.analytics-full-width {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 60em) {
+    .admin-full-width,
+    .analytics-full-width {
+        grid-column: 1;
+    }
+}
+

@@ -13,7 +13,7 @@ function outputFilterTab($week_days, $selected_date, $today, $trainers, $class_t
 
             <div class="filter-group">
                 <label for="trainer_id">Trainer:</label>
-                <select name="trainer_id" id="trainer_id" onchange="this.form.submit()">
+                <select name="trainer_id" id="trainer_id">
                     <option value="">All Trainers</option>
                     <?php foreach ($trainers as $trainer): ?>
                         <option value="<?= $trainer['id'] ?>" <?= (isset($active_filters['trainer_id']) && $active_filters['trainer_id'] == $trainer['id']) ? 'selected' : '' ?>>
@@ -25,7 +25,7 @@ function outputFilterTab($week_days, $selected_date, $today, $trainers, $class_t
 
             <div class="filter-group">
                 <label for="type">Class Type:</label>
-                <select name="type" id="type" onchange="this.form.submit()">
+                <select name="type" id="type">
                     <option value="">All Types</option>
                     <?php foreach ($class_types as $type): ?>
                         <option value="<?= htmlspecialchars($type) ?>" <?= (isset($active_filters['type']) && $active_filters['type'] === $type) ? 'selected' : '' ?>>
@@ -44,34 +44,5 @@ function outputFilterTab($week_days, $selected_date, $today, $trainers, $class_t
             <?php endif; ?>
         </form>
     </div>
-    <style>
-        .filter-tab-container {
-            margin-bottom: 20px;
-            padding: 15px;
-        }
-        .additional-filters {
-            display: flex;
-            gap: 20px;
-            align-items: flex-end;
-            margin-top: 15px;
-            padding-top: 15px;
-            flex-wrap: wrap;
-        }
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .filter-group select {
-            padding: 8px;
-            border-radius: 4px;
-        }
-        .clear-filters {
-            font-size: 0.9em;
-            color: #666;
-            text-decoration: underline;
-            padding-bottom: 8px;
-        }
-    </style>
     <?php
 }

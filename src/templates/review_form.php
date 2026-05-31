@@ -5,16 +5,15 @@
  * 
  * @param int $session_id The ID of the session being reviewed.
  */
-function outputReviewForm($session_id)
+function outputReviewForm($session_id, $user)
 {
-    $username = $_SESSION['username'] ?? '{Current user}';
     ?>
     <form action="action_post_review.php" method="POST" class="review-form boxes">
         <input type="hidden" name="session_id" value="<?= htmlspecialchars($session_id) ?>">
         
         <div class="current-user-badge">
-            <span class="user-label">Posting as:</span>
-            <span class="author-name"><?= htmlspecialchars($username) ?></span>
+            <p class="user-label">Posting as:</p>
+            <?php outputUserBadge($user) ?>
         </div>
 
         <div class="rating-selector">
@@ -29,7 +28,7 @@ function outputReviewForm($session_id)
         </div>
 
         <div class="review-form-input-container">
-            <textarea name="comment" id="comment_<?= $session_id ?>" placeholder="Let others know what you think..." required style="width: 100%; height: 60px; margin-top: 10px;"></textarea>
+            <textarea name="comment" id="comment_<?= $session_id ?>" placeholder="Let others know what you think..." required style="width: 100%; height: 120px;"></textarea>
             <button type="submit" class="btn" style="display: block; margin-top: 10px;">Post Review</button>
         </div>
     </form>

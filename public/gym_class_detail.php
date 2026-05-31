@@ -29,10 +29,14 @@ if (!$gym_class) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/templates/review_card.css" rel="stylesheet">
+    <link href="css/templates/user_badge.css" rel="stylesheet">
+
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/sessions.css" rel="stylesheet">
     <link href="css/layout.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/gym_class_detail.css">
+    <link href="css/gym_class_detail.css" rel="stylesheet">
     <title><?= htmlspecialchars($gym_class['name']) ?> - Fit-Pro</title>
 </head>
 <body>

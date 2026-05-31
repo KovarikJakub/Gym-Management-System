@@ -11,8 +11,6 @@ function setupTestDb() {
     // Load schema and seed data
     $sql = file_get_contents(__DIR__ . '/../database/gym.sql');
     
-    // Split the SQL into individual statements to handle the "PRAGMA" and other commands if necessary
-    // or just execute the whole thing if PDO supports it.
     $db->exec($sql);
 
     // Set the global connection for the model functions
@@ -34,8 +32,7 @@ function test_getUsersPastSessions() {
     $sessions = getUsersPastSessions($user_id, $n);
     
     // In seed data, member 5 is enrolled in sessions 1, 2, 4, 6.
-    // All are in the past relative to current time (if current time > 2026-05-03).
-    // Note: The system prompt says today is 2026-05-25.
+    // All are in the past for the seeded test calendar.
     
     assert(count($sessions) === 4, "Member 5 should have 4 past sessions");
     assert($sessions[0]['session_id'] == 6, "First result should be session ID 6");

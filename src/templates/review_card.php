@@ -1,14 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../Utils/helpers.php';
-
-function getProfilePicPath($profile_photo)
-{
-    $uploadsBaseUrl = 'uploads/'; 
-    return isNullOrEmptyString($profile_photo) ? 
-        ($uploadsBaseUrl . "placeholder.jpg") : 
-        ($uploadsBaseUrl . $profile_photo);
-}
+require_once __DIR__ . '/user_badge.php';
 
 /**
  * Outputs a single review card.
@@ -18,16 +10,22 @@ function getProfilePicPath($profile_photo)
 function outputReviewCard($review)
 {
     $rating = (int)$review['rating'];
+    $user = [
+        'id' => $review['author_id'],
+        'username' => $review['real_name'],
+        'profile_photo' => $review['profile_photo'],
+        'role' => 'member'
+    ];
     ?>
 <article class="review-card boxes">
     <div class="review-card-header">
-        <span class="author-name"><?= htmlspecialchars($review['real_name'] ?: $review['username']) ?></span>
+        <?php outputUserBadge($user); ?>
         <div class="review-rating">
             <?= str_repeat('⭐', $rating) ?>
         </div>
     </div>
-    <img  src="<?= getProfilePicPath($review['profile_photo']) ?>" height="30" width="30"/>
-        <time datetime="<?= date('Y-m-d', strtotime($review['posted_date'])) ?>">
+    
+    <time datetime="<?= date('Y-m-d', strtotime($review['posted_date'])) ?>">
         <?= date('M j, Y', strtotime($review['posted_date'])) ?>
     </time>
     <p><?= nl2br(htmlspecialchars($review['comment'])) ?></p>
