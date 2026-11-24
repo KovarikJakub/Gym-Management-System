@@ -1,5 +1,42 @@
 
-# ltw-project-ltw02g04
+# Gym Management System [ LTW - University of Porto ]
+
+## Overview
+
+A web app for running a gym, with three roles. **Members** browse and enroll in classes, **trainers** manage their schedules and rosters, and **admins** manage users, classes and equipment and can view analytics. It is a university team project, built without frameworks to practise CRUD operations and session-based authentication.
+
+| | |
+|---|---|
+| **Backend** | PHP 8 (no framework), PDO with prepared statements |
+| **Database** | SQLite with foreign keys enforced ([ER diagram](docs/db_ER_diagram.md)) |
+| **Frontend** | Server-rendered PHP templates, vanilla JS (`fetch` for async admin and enrollment actions), plain CSS with a mobile-first responsive layout |
+| **Architecture** | `public/` holds the page controllers and `action_*.php` form handlers; `src/models/` holds the data access layer, `src/templates/` the reusable view components and `src/auth.php` the auth guards |
+| **Auth & Security** | PHP sessions, `password_hash`/`password_verify`, role-based access (`requireRole`), CSRF tokens on all form actions, output escaping |
+| **Testing** | Assertion-based model tests in `tests/` |
+
+Quick start: `sqlite3 database/gym.db < database/gym.sql && php -S localhost:9000 -t public`, then log in as `admin` / `1234`.
+
+## Screenshots
+
+### 📅 Class Schedule
+Pick a day of the week, filter by trainer or class type, and grab a spot. Every class card shows its time, duration, trainer and how many places are left. Enroll in one click, or cancel just as fast if plans change.
+
+![Class schedule](img/image00.png)
+
+### 🏠 Member Dashboard
+All your training in one place. Upcoming sessions sit at the top with their full details, and your past sessions are listed below, each with a prompt to leave a review.
+
+![Member dashboard](img/image01.png)
+
+### ⭐ Reviews
+Loved the class? Hated it? Give it a 1–5 star score and a comment from a quick popup, without leaving the dashboard.
+
+![Review form](img/image02.png)
+
+### 🛠️ Admin Panel
+Admins run the class catalog. They can add new courses with a discipline, difficulty tier, default capacity and description, then edit or remove existing ones from the live catalog.
+
+![Admin class management](img/image03.png)
 
 ## Features
 
